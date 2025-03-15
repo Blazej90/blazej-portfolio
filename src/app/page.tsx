@@ -1,24 +1,31 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Parallax } from "react-scroll-parallax";
 
 export default function Home() {
   return (
-    <main className="h-screen flex flex-col items-center justify-center text-center px-6">
+    <main className="relative h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
+      <Parallax speed={-10}>
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('/background.jpg')] bg-cover bg-center opacity-20"></div>
+      </Parallax>
+
       <motion.h1
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="text-5xl md:text-6xl font-bold text-gray-200"
+        viewport={{ once: true }}
+        className="relative text-5xl md:text-6xl font-bold text-gray-200"
       >
         Cześć, jestem <span className="text-gray-400">Błażej</span> 👋
       </motion.h1>
 
       <motion.p
         initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.5 }}
-        className="mt-4 text-lg text-gray-400 max-w-2xl"
+        viewport={{ once: true }}
+        className="relative mt-4 text-lg text-gray-400 max-w-2xl"
       >
         Jestem Frontend Developerem z pasją do nowoczesnych technologii
         webowych. Tworzę responsywne i szybkie aplikacje internetowe.
@@ -26,9 +33,10 @@ export default function Home() {
 
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
+        whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 1 }}
-        className="mt-6 flex space-x-4"
+        viewport={{ once: true }}
+        className="relative mt-6 flex space-x-4"
       >
         <a
           href="#projects"
