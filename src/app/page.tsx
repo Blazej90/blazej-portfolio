@@ -2,7 +2,9 @@
 
 import { motion } from "framer-motion";
 import { Parallax } from "react-scroll-parallax";
-import About from "@/components/about-me";
+import { lazy, Suspense } from "react";
+
+const About = lazy(() => import("@/components/about-me"));
 
 export default function Home() {
   return (
@@ -59,7 +61,11 @@ export default function Home() {
         </motion.div>
       </main>
 
-      <About />
+      <Suspense
+        fallback={<p className="text-gray-400 text-center">Ładowanie...</p>}
+      >
+        <About />
+      </Suspense>
     </>
   );
 }
