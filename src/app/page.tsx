@@ -5,6 +5,7 @@ import { Parallax } from "react-scroll-parallax";
 import { lazy, Suspense } from "react";
 
 const About = lazy(() => import("@/components/about-me"));
+const Projects = lazy(() => import("@/components/projects"));
 
 export default function Home() {
   return (
@@ -65,6 +66,14 @@ export default function Home() {
         fallback={<p className="text-gray-400 text-center">Ładowanie...</p>}
       >
         <About />
+      </Suspense>
+
+      <Suspense
+        fallback={
+          <p className="text-gray-400 text-center">Ładowanie projektów...</p>
+        }
+      >
+        <Projects />
       </Suspense>
     </>
   );
