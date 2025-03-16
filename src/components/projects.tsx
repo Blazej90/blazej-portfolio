@@ -44,7 +44,10 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-20 px-6 max-w-6xl mx-auto text-center">
+    <section
+      id="projects"
+      className="py-20 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto text-center"
+    >
       <motion.h2
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -55,7 +58,7 @@ export default function Projects() {
         Moje Projekty
       </motion.h2>
 
-      <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         {projects.map((project, index) => (
           <motion.div
             key={index}
@@ -74,8 +77,8 @@ export default function Projects() {
                   <Image
                     src={project.image}
                     alt={project.title}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
+                    style={{ objectFit: "cover" }}
                     className="rounded-t-lg hover:opacity-80 transition"
                   />
                 </div>

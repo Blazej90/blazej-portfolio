@@ -12,7 +12,7 @@ export default function Home() {
     <>
       <main className="relative h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
         <Parallax speed={-10}>
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('/background.jpg')] bg-cover bg-center opacity-20"></div>
+          <div className="absolute top-0 left-0 w-full h-full bg-cover bg-center opacity-20"></div>
         </Parallax>
 
         <motion.h1
