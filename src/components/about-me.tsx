@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Github, Linkedin } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 const technologies = [
   "TypeScript",
@@ -42,16 +44,43 @@ export default function About() {
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 1 }}
         viewport={{ amount: 0.3 }}
-        className="mt-8 flex flex-wrap justify-center gap-4"
+        className="mt-8 flex flex-wrap justify-center gap-3"
       >
         {technologies.map((tech) => (
-          <span
+          <Badge
             key={tech}
-            className="px-4 py-2 bg-gray-800 text-white rounded-lg shadow-md hover:bg-gray-700 transition"
+            variant="outline"
+            className="text-white border-gray-600 px-3 py-1 text-sm"
           >
             {tech}
-          </span>
+          </Badge>
         ))}
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1, delay: 1.2 }}
+        viewport={{ amount: 0.3 }}
+        className="mt-8 flex justify-center space-x-6"
+      >
+        <a
+          href="https://github.com/Blazej90"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-5 py-3 bg-gray-800 text-white rounded-lg flex items-center space-x-2 hover:bg-gray-700 transition text-lg"
+        >
+          <Github size={22} /> <span>GitHub</span>
+        </a>
+
+        <a
+          href="https://www.linkedin.com/in/błażej-bartoszewski-36b7162b7"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-5 py-3 bg-gray-800 text-white rounded-lg flex items-center space-x-2 hover:bg-gray-700 transition text-lg"
+        >
+          <Linkedin size={22} /> <span>LinkedIn</span>
+        </a>
       </motion.div>
     </section>
   );
