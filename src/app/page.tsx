@@ -6,6 +6,7 @@ import { lazy, Suspense } from "react";
 
 const About = lazy(() => import("@/components/about-me"));
 const Projects = lazy(() => import("@/components/projects"));
+const Contact = lazy(() => import("@/components/contact"));
 
 export default function Home() {
   return (
@@ -74,6 +75,12 @@ export default function Home() {
         }
       >
         <Projects />
+      </Suspense>
+
+      <Suspense
+        fallback={<p className="text-gray-400 text-center">Ładowanie...</p>}
+      >
+        <Contact />
       </Suspense>
     </>
   );
