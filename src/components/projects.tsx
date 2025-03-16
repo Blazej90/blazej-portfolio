@@ -48,6 +48,33 @@ const projects = [
     liveDemoUrl: "https://blazej90.github.io/goit-react-hw-05-movies/",
     technologies: ["React", "CSS Modules", "REST API", "TMDB API"],
   },
+  {
+    title: "Gra Wisielec",
+    description:
+      "Klasyczna gra Wisielec w wersji webowej! Użytkownik wybiera poziom trudności i zgaduje litery. Możliwość gry po angielsku z dedykowanymi hasłami.",
+    image: "/images/projects/hangman.jpg",
+    githubUrl: "https://github.com/Blazej90/hangman-game/tree/master",
+    liveDemoUrl: "https://game-for-boredom.netlify.app",
+    technologies: ["React", "Vite", "CSS Modules"],
+  },
+  {
+    title: "Wyszukiwarka obrazów",
+    description:
+      "Aplikacja do wyszukiwania i przeglądania obrazów według słów kluczowych. Wykorzystuje Pixabay API jako backend.",
+    image: "/images/projects/picture.jpg",
+    githubUrl: "https://github.com/Blazej90/goit-react-hw-03-image-finder",
+    liveDemoUrl: "https://blazej90.github.io/goit-react-hw-03-image-finder/",
+    technologies: ["React", "CSS Modules", "REST API", "Pixabay API"],
+  },
+  {
+    title: "Taxi Test",
+    description:
+      "Aplikacja służy do obliczania wartości błędu taksometru podczas jego legalizacji. Użytkownik wprowadza wartości, otrzymuje wynik testu i może zapisać wyniki w localStorage.",
+    image: "/images/projects/taxi.jpg",
+    githubUrl: "https://github.com/Blazej90/taxi-test",
+    liveDemoUrl: "https://blazej90.github.io/taxi-test/",
+    technologies: ["HTML", "JavaScript", "CSS"],
+  },
 ];
 
 export default function Projects() {
