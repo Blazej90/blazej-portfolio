@@ -31,9 +31,15 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <Button className="hidden md:block" variant="default">
-          Pobierz CV
-        </Button>
+        <a
+          href="/cv/CV_Błażej_Bartoszewski.pdf"
+          download="CV_Błażej_Bartoszewski.pdf"
+          className="hidden md:block cursor-pointer"
+        >
+          <Button variant="default" className="cursor-pointer">
+            Pobierz CV
+          </Button>
+        </a>
 
         <Sheet>
           <SheetTrigger asChild>
@@ -43,37 +49,41 @@ const Navbar = () => {
           </SheetTrigger>
           <SheetContent
             side="left"
-            className="bg-black text-white border-0 px-6 w-[250px]"
+            className="bg-black text-white border-0 px-6 w-[250px] flex flex-col items-center"
           >
-            <SheetHeader>
-              <SheetTitle className="text-xl font-bold text-center">
-                Menu
-              </SheetTitle>
+            <SheetHeader className="w-full flex flex-col items-center">
+              <SheetTitle className="text-xl font-bold">Menu</SheetTitle>
             </SheetHeader>
 
-            <div className="flex flex-col mt-6 space-y-6 items-center">
+            <div className="flex flex-col mt-6 space-y-6 items-center w-full">
               <Link
                 href="#projects"
-                className="hover:text-gray-400 transition text-lg"
+                className="hover:text-gray-400 transition text-lg text-center"
               >
                 Projekty
               </Link>
               <Link
                 href="#about"
-                className="hover:text-gray-400 transition text-lg"
+                className="hover:text-gray-400 transition text-lg text-center"
               >
                 O mnie
               </Link>
               <Link
                 href="#contact"
-                className="hover:text-gray-400 transition text-lg"
+                className="hover:text-gray-400 transition text-lg text-center"
               >
                 Kontakt
               </Link>
 
-              <Button className="mt-4 w-[80%]" variant="default">
-                Pobierz CV
-              </Button>
+              <a
+                href="/cv/CV_Błażej_Bartoszewski.pdf"
+                download="CV_Błażej_Bartoszewski.pdf"
+                className="w-full flex justify-center"
+              >
+                <Button className="mt-4 w-[80%] cursor-pointer">
+                  Pobierz CV
+                </Button>
+              </a>
             </div>
           </SheetContent>
         </Sheet>
