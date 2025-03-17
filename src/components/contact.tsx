@@ -1,15 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useState } from "react";
-import { Send } from "lucide-react";
+import { Send, Paperclip, X } from "lucide-react";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [files, setFiles] = useState<File[]>([]);
   const [status, setStatus] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -19,22 +20,39 @@ export default function Contact() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const selectedFiles = Array.from(e.target.files);
+      setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
+    }
+  };
+
+  const removeFile = (fileName: string) => {
+    setFiles((prevFiles) => prevFiles.filter((file) => file.name !== fileName));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setStatus(null);
 
+    const formData = new FormData();
+    formData.append("name", form.name);
+    formData.append("email", form.email);
+    formData.append("message", form.message);
+    files.forEach((file) => formData.append("attachments", file));
+
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: formData,
       });
 
       const data = await response.json();
       if (response.ok) {
         setStatus("✅ Wiadomość wysłana pomyślnie!");
         setForm({ name: "", email: "", message: "" });
+        setFiles([]);
       } else {
         setStatus("❌ Błąd: " + data.error);
       }
@@ -79,7 +97,6 @@ export default function Contact() {
                 placeholder="Twoje imię"
                 value={form.name}
                 onChange={handleChange}
-                className="max-w-lg w-full"
               />
               <Input
                 type="email"
@@ -87,22 +104,59 @@ export default function Contact() {
                 placeholder="Twój e-mail"
                 value={form.email}
                 onChange={handleChange}
-                className="max-w-lg w-full"
               />
               <Textarea
                 name="message"
                 placeholder="Twoja wiadomość"
                 value={form.message}
                 onChange={handleChange}
-                className="max-w-lg w-full"
               />
+
+              <div className="flex flex-col items-start space-y-2 border border-gray-600 p-2 rounded-lg hover:bg-gray-800 transition w-full">
+                <label
+                  htmlFor="fileInput"
+                  className="flex items-center space-x-2 cursor-pointer"
+                >
+                  <Paperclip size={18} />
+                  <span>Dodaj załączniki (25 MB)</span>
+                </label>
+
+                <input
+                  id="fileInput"
+                  type="file"
+                  multiple
+                  onChange={handleFileChange}
+                  className="hidden"
+                />
+
+                {files.length > 0 && (
+                  <ul className="mt-2 space-y-1 w-full">
+                    {files.map((file) => (
+                      <li
+                        key={file.name}
+                        className="flex justify-between items-center px-2 py-1 bg-gray-800 rounded-lg"
+                      >
+                        <span className="text-sm">{file.name}</span>
+                        <button
+                          type="button"
+                          onClick={() => removeFile(file.name)}
+                          className="text-gray-400 hover:text-red-500 transition"
+                        >
+                          <X size={16} />
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
               <Button
                 type="submit"
                 className="mt-4 bg-gray-700 hover:bg-gray-600 flex items-center gap-2 px-6 py-3 text-lg"
-                disabled={loading}
               >
                 {loading ? "Wysyłanie..." : "Wyślij"} <Send size={18} />
               </Button>
+
               {status && <p className="mt-4 text-sm text-gray-300">{status}</p>}
             </form>
           </CardContent>

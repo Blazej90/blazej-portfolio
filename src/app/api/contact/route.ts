@@ -3,7 +3,12 @@ import nodemailer from "nodemailer";
 
 export async function POST(req: Request) {
   try {
-    const { name, email, message } = await req.json();
+    const formData = await req.formData();
+
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const message = formData.get("message") as string;
+    const files = formData.getAll("attachments") as File[];
 
     if (!name || !email || !message) {
       return NextResponse.json(
@@ -24,23 +29,20 @@ export async function POST(req: Request) {
       from: `"${name}" <${email}>`,
       to: process.env.EMAIL_RECEIVER,
       subject: `Nowa wiadomość od ${name}`,
-      text: `Od: ${name} (${email})\n\n${message}`,
-      html: `
-        <h2>Nowa wiadomość od ${name}</h2>
-        <p><strong>Adres e-mail:</strong> ${email}</p>
-        <p><strong>Treść wiadomości:</strong></p>
-        <p>${message}</p>
-      `,
+      text: message,
+      attachments: await Promise.all(
+        files.map(async (file) => ({
+          filename: file.name,
+          content: Buffer.from(await file.arrayBuffer()),
+        }))
+      ),
     };
 
     await transporter.sendMail(mailOptions);
 
-    return NextResponse.json({
-      success: true,
-      message: "Wiadomość wysłana pomyślnie!",
-    });
+    return NextResponse.json({ success: true, message: "Wiadomość wysłana!" });
   } catch (error) {
-    console.error("Błąd wysyłania e-maila:", error);
+    console.error("Błąd:", error);
     return NextResponse.json(
       { error: "Nie udało się wysłać wiadomości" },
       { status: 500 }
