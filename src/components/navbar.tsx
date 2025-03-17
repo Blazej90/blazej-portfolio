@@ -37,17 +37,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div className="hidden md:flex items-center space-x-4">
-          <a
-            href="/cv/CV_Błażej_Bartoszewski.pdf"
-            download="CV_Błażej_Bartoszewski.pdf"
-            className="cursor-pointer"
-          >
-            <Button variant="default" className="cursor-pointer">
-              {t.downloadCV}
-            </Button>
-          </a>
-
+        <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2">
             <span className="text-sm">PL</span>
             <Switch
@@ -56,63 +46,64 @@ const Navbar = () => {
             />
             <span className="text-sm">EN</span>
           </div>
-        </div>
 
-        <Sheet>
-          <SheetTrigger asChild>
-            <button className="md:hidden">
-              <Menu size={24} />
-            </button>
-          </SheetTrigger>
-          <SheetContent
-            side="left"
-            className="bg-black text-white border-0 px-6 w-[250px] flex flex-col items-center"
+          <a
+            href="/cv/CV_Błażej_Bartoszewski.pdf"
+            download="CV_Błażej_Bartoszewski.pdf"
+            className="hidden md:block cursor-pointer"
           >
-            <SheetHeader className="w-full flex flex-col items-center">
-              <SheetTitle className="text-xl font-bold">{t.menu}</SheetTitle>
-            </SheetHeader>
+            <Button variant="default" className="cursor-pointer">
+              {t.downloadCV}
+            </Button>
+          </a>
 
-            <div className="flex flex-col mt-6 space-y-6 items-center w-full">
-              <Link
-                href="#projects"
-                className="hover:text-gray-400 transition text-lg text-center"
-              >
-                {t.projects}
-              </Link>
-              <Link
-                href="#about"
-                className="hover:text-gray-400 transition text-lg text-center"
-              >
-                {t.about}
-              </Link>
-              <Link
-                href="#contact"
-                className="hover:text-gray-400 transition text-lg text-center"
-              >
-                {t.contact}
-              </Link>
+          <Sheet>
+            <SheetTrigger asChild>
+              <button className="md:hidden">
+                <Menu size={24} />
+              </button>
+            </SheetTrigger>
+            <SheetContent
+              side="left"
+              className="bg-black text-white border-0 px-6 w-[250px] flex flex-col items-center"
+            >
+              <SheetHeader className="w-full flex flex-col items-center">
+                <SheetTitle className="text-xl font-bold">{t.menu}</SheetTitle>
+              </SheetHeader>
 
-              <a
-                href="/cv/CV_Błażej_Bartoszewski.pdf"
-                download="CV_Błażej_Bartoszewski.pdf"
-                className="w-full flex justify-center"
-              >
-                <Button className="mt-4 w-[80%] cursor-pointer">
-                  {t.downloadCV}
-                </Button>
-              </a>
+              <div className="flex flex-col mt-6 space-y-6 items-center w-full">
+                <Link
+                  href="#projects"
+                  className="hover:text-gray-400 transition text-lg text-center"
+                >
+                  {t.projects}
+                </Link>
+                <Link
+                  href="#about"
+                  className="hover:text-gray-400 transition text-lg text-center"
+                >
+                  {t.about}
+                </Link>
+                <Link
+                  href="#contact"
+                  className="hover:text-gray-400 transition text-lg text-center"
+                >
+                  {t.contact}
+                </Link>
 
-              <div className="flex items-center space-x-2 mt-4">
-                <span className="text-sm">PL</span>
-                <Switch
-                  checked={language === "en"}
-                  onCheckedChange={toggleLanguage}
-                />
-                <span className="text-sm">EN</span>
+                <a
+                  href="/cv/CV_Błażej_Bartoszewski.pdf"
+                  download="CV_Błażej_Bartoszewski.pdf"
+                  className="w-full flex justify-center"
+                >
+                  <Button className="mt-4 w-[80%] cursor-pointer">
+                    {t.downloadCV}
+                  </Button>
+                </a>
               </div>
-            </div>
-          </SheetContent>
-        </Sheet>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </nav>
   );
