@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { useLanguage } from "@/context/language-context";
+import { aboutMeLocales } from "@/locales/about-me";
 
 const technologies = [
   "TypeScript",
@@ -15,6 +17,9 @@ const technologies = [
 ];
 
 export default function About() {
+  const { language } = useLanguage();
+  const t = aboutMeLocales[language];
+
   return (
     <section id="about" className="py-20 px-6 max-w-5xl mx-auto text-center">
       <motion.h2
@@ -24,7 +29,7 @@ export default function About() {
         viewport={{ amount: 0.3 }}
         className="text-4xl font-bold text-gray-200"
       >
-        O mnie
+        {t.title}
       </motion.h2>
 
       <motion.p
@@ -34,9 +39,7 @@ export default function About() {
         viewport={{ amount: 0.3 }}
         className="mt-4 text-lg text-gray-400 max-w-3xl mx-auto"
       >
-        Jestem Frontend Developerem z pasją do tworzenia nowoczesnych aplikacji
-        internetowych. Specjalizuję się w ekosystemie React, a także posiadam
-        doświadczenie w tworzeniu pełnych aplikacji Fullstack.
+        {t.description}
       </motion.p>
 
       <motion.div
@@ -70,7 +73,7 @@ export default function About() {
           rel="noopener noreferrer"
           className="px-5 py-3 bg-gray-800 text-white rounded-lg flex items-center space-x-2 hover:bg-gray-700 transition text-lg"
         >
-          <Github size={22} /> <span>GitHub</span>
+          <Github size={22} /> <span>{t.github}</span>
         </a>
 
         <a
@@ -79,7 +82,7 @@ export default function About() {
           rel="noopener noreferrer"
           className="px-5 py-3 bg-gray-800 text-white rounded-lg flex items-center space-x-2 hover:bg-gray-700 transition text-lg"
         >
-          <Linkedin size={22} /> <span>LinkedIn</span>
+          <Linkedin size={22} /> <span>{t.linkedin}</span>
         </a>
       </motion.div>
     </section>

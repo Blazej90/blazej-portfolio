@@ -12,15 +12,14 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from "@/components/ui/carousel";
+import { useLanguage } from "@/context/language-context";
+import { projectsLocales } from "@/locales/projects";
 
 const projects = [
   {
-    title: "Ucz się React.js z AI",
-    description:
-      "Aplikacja losuje pytania z React.js, pozwala na nagrywanie odpowiedzi głosowej i weryfikację przez AI. Po skończonej odpowiedzi AI ocenia poprawność i daje wskazówki.",
-    image: "/images/projects/learn-react.jpg",
     githubUrl: "https://github.com/Blazej90/lern-react",
     liveDemoUrl: "https://lern-react.vercel.app",
+    image: "/images/projects/learn-react.jpg",
     technologies: [
       "Next.js",
       "TypeScript",
@@ -31,53 +30,41 @@ const projects = [
     ],
   },
   {
-    title: "Kreator formularza",
-    description:
-      "Aplikacja do tworzenia dynamicznych formularzy. Użytkownik może samodzielnie konfigurować pola według własnych potrzeb.",
-    image: "/images/projects/form.jpg",
     githubUrl: "https://github.com/Blazej90/form",
     liveDemoUrl: "https://form-eta-three.vercel.app/",
+    image: "/images/projects/form.jpg",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "shadcn"],
   },
   {
-    title: "Wyszukiwarka filmów",
-    description:
-      "Aplikacja pozwala na wyszukiwanie filmów po tytule, przeglądanie recenzji i obsady. Pokazuje najpopularniejsze filmy na podstawie TMDB API.",
-    image: "/images/projects/movie.jpg",
     githubUrl: "https://github.com/Blazej90/goit-react-hw-05-movies",
     liveDemoUrl: "https://blazej90.github.io/goit-react-hw-05-movies/",
+    image: "/images/projects/movie.jpg",
     technologies: ["React", "CSS Modules", "REST API", "TMDB API"],
   },
   {
-    title: "Gra Wisielec",
-    description:
-      "Klasyczna gra Wisielec w wersji webowej! Użytkownik wybiera poziom trudności i zgaduje litery. Możliwość gry po angielsku z dedykowanymi hasłami.",
-    image: "/images/projects/hangman.jpg",
     githubUrl: "https://github.com/Blazej90/hangman-game/tree/master",
     liveDemoUrl: "https://game-for-boredom.netlify.app",
+    image: "/images/projects/hangman.jpg",
     technologies: ["React", "Vite", "CSS Modules"],
   },
   {
-    title: "Wyszukiwarka obrazów",
-    description:
-      "Aplikacja do wyszukiwania i przeglądania obrazów według słów kluczowych. Wykorzystuje Pixabay API jako backend.",
-    image: "/images/projects/picture.jpg",
     githubUrl: "https://github.com/Blazej90/goit-react-hw-03-image-finder",
     liveDemoUrl: "https://blazej90.github.io/goit-react-hw-03-image-finder/",
+    image: "/images/projects/picture.jpg",
     technologies: ["React", "CSS Modules", "REST API", "Pixabay API"],
   },
   {
-    title: "Taxi Test",
-    description:
-      "Aplikacja służy do obliczania wartości błędu taksometru podczas jego legalizacji. Użytkownik wprowadza wartości, otrzymuje wynik testu i może zapisać wyniki w localStorage.",
-    image: "/images/projects/taxi.jpg",
     githubUrl: "https://github.com/Blazej90/taxi-test",
     liveDemoUrl: "https://blazej90.github.io/taxi-test/",
+    image: "/images/projects/taxi.jpg",
     technologies: ["HTML", "JavaScript", "CSS"],
   },
 ];
 
 export default function Projects() {
+  const { language } = useLanguage();
+  const t = projectsLocales[language];
+
   return (
     <section
       id="projects"
@@ -90,13 +77,13 @@ export default function Projects() {
         viewport={{ amount: 0.3 }}
         className="text-4xl font-bold text-gray-200"
       >
-        Moje Projekty
+        {t.title}
       </motion.h2>
 
       <div className="mt-10 relative">
         <Carousel className="w-full max-w-5xl mx-auto relative">
-          <CarouselPrevious className="absolute left-[-60px] top-1/2 transform -translate-y-1/2 bg-gray-800 text-white rounded-full p-3 hover:bg-gray-700 transition hidden sm:flex" />
-          <CarouselNext className="absolute right-[-60px] top-1/2 transform -translate-y-1/2 bg-gray-800 text-white rounded-full p-3 hover:bg-gray-700 transition hidden sm:flex" />
+          <CarouselPrevious className="hidden sm:flex absolute left-[-60px] top-1/2 transform -translate-y-1/2 bg-gray-800 text-white rounded-full p-3 hover:bg-gray-700 transition" />
+          <CarouselNext className="hidden sm:flex absolute right-[-60px] top-1/2 transform -translate-y-1/2 bg-gray-800 text-white rounded-full p-3 hover:bg-gray-700 transition" />
 
           <CarouselContent className="-ml-2">
             {projects.map((project, index) => (
@@ -119,7 +106,7 @@ export default function Projects() {
                       <div className="relative w-full h-48 cursor-pointer">
                         <Image
                           src={project.image}
-                          alt={project.title}
+                          alt={t.projects[index].title}
                           fill
                           style={{ objectFit: "cover" }}
                           className="rounded-t-lg hover:opacity-80 transition"
@@ -129,13 +116,13 @@ export default function Projects() {
 
                     <CardHeader>
                       <CardTitle className="text-xl font-semibold text-white">
-                        {project.title}
+                        {t.projects[index].title}
                       </CardTitle>
                     </CardHeader>
 
                     <CardContent className="flex flex-col flex-grow min-h-[250px]">
                       <p className="text-gray-400 flex-grow">
-                        {project.description}
+                        {t.projects[index].description}
                       </p>
 
                       <div className="mt-4 flex flex-wrap justify-center gap-2">

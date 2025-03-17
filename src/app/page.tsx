@@ -3,12 +3,17 @@
 import { motion } from "framer-motion";
 import { Parallax } from "react-scroll-parallax";
 import { lazy, Suspense } from "react";
+import { useLanguage } from "@/context/language-context";
+import { pageLocales } from "@/locales/page";
 
 const About = lazy(() => import("@/components/about-me"));
 const Projects = lazy(() => import("@/components/projects"));
 const Contact = lazy(() => import("@/components/contact"));
 
 export default function Home() {
+  const { language } = useLanguage();
+  const t = pageLocales[language];
+
   return (
     <>
       <main className="relative h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
@@ -23,7 +28,7 @@ export default function Home() {
           viewport={{ amount: 0.3 }}
           className="relative text-5xl md:text-6xl font-bold text-gray-200"
         >
-          Cześć, jestem <span className="text-gray-400">Błażej</span> 👋
+          {t.greeting} <span className="text-gray-400">Błażej</span> 👋
         </motion.h1>
 
         <motion.p
@@ -33,8 +38,7 @@ export default function Home() {
           viewport={{ amount: 0.3 }}
           className="relative mt-4 text-lg text-gray-400 max-w-2xl"
         >
-          Jestem Frontend Developerem z pasją do nowoczesnych technologii
-          webowych. Tworzę responsywne i szybkie aplikacje internetowe.
+          {t.description}
         </motion.p>
 
         <motion.div
@@ -50,7 +54,7 @@ export default function Home() {
             whileTap={{ scale: 0.95 }}
             className="px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition"
           >
-            Zobacz moje projekty
+            {t.projectsButton}
           </motion.a>
           <motion.a
             href="#contact"
@@ -58,27 +62,27 @@ export default function Home() {
             whileTap={{ scale: 0.95 }}
             className="px-6 py-3 border border-gray-600 text-white rounded-lg hover:bg-gray-800 transition"
           >
-            Skontaktuj się ze mną
+            {t.contactButton}
           </motion.a>
         </motion.div>
       </main>
 
       <Suspense
-        fallback={<p className="text-gray-400 text-center">Ładowanie...</p>}
+        fallback={<p className="text-gray-400 text-center">{t.loading}</p>}
       >
         <About />
       </Suspense>
 
       <Suspense
         fallback={
-          <p className="text-gray-400 text-center">Ładowanie projektów...</p>
+          <p className="text-gray-400 text-center">{t.projectsLoading}</p>
         }
       >
         <Projects />
       </Suspense>
 
       <Suspense
-        fallback={<p className="text-gray-400 text-center">Ładowanie...</p>}
+        fallback={<p className="text-gray-400 text-center">{t.loading}</p>}
       >
         <Contact />
       </Suspense>

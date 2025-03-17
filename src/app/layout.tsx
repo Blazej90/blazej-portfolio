@@ -1,6 +1,7 @@
 "use client";
 
 import { ParallaxProvider } from "react-scroll-parallax";
+import { LanguageProvider } from "@/context/language-context";
 import Navbar from "@/components/navbar";
 import "./globals.css";
 
@@ -13,8 +14,10 @@ export default function RootLayout({
     <html lang="pl">
       <body className="bg-black text-white">
         <ParallaxProvider>
-          <Navbar />
-          {children}
+          <LanguageProvider>
+            <Navbar />
+            {children}
+          </LanguageProvider>
         </ParallaxProvider>
       </body>
     </html>

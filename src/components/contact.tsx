@@ -7,8 +7,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Send, Paperclip, X } from "lucide-react";
+import { useLanguage } from "@/context/language-context";
+import { contactLocales } from "@/locales/contact";
 
 export default function Contact() {
+  const { language } = useLanguage();
+  const t = contactLocales[language];
+
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [files, setFiles] = useState<File[]>([]);
   const [status, setStatus] = useState<string | null>(null);
@@ -50,14 +55,14 @@ export default function Contact() {
 
       const data = await response.json();
       if (response.ok) {
-        setStatus("✅ Wiadomość wysłana pomyślnie!");
+        setStatus(t.successMessage);
         setForm({ name: "", email: "", message: "" });
         setFiles([]);
       } else {
-        setStatus("❌ Błąd: " + data.error);
+        setStatus(t.errorMessage + data.error);
       }
     } catch {
-      setStatus("❌ Nie udało się wysłać wiadomości. Spróbuj ponownie.");
+      setStatus(t.errorMessage);
     } finally {
       setLoading(false);
     }
@@ -72,7 +77,7 @@ export default function Contact() {
         viewport={{ amount: 0.3 }}
         className="text-4xl font-bold text-gray-200"
       >
-        Kontakt
+        {t.title}
       </motion.h2>
 
       <motion.div
@@ -84,7 +89,7 @@ export default function Contact() {
       >
         <Card className="bg-gray-900 text-white shadow-lg rounded-lg p-6 border-0">
           <CardHeader>
-            <CardTitle className="text-xl">Formularz kontaktowy</CardTitle>
+            <CardTitle className="text-xl">{t.formTitle}</CardTitle>
           </CardHeader>
           <CardContent>
             <form
@@ -94,20 +99,20 @@ export default function Contact() {
               <Input
                 type="text"
                 name="name"
-                placeholder="Twoje imię"
+                placeholder={t.namePlaceholder}
                 value={form.name}
                 onChange={handleChange}
               />
               <Input
                 type="email"
                 name="email"
-                placeholder="Twój e-mail"
+                placeholder={t.emailPlaceholder}
                 value={form.email}
                 onChange={handleChange}
               />
               <Textarea
                 name="message"
-                placeholder="Twoja wiadomość"
+                placeholder={t.messagePlaceholder}
                 value={form.message}
                 onChange={handleChange}
               />
@@ -118,7 +123,7 @@ export default function Contact() {
                   className="flex items-center space-x-2 cursor-pointer"
                 >
                   <Paperclip size={18} />
-                  <span>Dodaj załączniki (25 MB)</span>
+                  <span>{t.attachment}</span>
                 </label>
 
                 <input
@@ -154,7 +159,7 @@ export default function Contact() {
                 type="submit"
                 className="mt-4 bg-gray-700 hover:bg-gray-600 flex items-center gap-2 px-6 py-3 text-lg"
               >
-                {loading ? "Wysyłanie..." : "Wyślij"} <Send size={18} />
+                {loading ? t.sending : t.submit} <Send size={18} />
               </Button>
 
               {status && <p className="mt-4 text-sm text-gray-300">{status}</p>}
