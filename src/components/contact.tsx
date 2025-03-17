@@ -38,7 +38,7 @@ export default function Contact() {
       } else {
         setStatus("❌ Błąd: " + data.error);
       }
-    } catch (error) {
+    } catch {
       setStatus("❌ Nie udało się wysłać wiadomości. Spróbuj ponownie.");
     } finally {
       setLoading(false);
