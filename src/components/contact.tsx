@@ -10,6 +10,8 @@ import { Send } from "lucide-react";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -17,10 +19,30 @@ export default function Contact() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", form);
-    // Logika do obsługi wysyłki
+    setLoading(true);
+    setStatus(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setStatus("✅ Wiadomość wysłana pomyślnie!");
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        setStatus("❌ Błąd: " + data.error);
+      }
+    } catch (error) {
+      setStatus("❌ Nie udało się wysłać wiadomości. Spróbuj ponownie.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -34,16 +56,6 @@ export default function Contact() {
       >
         Kontakt
       </motion.h2>
-
-      <motion.p
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.5 }}
-        viewport={{ amount: 0.3 }}
-        className="mt-4 text-lg text-gray-400 max-w-3xl mx-auto"
-      >
-        Masz pytania? Skontaktuj się ze mną za pomocą formularza poniżej.
-      </motion.p>
 
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
@@ -67,7 +79,7 @@ export default function Contact() {
                 placeholder="Twoje imię"
                 value={form.name}
                 onChange={handleChange}
-                className="bg-gray-800 text-white border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-500 max-w-lg w-full"
+                className="max-w-lg w-full"
               />
               <Input
                 type="email"
@@ -75,24 +87,23 @@ export default function Contact() {
                 placeholder="Twój e-mail"
                 value={form.email}
                 onChange={handleChange}
-                className="bg-gray-800 text-white border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-500 max-w-lg w-full"
+                className="max-w-lg w-full"
               />
               <Textarea
                 name="message"
                 placeholder="Twoja wiadomość"
                 value={form.message}
                 onChange={handleChange}
-                className="bg-gray-800 text-white border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-500 max-w-lg w-full"
+                className="max-w-lg w-full"
               />
-              <div className="flex justify-center">
-                <Button
-                  type="submit"
-                  className="mt-4 bg-gray-700 hover:bg-gray-600 flex items-center gap-2 px-6 py-3 text-lg"
-                >
-                  <Send size={18} />
-                  Wyślij
-                </Button>
-              </div>
+              <Button
+                type="submit"
+                className="mt-4 bg-gray-700 hover:bg-gray-600 flex items-center gap-2 px-6 py-3 text-lg"
+                disabled={loading}
+              >
+                {loading ? "Wysyłanie..." : "Wyślij"} <Send size={18} />
+              </Button>
+              {status && <p className="mt-4 text-sm text-gray-300">{status}</p>}
             </form>
           </CardContent>
         </Card>
