@@ -26,10 +26,11 @@ export async function POST(req: Request) {
     });
 
     const mailOptions = {
-      from: `"${name}" <${email}>`,
+      from: `"Nowa wiadomość" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_RECEIVER,
+      replyTo: email,
       subject: `Nowa wiadomość od ${name}`,
-      text: message,
+      text: `Od: ${name} <${email}>\n\n${message}`,
       attachments: await Promise.all(
         files.map(async (file) => ({
           filename: file.name,
