@@ -1,17 +1,17 @@
 export const pageLocales = {
   pl: {
-    greeting: "Cześć, jestem",
+    role: "Frontend Developer",
     description:
-      "Jestem Frontend Developerem z pasją do nowoczesnych technologii webowych. Tworzę responsywne i szybkie aplikacje internetowe.",
+      "Specjalizuję się w tworzeniu nowoczesnych, wydajnych i responsywnych aplikacji webowych. Moje projekty łączą estetykę z funkcjonalnością.",
     projectsButton: "Zobacz moje projekty",
     contactButton: "Skontaktuj się ze mną",
     loading: "Ładowanie...",
     projectsLoading: "Ładowanie projektów...",
   },
   en: {
-    greeting: "Hi, I'm",
+    role: "Frontend Developer",
     description:
-      "I am a Frontend Developer passionate about modern web technologies. I create responsive and fast web applications.",
+      "I specialize in building modern, high-performance, and responsive web applications. My projects blend aesthetics with functionality.",
     projectsButton: "See my projects",
     contactButton: "Contact me",
     loading: "Loading...",

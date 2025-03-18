@@ -22,19 +22,29 @@ export default function Home() {
         </Parallax>
 
         <motion.h1
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
           viewport={{ amount: 0.3 }}
-          className="relative text-5xl md:text-6xl font-bold text-gray-200"
+          className="relative text-4xl md:text-5xl font-bold text-gray-200"
         >
-          {t.greeting} <span className="text-gray-400">Błażej</span> 👋
+          {t.role}
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          viewport={{ amount: 0.3 }}
+          className="relative text-lg text-gray-400"
+        >
+          Błażej Bartoszewski
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.6 }}
           viewport={{ amount: 0.3 }}
           className="relative mt-4 text-lg text-gray-400 max-w-2xl"
         >
