@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect } from "react";
 import { motion, stagger, useAnimate } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -16,7 +15,7 @@ export const TextGenerateEffect = ({
   duration?: number;
 }) => {
   const [scope, animate] = useAnimate();
-  let wordsArray = words.split(" ");
+  const wordsArray = words.split(" ");
 
   useEffect(() => {
     animate(
@@ -27,22 +26,20 @@ export const TextGenerateEffect = ({
       },
       {
         duration: duration ? duration : 1,
-        delay: stagger(0.08),
+        delay: stagger(0.1),
       }
     );
-  }, [words]);
+  }, [animate, duration, filter]);
 
   return (
     <motion.div
-      key={words}
       ref={scope}
       className={cn(
         "inline-block leading-relaxed text-lg text-gray-400",
         className
       )}
       initial={{ opacity: 0, filter: "blur(6px)" }}
-      animate={{ opacity: 1, filter: "blur(0px)" }}
-      exit={{ opacity: 0, filter: "blur(6px)" }}
+      whileInView={{ opacity: 1, filter: "blur(0px)" }}
       viewport={{ once: false, amount: 0.3 }}
       transition={{ duration: 0.8 }}
     >
