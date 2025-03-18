@@ -5,15 +5,23 @@ import { Github, Linkedin } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/context/language-context";
 import { aboutMeLocales } from "@/locales/about-me";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
 const technologies = [
   "TypeScript",
-  "React",
+  "React.js",
+  "Redux",
   "Next.js",
   "Tailwind CSS",
+  "HTML",
+  "CSS",
+  "JavaScript",
   "Node.js",
   "MongoDB",
   "Docker",
+  "Github",
+  "Git",
+  "REST API",
 ];
 
 export default function About() {
@@ -26,27 +34,24 @@ export default function About() {
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        viewport={{ amount: 0.3 }}
+        viewport={{ once: false, amount: 0.3 }}
         className="text-4xl font-bold text-gray-200"
       >
         {t.title}
       </motion.h2>
 
-      <motion.p
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.5 }}
-        viewport={{ amount: 0.3 }}
-        className="mt-4 text-lg text-gray-400 max-w-3xl mx-auto"
-      >
-        {t.description}
-      </motion.p>
+      <TextGenerateEffect
+        key={language}
+        words={t.description || ""}
+        className="mt-4 max-w-3xl mx-auto"
+        duration={0.8}
+      />
 
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 1 }}
-        viewport={{ amount: 0.3 }}
+        viewport={{ once: false, amount: 0.3 }}
         className="mt-8 flex flex-wrap justify-center gap-3"
       >
         {technologies.map((tech) => (
@@ -64,7 +69,7 @@ export default function About() {
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 1.2 }}
-        viewport={{ amount: 0.3 }}
+        viewport={{ once: false, amount: 0.3 }}
         className="mt-8 flex justify-center space-x-6"
       >
         <a
