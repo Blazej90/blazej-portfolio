@@ -5,6 +5,7 @@ import { Parallax } from "react-scroll-parallax";
 import { lazy, Suspense } from "react";
 import { useLanguage } from "@/context/language-context";
 import { pageLocales } from "@/locales/page";
+import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 
 const About = lazy(() => import("@/components/about-me"));
 const Projects = lazy(() => import("@/components/projects"));
@@ -58,22 +59,21 @@ export default function Home() {
           viewport={{ amount: 0.3 }}
           className="relative mt-6 flex space-x-4"
         >
-          <motion.a
+          <HoverBorderGradient
+            as="a"
             href="#projects"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition"
+            className="px-6 py-3 text-lg"
           >
             {t.projectsButton}
-          </motion.a>
-          <motion.a
+          </HoverBorderGradient>
+
+          <HoverBorderGradient
+            as="a"
             href="#contact"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-6 py-3 border border-gray-600 text-white rounded-lg hover:bg-gray-800 transition"
+            className="px-6 py-3 text-lg"
           >
             {t.contactButton}
-          </motion.a>
+          </HoverBorderGradient>
         </motion.div>
       </main>
 
