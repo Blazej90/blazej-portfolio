@@ -27,7 +27,7 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
           viewport={{ amount: 0.3 }}
-          className="relative text-4xl md:text-5xl font-bold text-gray-200"
+          className="relative text-3xl sm:text-4xl md:text-5xl font-bold text-gray-200"
         >
           {t.role}
         </motion.h1>
@@ -37,7 +37,7 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
           viewport={{ amount: 0.3 }}
-          className="relative text-lg text-gray-400"
+          className="relative text-base sm:text-lg text-gray-400"
         >
           Błażej Bartoszewski
         </motion.p>
@@ -47,7 +47,7 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
           viewport={{ amount: 0.3 }}
-          className="relative mt-4 text-lg text-gray-400 max-w-2xl"
+          className="relative mt-4 text-sm sm:text-lg text-gray-400 max-w-xs sm:max-w-md md:max-w-2xl"
         >
           {t.description}
         </motion.p>
@@ -57,12 +57,12 @@ export default function Home() {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 1 }}
           viewport={{ amount: 0.3 }}
-          className="relative mt-6 flex space-x-4"
+          className="relative mt-6 flex flex-col sm:flex-row justify-center items-center gap-3 w-full"
         >
           <HoverBorderGradient
             as="a"
             href="#projects"
-            className="px-6 py-3 text-lg"
+            className="px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-lg"
           >
             {t.projectsButton}
           </HoverBorderGradient>
@@ -70,7 +70,7 @@ export default function Home() {
           <HoverBorderGradient
             as="a"
             href="#contact"
-            className="px-6 py-3 text-lg"
+            className="px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-lg"
           >
             {t.contactButton}
           </HoverBorderGradient>
