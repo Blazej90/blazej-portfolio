@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import {
   Sheet,
@@ -13,6 +12,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { navbarLocales } from "@/locales/navbar";
 import { useLanguage } from "@/context/language-context";
+import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 
 const Navbar = () => {
   const { language, toggleLanguage } = useLanguage();
@@ -61,15 +61,20 @@ const Navbar = () => {
                 {t.contact}
               </Link>
 
-              <a
-                href="/cv/CV_Błażej_Bartoszewski.pdf"
-                download="CV_Błażej_Bartoszewski.pdf"
-                className="w-full flex justify-center"
-              >
-                <Button className="mt-4 w-[80%] cursor-pointer">
-                  {t.downloadCV}
-                </Button>
-              </a>
+              <div className="w-full flex justify-center">
+                <a
+                  href="/cv/CV_Błażej_Bartoszewski.pdf"
+                  download="CV_Błażej_Bartoszewski.pdf"
+                  className="w-auto"
+                >
+                  <HoverBorderGradient
+                    as="div"
+                    className="px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-lg"
+                  >
+                    {t.downloadCV}
+                  </HoverBorderGradient>
+                </a>
+              </div>
             </div>
           </SheetContent>
         </Sheet>
@@ -114,11 +119,14 @@ const Navbar = () => {
           <a
             href="/cv/CV_Błażej_Bartoszewski.pdf"
             download="CV_Błażej_Bartoszewski.pdf"
-            className="hidden md:block cursor-pointer"
+            className="hidden md:block w-auto"
           >
-            <Button variant="default" className="cursor-pointer">
+            <HoverBorderGradient
+              as="div"
+              className="px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-lg"
+            >
               {t.downloadCV}
-            </Button>
+            </HoverBorderGradient>
           </a>
         </div>
       </div>

@@ -18,6 +18,7 @@ export function HoverBorderGradient({
   {
     as?: React.ElementType;
     href?: string;
+    download?: string;
     containerClassName?: string;
     className?: string;
     duration?: number;
