@@ -2,26 +2,26 @@
 
 import { motion } from "framer-motion";
 import { Github, Linkedin } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/context/language-context";
 import { aboutMeLocales } from "@/locales/about-me";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 
 const technologies = [
-  "TypeScript",
-  "React.js",
-  "Redux",
-  "Next.js",
-  "Tailwind CSS",
-  "HTML",
-  "CSS",
-  "JavaScript",
-  "Node.js",
-  "MongoDB",
-  "Docker",
-  "Github",
-  "Git",
-  "REST API",
+  { id: 1, quote: "TypeScript", name: "", title: "" },
+  { id: 2, quote: "React.js", name: "", title: "" },
+  { id: 3, quote: "Redux", name: "", title: "" },
+  { id: 4, quote: "Next.js", name: "", title: "" },
+  { id: 5, quote: "Tailwind CSS", name: "", title: "" },
+  { id: 6, quote: "HTML", name: "", title: "" },
+  { id: 7, quote: "CSS", name: "", title: "" },
+  { id: 8, quote: "JavaScript", name: "", title: "" },
+  { id: 9, quote: "Node.js", name: "", title: "" },
+  { id: 10, quote: "MongoDB", name: "", title: "" },
+  { id: 11, quote: "Docker", name: "", title: "" },
+  { id: 12, quote: "GitHub", name: "", title: "" },
+  { id: 13, quote: "Git", name: "", title: "" },
+  { id: 14, quote: "REST API", name: "", title: "" },
 ];
 
 export default function About() {
@@ -43,34 +43,31 @@ export default function About() {
       <TextGenerateEffect
         key={language}
         words={t.description || ""}
-        className="mt-4 max-w-3xl mx-auto"
+        className="mt-4 max-w-3xl mx-auto text-lg text-gray-400"
         duration={0.8}
       />
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
+        initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 1 }}
         viewport={{ once: false, amount: 0.3 }}
-        className="mt-8 flex flex-wrap justify-center gap-3"
+        className="mt-12"
       >
-        {technologies.map((tech) => (
-          <Badge
-            key={tech}
-            variant="outline"
-            className="text-white border-gray-600 px-3 py-1 text-sm"
-          >
-            {tech}
-          </Badge>
-        ))}
+        <InfiniteMovingCards
+          items={technologies}
+          direction="left"
+          speed="normal"
+          pauseOnHover={true}
+        />
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
+        initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 1.2 }}
         viewport={{ once: false, amount: 0.3 }}
-        className="mt-8 flex justify-center space-x-6"
+        className="mt-12 flex justify-center space-x-6"
       >
         <a
           href="https://github.com/Blazej90"
