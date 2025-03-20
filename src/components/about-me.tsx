@@ -7,21 +7,76 @@ import { aboutMeLocales } from "@/locales/about-me";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 
+import {
+  SiJavascript,
+  SiTypescript,
+  SiReact,
+  SiRedux,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiHtml5,
+  SiCss3,
+  SiNodedotjs,
+  SiMongodb,
+  SiDocker,
+  SiGit,
+  SiGithub,
+} from "@icons-pack/react-simple-icons";
+
 const technologies = [
-  { id: 1, quote: "TypeScript", name: "", title: "" },
-  { id: 2, quote: "React.js", name: "", title: "" },
-  { id: 3, quote: "Redux", name: "", title: "" },
-  { id: 4, quote: "Next.js", name: "", title: "" },
-  { id: 5, quote: "Tailwind CSS", name: "", title: "" },
-  { id: 6, quote: "HTML", name: "", title: "" },
-  { id: 7, quote: "CSS", name: "", title: "" },
-  { id: 8, quote: "JavaScript", name: "", title: "" },
-  { id: 9, quote: "Node.js", name: "", title: "" },
-  { id: 10, quote: "MongoDB", name: "", title: "" },
-  { id: 11, quote: "Docker", name: "", title: "" },
-  { id: 12, quote: "GitHub", name: "", title: "" },
-  { id: 13, quote: "Git", name: "", title: "" },
-  { id: 14, quote: "REST API", name: "", title: "" },
+  {
+    id: 1,
+    name: "JavaScript",
+    icon: <SiJavascript className="text-yellow-400 w-6 h-6" />,
+  },
+  {
+    id: 2,
+    name: "TypeScript",
+    icon: <SiTypescript className="text-blue-500 w-6 h-6" />,
+  },
+  {
+    id: 3,
+    name: "React.js",
+    icon: <SiReact className="text-cyan-400 w-6 h-6" />,
+  },
+  {
+    id: 4,
+    name: "Redux",
+    icon: <SiRedux className="text-purple-500 w-6 h-6" />,
+  },
+  {
+    id: 5,
+    name: "Next.js",
+    icon: <SiNextdotjs className="text-white w-6 h-6" />,
+  },
+  {
+    id: 6,
+    name: "Tailwind CSS",
+    icon: <SiTailwindcss className="text-blue-300 w-6 h-6" />,
+  },
+  {
+    id: 7,
+    name: "HTML",
+    icon: <SiHtml5 className="text-orange-500 w-6 h-6" />,
+  },
+  { id: 8, name: "CSS", icon: <SiCss3 className="text-blue-600 w-6 h-6" /> },
+  {
+    id: 9,
+    name: "Node.js",
+    icon: <SiNodedotjs className="text-green-600 w-6 h-6" />,
+  },
+  {
+    id: 10,
+    name: "MongoDB",
+    icon: <SiMongodb className="text-green-400 w-6 h-6" />,
+  },
+  {
+    id: 11,
+    name: "Docker",
+    icon: <SiDocker className="text-blue-400 w-6 h-6" />,
+  },
+  { id: 12, name: "Git", icon: <SiGit className="text-orange-400 w-6 h-6" /> },
+  { id: 13, name: "GitHub", icon: <SiGithub className="text-white w-6 h-6" /> },
 ];
 
 export default function About() {
@@ -48,14 +103,18 @@ export default function About() {
       />
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 1 }}
         viewport={{ once: false, amount: 0.3 }}
         className="mt-12"
       >
         <InfiniteMovingCards
-          items={technologies}
+          items={technologies.map((tech) => ({
+            id: tech.id,
+            quote: tech.name,
+            icon: tech.icon,
+          }))}
           direction="left"
           speed="normal"
           pauseOnHover={true}

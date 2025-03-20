@@ -1,8 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, ReactNode } from "react";
 
 export const InfiniteMovingCards = ({
   items,
@@ -11,7 +10,7 @@ export const InfiniteMovingCards = ({
   pauseOnHover = true,
   className,
 }: {
-  items: { id: number; quote: string }[];
+  items: { id: number; quote: string; icon?: ReactNode }[];
   direction?: "left" | "right";
   speed?: "fast" | "normal" | "slow";
   pauseOnHover?: boolean;
@@ -54,17 +53,8 @@ export const InfiniteMovingCards = ({
 
   const getSpeed = () => {
     if (containerRef.current) {
-      let duration;
-      switch (speed) {
-        case "fast":
-          duration = "25s";
-          break;
-        case "normal":
-          duration = "50s";
-          break;
-        default:
-          duration = "80s";
-      }
+      const duration =
+        speed === "fast" ? "50s" : speed === "normal" ? "70s" : "100s";
       containerRef.current.style.setProperty("--animation-duration", duration);
     }
   };
@@ -73,7 +63,7 @@ export const InfiniteMovingCards = ({
     <div
       ref={containerRef}
       className={cn(
-        "scroller relative z-20 max-w-7xl overflow-hidden",
+        "scroller relative overflow-hidden",
         "[mask-image:linear-gradient(to_right,transparent,white_15%,white_85%,transparent)]",
         className
       )}
@@ -87,10 +77,11 @@ export const InfiniteMovingCards = ({
         )}
       >
         {items.map((item) => (
-          <li key={item.id} className="shrink-0">
-            <Badge className="px-6 py-2 text-lg text-white bg-gray-800 border border-gray-700 rounded-full">
-              {item.quote}
-            </Badge>
+          <li
+            key={item.id}
+            className="shrink-0 flex items-center space-x-2 bg-gray-800 text-white px-4 py-2 rounded-lg border border-gray-700 shadow-md"
+          >
+            {item.icon} <span className="text-sm">{item.quote}</span>
           </li>
         ))}
       </ul>
