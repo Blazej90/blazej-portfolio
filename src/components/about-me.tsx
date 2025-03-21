@@ -6,6 +6,7 @@ import { useLanguage } from "@/context/language-context";
 import { aboutMeLocales } from "@/locales/about-me";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
+import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 
 import {
   SiJavascript,
@@ -123,23 +124,27 @@ export default function About() {
         viewport={{ once: false, amount: 0.3 }}
         className="mt-12 flex justify-center space-x-6"
       >
-        <a
+        <HoverBorderGradient
+          as="a"
           href="https://github.com/Blazej90"
           target="_blank"
           rel="noopener noreferrer"
-          className="px-5 py-3 bg-gray-800 text-white rounded-lg flex items-center space-x-2 hover:bg-gray-700 transition text-lg"
+          className="flex items-center space-x-2 text-white text-lg px-6 py-2"
         >
-          <Github size={22} /> <span>{t.github}</span>
-        </a>
+          <Github size={22} />
+          <span>{t.github}</span>
+        </HoverBorderGradient>
 
-        <a
+        <HoverBorderGradient
+          as="a"
           href="https://www.linkedin.com/in/błażej-bartoszewski-36b7162b7"
           target="_blank"
           rel="noopener noreferrer"
-          className="px-5 py-3 bg-gray-800 text-white rounded-lg flex items-center space-x-2 hover:bg-gray-700 transition text-lg"
+          className="flex items-center space-x-2 text-white text-lg px-6 py-2"
         >
-          <Linkedin size={22} /> <span>{t.linkedin}</span>
-        </a>
+          <Linkedin size={22} />
+          <span>{t.linkedin}</span>
+        </HoverBorderGradient>
       </motion.div>
     </section>
   );

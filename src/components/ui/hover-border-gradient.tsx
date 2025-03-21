@@ -1,40 +1,44 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ElementType, HTMLAttributes } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 type Direction = "TOP" | "LEFT" | "BOTTOM" | "RIGHT";
 
-export function HoverBorderGradient({
+type HoverBorderGradientProps<T extends ElementType> = {
+  as?: T;
+  href?: string;
+  download?: string;
+  target?: string;
+  rel?: string;
+  containerClassName?: string;
+  className?: string;
+  duration?: number;
+  clockwise?: boolean;
+} & Omit<React.ComponentPropsWithoutRef<T>, "as" | "children"> & {
+    children: React.ReactNode;
+  };
+
+export function HoverBorderGradient<T extends ElementType = "button">({
   children,
   containerClassName,
   className,
-  as: Tag = "button",
+  as,
   duration = 1,
   clockwise = true,
   ...props
-}: React.PropsWithChildren<
-  {
-    as?: React.ElementType;
-    href?: string;
-    download?: string;
-    containerClassName?: string;
-    className?: string;
-    duration?: number;
-    clockwise?: boolean;
-  } & React.HTMLAttributes<HTMLElement>
->) {
-  const [hovered, setHovered] = useState<boolean>(false);
+}: HoverBorderGradientProps<T>) {
+  const Tag = as || "button";
+  const [hovered, setHovered] = useState(false);
   const [direction, setDirection] = useState<Direction>("TOP");
 
-  const rotateDirection = (currentDirection: Direction): Direction => {
-    const directions: Direction[] = ["TOP", "LEFT", "BOTTOM", "RIGHT"];
-    const currentIndex = directions.indexOf(currentDirection);
-    const nextIndex = clockwise
-      ? (currentIndex - 1 + directions.length) % directions.length
-      : (currentIndex + 1) % directions.length;
-    return directions[nextIndex];
+  const rotateDirection = (current: Direction): Direction => {
+    const order: Direction[] = ["TOP", "LEFT", "BOTTOM", "RIGHT"];
+    const idx = order.indexOf(current);
+    return clockwise
+      ? order[(idx - 1 + order.length) % order.length]
+      : order[(idx + 1) % order.length];
   };
 
   const movingMap: Record<Direction, string> = {
@@ -52,7 +56,7 @@ export function HoverBorderGradient({
   useEffect(() => {
     if (!hovered) {
       const interval = setInterval(() => {
-        setDirection((prevState) => rotateDirection(prevState));
+        setDirection((prev) => rotateDirection(prev));
       }, duration * 1000);
       return () => clearInterval(interval);
     }
@@ -68,7 +72,6 @@ export function HoverBorderGradient({
         "rounded-l-full rounded-r-full",
         containerClassName
       )}
-      {...(props.href ? { href: props.href } : {})}
       {...props}
     >
       <div
@@ -94,7 +97,7 @@ export function HoverBorderGradient({
             ? [movingMap[direction], highlight]
             : movingMap[direction],
         }}
-        transition={{ ease: "linear", duration: duration ?? 1 }}
+        transition={{ ease: "linear", duration }}
       />
 
       <div className="bg-black absolute inset-[2px] rounded-[inherit]" />
