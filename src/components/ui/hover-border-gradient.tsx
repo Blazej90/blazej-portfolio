@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, ElementType, HTMLAttributes } from "react";
+import React, { useState, useEffect, ElementType } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -60,7 +60,7 @@ export function HoverBorderGradient<T extends ElementType = "button">({
       }, duration * 1000);
       return () => clearInterval(interval);
     }
-  }, [hovered]);
+  }, [hovered, duration, rotateDirection]);
 
   return (
     <Tag
