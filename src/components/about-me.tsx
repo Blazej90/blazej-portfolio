@@ -110,14 +110,9 @@ export default function About() {
         className="mt-12"
       >
         <InfiniteMovingCards
-          items={technologies.map((tech) => ({
-            id: tech.id,
-            quote: tech.name,
-            icon: tech.icon,
-          }))}
+          items={technologies}
           direction="left"
-          speed="normal"
-          pauseOnHover={true}
+          speed="slow"
         />
       </motion.div>
 
