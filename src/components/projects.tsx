@@ -5,6 +5,7 @@ import { Github, ExternalLink } from "lucide-react";
 import { useState, useRef, useId, useEffect } from "react";
 import { useLanguage } from "@/context/language-context";
 import { projectsLocales } from "@/locales/projects";
+import { motion } from "framer-motion";
 
 interface SlideData {
   src: string;
@@ -30,7 +31,6 @@ const Slide = ({
   handleSlideClick,
 }: SlideProps) => {
   const slideRef = useRef<HTMLLIElement>(null);
-
   const xRef = useRef(0);
   const yRef = useRef(0);
   const frameRef = useRef<number | null>(null);
@@ -38,15 +38,17 @@ const Slide = ({
   useEffect(() => {
     const animate = () => {
       if (!slideRef.current) return;
-      const x = xRef.current;
-      const y = yRef.current;
-      slideRef.current.style.setProperty("--x", `${x}px`);
-      slideRef.current.style.setProperty("--y", `${y}px`);
+      slideRef.current.style.setProperty("--x", `${xRef.current}px`);
+      slideRef.current.style.setProperty("--y", `${yRef.current}px`);
       frameRef.current = requestAnimationFrame(animate);
     };
+
     frameRef.current = requestAnimationFrame(animate);
+
     return () => {
-      if (frameRef.current) cancelAnimationFrame(frameRef.current);
+      if (frameRef.current !== null) {
+        cancelAnimationFrame(frameRef.current);
+      }
     };
   }, []);
 
@@ -54,8 +56,8 @@ const Slide = ({
     const el = slideRef.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
-    xRef.current = event.clientX - (r.left + Math.floor(r.width / 2));
-    yRef.current = event.clientY - (r.top + Math.floor(r.height / 2));
+    xRef.current = event.clientX - (r.left + r.width / 2);
+    yRef.current = event.clientY - (r.top + r.height / 2);
   };
 
   const handleMouseLeave = () => {
@@ -69,7 +71,7 @@ const Slide = ({
     <div className="[perspective:1200px] [transform-style:preserve-3d]">
       <li
         ref={slideRef}
-        className="flex flex-1 flex-col items-center justify-end relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[90vw] sm:w-[70vmin] h-[90vw] sm:h-[70vmin] mx-[4vmin] z-10"
+        className="flex flex-1 flex-col items-center justify-end relative text-center text-white transition-all duration-300 ease-in-out w-[90vw] sm:w-[70vmin] h-[90vw] sm:h-[70vmin] mx-auto sm:mx-[4vmin] z-10"
         onClick={() => handleSlideClick(index)}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -78,7 +80,6 @@ const Slide = ({
             current !== index
               ? "scale(0.98) rotateX(8deg)"
               : "scale(1) rotateX(0deg)",
-          transition: "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
           transformOrigin: "bottom",
         }}
       >
@@ -102,7 +103,8 @@ const Slide = ({
           {current === index && (
             <div className="absolute inset-0 bg-black/30 transition-all duration-1000" />
           )}
-          <article className="absolute bottom-0 left-0 w-full bg-black/70 mt-4 p-6 z-10">
+
+          <article className="absolute bottom-0 left-0 w-full bg-black/70 p-6 z-10">
             <h2 className="text-lg md:text-2xl lg:text-3xl font-semibold mb-2">
               {title}
             </h2>
@@ -159,7 +161,7 @@ export default function Projects() {
   const { language } = useLanguage();
   const t = projectsLocales[language];
 
-  const slides = [
+  const slides: SlideData[] = [
     {
       src: "/images/projects/learn-react.jpg",
       githubUrl: "https://github.com/Blazej90/lern-react",
@@ -211,18 +213,22 @@ export default function Projects() {
   const id = useId();
 
   return (
-    <section
+    <motion.section
       id="projects"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+      viewport={{ amount: 0.3 }}
       className="py-20 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto text-center relative"
     >
       <h2 className="text-4xl font-bold text-gray-200 mb-10">{t.title}</h2>
 
       <div
-        className="relative w-[90vw] sm:w-[70vmin] h-[90vw] sm:h-[70vmin] mx-auto"
+        className="relative w-full max-w-[90vw] sm:max-w-[70vmin] h-[90vw] sm:h-[70vmin] mx-auto"
         aria-labelledby={`carousel-heading-${id}`}
       >
         <ul
-          className="absolute flex mx-[-4vmin] transition-transform duration-1000 ease-in-out"
+          className="absolute flex transition-transform duration-1000 ease-in-out overflow-hidden touch-none"
           style={{
             transform: `translateX(-${current * (100 / slides.length)}%)`,
           }}
@@ -246,7 +252,6 @@ export default function Projects() {
             title="Poprzedni"
             handleClick={handlePreviousClick}
           />
-
           <CarouselControl
             type="next"
             title="Następny"
@@ -254,6 +259,6 @@ export default function Projects() {
           />
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
