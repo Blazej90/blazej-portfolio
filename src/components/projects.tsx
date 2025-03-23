@@ -42,9 +42,13 @@ const Slide = ({
       slideRef.current.style.setProperty("--y", `${yRef.current}px`);
       frameRef.current = requestAnimationFrame(animate);
     };
+
     frameRef.current = requestAnimationFrame(animate);
+
     return () => {
-      if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
+      if (frameRef.current !== null) {
+        cancelAnimationFrame(frameRef.current);
+      }
     };
   }, []);
 
@@ -67,7 +71,7 @@ const Slide = ({
     <div className="[perspective:1200px] [transform-style:preserve-3d]">
       <li
         ref={slideRef}
-        className="flex flex-1 flex-col items-center justify-end relative text-center text-white transition-all duration-300 ease-in-out w-[90vw] sm:w-[70vmin] h-[90vw] sm:h-[70vmin] mx-auto z-10"
+        className="flex flex-1 flex-col items-center justify-end relative text-center text-white transition-all duration-300 ease-in-out w-[90vw] sm:w-[70vmin] h-[90vw] sm:h-[70vmin] mx-[4vmin] z-10"
         onClick={() => handleSlideClick(index)}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -80,7 +84,7 @@ const Slide = ({
         }}
       >
         <div
-          className="relative w-full h-full bg-[#1D1F2F] overflow-hidden transition-all duration-150 ease-out rounded-none"
+          className="absolute top-0 left-0 w-full h-full bg-[#1D1F2F] overflow-hidden transition-all duration-150 ease-out"
           style={{
             transform:
               current === index
@@ -89,7 +93,7 @@ const Slide = ({
           }}
         >
           <img
-            className="absolute inset-0 w-[120%] h-[120%] object-cover transition-opacity duration-600 ease-in-out"
+            className="absolute inset-0 w-[120%] h-[120%] object-cover opacity-100 transition-opacity duration-600 ease-in-out"
             style={{ opacity: current === index ? 1 : 0.5 }}
             alt={title}
             src={src}
@@ -100,7 +104,12 @@ const Slide = ({
             <div className="absolute inset-0 bg-black/30 transition-all duration-1000" />
           )}
 
-          <article className="absolute bottom-0 left-0 w-full bg-black/70 p-6 z-10">
+          {/* Opis natychmiastowy – bez opóźnienia */}
+          <article
+            className={`absolute bottom-0 left-0 w-full bg-black/70 p-6 z-10 ${
+              current === index ? "opacity-100" : "opacity-0"
+            } transition-none`}
+          >
             <h2 className="text-lg md:text-2xl lg:text-3xl font-semibold mb-2">
               {title}
             </h2>
@@ -191,11 +200,13 @@ export default function Projects() {
   ];
 
   const handlePreviousClick = () => {
-    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+    const previous = current - 1;
+    setCurrent(previous < 0 ? slides.length - 1 : previous);
   };
 
   const handleNextClick = () => {
-    setCurrent((prev) => (prev + 1) % slides.length);
+    const next = current + 1;
+    setCurrent(next === slides.length ? 0 : next);
   };
 
   const handleSlideClick = (index: number) => {
@@ -213,7 +224,7 @@ export default function Projects() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
       viewport={{ amount: 0.3 }}
-      className="py-20 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto text-center relative overflow-x-hidden"
+      className="py-20 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto text-center relative"
     >
       <h2 className="text-4xl font-bold text-gray-200 mb-10">{t.title}</h2>
 
@@ -222,7 +233,7 @@ export default function Projects() {
         aria-labelledby={`carousel-heading-${id}`}
       >
         <ul
-          className="absolute flex transition-transform duration-1000 ease-in-out overflow-hidden"
+          className="absolute flex transition-transform duration-1000 ease-in-out overflow-hidden touch-none"
           style={{
             transform: `translateX(-${current * (100 / slides.length)}%)`,
           }}
