@@ -6,6 +6,7 @@ import { useState, useRef, useId, useEffect } from "react";
 import { useLanguage } from "@/context/language-context";
 import { projectsLocales } from "@/locales/projects";
 import { motion } from "framer-motion";
+import { useSwipeable } from "react-swipeable";
 
 interface SlideData {
   src: string;
@@ -204,6 +205,12 @@ export default function Projects() {
     }
   };
 
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: handleNextClick,
+    onSwipedRight: handlePreviousClick,
+    trackMouse: true,
+  });
+
   const id = useId();
 
   return (
@@ -220,6 +227,7 @@ export default function Projects() {
       <div
         className="relative w-[90vw] sm:w-[70vmin] h-[90vw] sm:h-[70vmin] mx-auto"
         aria-labelledby={`carousel-heading-${id}`}
+        {...swipeHandlers}
       >
         <ul
           className="absolute flex transition-transform duration-1000 ease-in-out overflow-hidden"
