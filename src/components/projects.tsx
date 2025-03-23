@@ -42,13 +42,9 @@ const Slide = ({
       slideRef.current.style.setProperty("--y", `${yRef.current}px`);
       frameRef.current = requestAnimationFrame(animate);
     };
-
     frameRef.current = requestAnimationFrame(animate);
-
     return () => {
-      if (frameRef.current !== null) {
-        cancelAnimationFrame(frameRef.current);
-      }
+      if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
     };
   }, []);
 
@@ -71,7 +67,7 @@ const Slide = ({
     <div className="[perspective:1200px] [transform-style:preserve-3d]">
       <li
         ref={slideRef}
-        className="flex flex-1 flex-col items-center justify-end relative text-center text-white transition-all duration-300 ease-in-out w-[90vw] sm:w-[70vmin] h-[90vw] sm:h-[70vmin] mx-auto sm:mx-[4vmin] z-10"
+        className="flex flex-1 flex-col items-center justify-end relative text-center text-white transition-all duration-300 ease-in-out w-[90vw] sm:w-[70vmin] h-[90vw] sm:h-[70vmin] mx-auto z-10"
         onClick={() => handleSlideClick(index)}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -84,7 +80,7 @@ const Slide = ({
         }}
       >
         <div
-          className="absolute top-0 left-0 w-full h-full bg-[#1D1F2F] overflow-hidden transition-all duration-150 ease-out"
+          className="relative w-full h-full bg-[#1D1F2F] overflow-hidden transition-all duration-150 ease-out rounded-none"
           style={{
             transform:
               current === index
@@ -93,7 +89,7 @@ const Slide = ({
           }}
         >
           <img
-            className="absolute inset-0 w-[120%] h-[120%] object-cover opacity-100 transition-opacity duration-600 ease-in-out"
+            className="absolute inset-0 w-[120%] h-[120%] object-cover transition-opacity duration-600 ease-in-out"
             style={{ opacity: current === index ? 1 : 0.5 }}
             alt={title}
             src={src}
@@ -195,13 +191,11 @@ export default function Projects() {
   ];
 
   const handlePreviousClick = () => {
-    const previous = current - 1;
-    setCurrent(previous < 0 ? slides.length - 1 : previous);
+    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
   const handleNextClick = () => {
-    const next = current + 1;
-    setCurrent(next === slides.length ? 0 : next);
+    setCurrent((prev) => (prev + 1) % slides.length);
   };
 
   const handleSlideClick = (index: number) => {
@@ -219,16 +213,16 @@ export default function Projects() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
       viewport={{ amount: 0.3 }}
-      className="py-20 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto text-center relative"
+      className="py-20 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto text-center relative overflow-x-hidden"
     >
       <h2 className="text-4xl font-bold text-gray-200 mb-10">{t.title}</h2>
 
       <div
-        className="relative w-full max-w-[90vw] sm:max-w-[70vmin] h-[90vw] sm:h-[70vmin] mx-auto"
+        className="relative w-[90vw] sm:w-[70vmin] h-[90vw] sm:h-[70vmin] mx-auto"
         aria-labelledby={`carousel-heading-${id}`}
       >
         <ul
-          className="absolute flex transition-transform duration-1000 ease-in-out overflow-hidden touch-none"
+          className="absolute flex transition-transform duration-1000 ease-in-out overflow-hidden"
           style={{
             transform: `translateX(-${current * (100 / slides.length)}%)`,
           }}
