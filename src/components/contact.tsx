@@ -3,11 +3,20 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, X, Paperclip } from "lucide-react";
+import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { useLanguage } from "@/context/language-context";
 import { contactLocales } from "@/locales/contact";
 import { Input } from "@/components/ui/aceternity-input";
 import { Label } from "@/components/ui/aceternity-label";
 import { HoverEffectWrapper } from "@/components/ui/hover-effect-wrapper";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -29,8 +38,13 @@ export default function Contact() {
 
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [files, setFiles] = useState<File[]>([]);
-  const [status, setStatus] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [dialogContent, setDialogContent] = useState<{
+    title: string;
+    description: string;
+    success: boolean;
+  }>({ title: "", description: "", success: true });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -52,7 +66,6 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setStatus(null);
 
     const formData = new FormData();
     formData.append("name", form.name);
@@ -68,16 +81,29 @@ export default function Contact() {
 
       const data = await response.json();
       if (response.ok) {
-        setStatus(t.successMessage);
+        setDialogContent({
+          title: t.successMessage,
+          description: "",
+          success: true,
+        });
         setForm({ name: "", email: "", message: "" });
         setFiles([]);
       } else {
-        setStatus(t.errorMessage + data.error);
+        setDialogContent({
+          title: t.errorMessage,
+          description: data.error || "",
+          success: false,
+        });
       }
     } catch {
-      setStatus(t.errorMessage);
+      setDialogContent({
+        title: t.errorMessage,
+        description: "",
+        success: false,
+      });
     } finally {
       setLoading(false);
+      setIsDialogOpen(true);
     }
   };
 
@@ -92,6 +118,16 @@ export default function Contact() {
       >
         {t.title}
       </motion.h2>
+
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.2 }}
+        viewport={{ amount: 0.3 }}
+        className="text-base text-gray-400 mt-2"
+      >
+        {t.description}
+      </motion.p>
 
       <motion.form
         onSubmit={handleSubmit}
@@ -192,9 +228,40 @@ export default function Contact() {
           <span className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
         </Button>
 
-        {status && (
-          <p className="text-sm text-gray-600 dark:text-gray-300">{status}</p>
-        )}
+        <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <AlertDialogContent asChild>
+            <HoverEffectWrapper className="bg-[#27272a] border border-gray-600 text-white shadow-xl w-full max-w-md">
+              <div className="p-6 rounded-lg bg-[#27272a]">
+                <AlertDialogHeader>
+                  <AlertDialogTitle className="text-lg flex items-center gap-2">
+                    {dialogContent.success ? (
+                      <FaCheckCircle className="text-green-400" />
+                    ) : (
+                      <FaTimesCircle className="text-red-500" />
+                    )}
+                    {dialogContent.title}
+                  </AlertDialogTitle>
+                  {dialogContent.description && (
+                    <AlertDialogDescription className="text-sm text-gray-300 mt-2">
+                      {dialogContent.description}
+                    </AlertDialogDescription>
+                  )}
+                </AlertDialogHeader>
+
+                <AlertDialogFooter className="pt-6">
+                  <Button
+                    onClick={() => setIsDialogOpen(false)}
+                    className="group/btn relative block h-10 w-full rounded-md bg-[#1f1f1f] text-white font-medium dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
+                  >
+                    {t.close}
+                    <span className="absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
+                    <span className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
+                  </Button>
+                </AlertDialogFooter>
+              </div>
+            </HoverEffectWrapper>
+          </AlertDialogContent>
+        </AlertDialog>
       </motion.form>
     </section>
   );
