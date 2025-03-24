@@ -1,5 +1,6 @@
 "use client";
 
+import Footer from "@/components/footer";
 import { motion } from "framer-motion";
 import { Parallax } from "react-scroll-parallax";
 import { lazy, Suspense } from "react";
@@ -108,6 +109,8 @@ export default function Home() {
       >
         <Contact />
       </Suspense>
+
+      <Footer />
     </>
   );
 }
