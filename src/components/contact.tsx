@@ -2,13 +2,26 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Send, Paperclip, X } from "lucide-react";
+import { Send, X, Paperclip } from "lucide-react";
 import { useLanguage } from "@/context/language-context";
 import { contactLocales } from "@/locales/contact";
+import { Input } from "@/components/ui/aceternity-input";
+import { Label } from "@/components/ui/aceternity-label";
+import { HoverEffectWrapper } from "@/components/ui/hover-effect-wrapper";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+const LabelInputContainer = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <div className={cn("flex w-full flex-col space-y-[2px]", className)}>
+    {children}
+  </div>
+);
 
 export default function Contact() {
   const { language } = useLanguage();
@@ -69,7 +82,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 px-6 max-w-4xl mx-auto text-center">
+    <section id="contact" className="py-20 px-4 max-w-3xl mx-auto text-center">
       <motion.h2
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -80,93 +93,109 @@ export default function Contact() {
         {t.title}
       </motion.h2>
 
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+      <motion.form
+        onSubmit={handleSubmit}
+        initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, delay: 1 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
         viewport={{ amount: 0.3 }}
-        className="mt-8"
+        className="shadow-input mx-auto mt-10 w-full max-w-lg rounded-none p-0 space-y-4 sm:space-y-5"
       >
-        <Card className="bg-gray-900 text-white shadow-lg rounded-lg p-6 border-0">
-          <CardHeader>
-            <CardTitle className="text-xl">{t.formTitle}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col items-center space-y-4"
+        <LabelInputContainer>
+          <Label htmlFor="name">{t.namePlaceholder}</Label>
+          <Input
+            id="name"
+            name="name"
+            type="text"
+            placeholder={t.namePlaceholder}
+            value={form.name}
+            onChange={handleChange}
+            className="bg-[#27272a] text-white placeholder:text-neutral-400"
+          />
+        </LabelInputContainer>
+
+        <LabelInputContainer>
+          <Label htmlFor="email">{t.emailPlaceholder}</Label>
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            placeholder={t.emailPlaceholder}
+            value={form.email}
+            onChange={handleChange}
+            className="bg-[#27272a] text-white placeholder:text-neutral-400"
+          />
+        </LabelInputContainer>
+
+        <LabelInputContainer>
+          <Label htmlFor="message">{t.messagePlaceholder}</Label>
+          <HoverEffectWrapper>
+            <textarea
+              id="message"
+              name="message"
+              placeholder={t.messagePlaceholder}
+              value={form.message}
+              onChange={handleChange}
+              rows={6}
+              className="w-full rounded-md border-none bg-[#27272a] px-3 py-2 text-sm text-white placeholder:text-neutral-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition duration-300"
+            />
+          </HoverEffectWrapper>
+        </LabelInputContainer>
+
+        <HoverEffectWrapper>
+          <div className="relative z-10 flex flex-col items-start space-y-2 border border-gray-600 p-3 rounded-lg bg-[#27272a] w-full focus-within:ring-2 focus-within:ring-blue-500 transition duration-300">
+            <label
+              htmlFor="fileInput"
+              className="flex items-center space-x-2 cursor-pointer text-sm text-gray-300"
             >
-              <Input
-                type="text"
-                name="name"
-                placeholder={t.namePlaceholder}
-                value={form.name}
-                onChange={handleChange}
-              />
-              <Input
-                type="email"
-                name="email"
-                placeholder={t.emailPlaceholder}
-                value={form.email}
-                onChange={handleChange}
-              />
-              <Textarea
-                name="message"
-                placeholder={t.messagePlaceholder}
-                value={form.message}
-                onChange={handleChange}
-              />
+              <Paperclip size={16} />
+              <span>{t.attachment}</span>
+            </label>
+            <input
+              id="fileInput"
+              type="file"
+              multiple
+              onChange={handleFileChange}
+              className="hidden"
+            />
 
-              <div className="flex flex-col items-start space-y-2 border border-gray-600 p-2 rounded-lg hover:bg-gray-800 transition w-full">
-                <label
-                  htmlFor="fileInput"
-                  className="flex items-center space-x-2 cursor-pointer"
-                >
-                  <Paperclip size={18} />
-                  <span>{t.attachment}</span>
-                </label>
+            {files.length > 0 && (
+              <ul className="space-y-1 w-full">
+                {files.map((file) => (
+                  <li
+                    key={file.name}
+                    className="flex justify-between items-center px-2 py-1 bg-[#27272a] rounded"
+                  >
+                    <span className="text-sm text-white">{file.name}</span>
+                    <button
+                      type="button"
+                      onClick={() => removeFile(file.name)}
+                      className="text-gray-400 hover:text-red-500 transition"
+                    >
+                      <X size={16} />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </HoverEffectWrapper>
 
-                <input
-                  id="fileInput"
-                  type="file"
-                  multiple
-                  onChange={handleFileChange}
-                  className="hidden"
-                />
+        <Button
+          type="submit"
+          disabled={loading}
+          className="group/btn relative block h-10 w-full rounded-md bg-[#1f1f1f] text-white font-medium dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
+        >
+          {loading ? t.sending : t.submit}
+          <Send size={16} className="inline ml-2" />
+          <span className="absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
+          <span className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
+        </Button>
 
-                {files.length > 0 && (
-                  <ul className="mt-2 space-y-1 w-full">
-                    {files.map((file) => (
-                      <li
-                        key={file.name}
-                        className="flex justify-between items-center px-2 py-1 bg-gray-800 rounded-lg"
-                      >
-                        <span className="text-sm">{file.name}</span>
-                        <button
-                          type="button"
-                          onClick={() => removeFile(file.name)}
-                          className="text-gray-400 hover:text-red-500 transition"
-                        >
-                          <X size={16} />
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-
-              <Button
-                type="submit"
-                className="mt-4 bg-gray-700 hover:bg-gray-600 flex items-center gap-2 px-6 py-3 text-lg"
-              >
-                {loading ? t.sending : t.submit} <Send size={18} />
-              </Button>
-
-              {status && <p className="mt-4 text-sm text-gray-300">{status}</p>}
-            </form>
-          </CardContent>
-        </Card>
-      </motion.div>
+        {status && (
+          <p className="text-sm text-gray-600 dark:text-gray-300">{status}</p>
+        )}
+      </motion.form>
     </section>
   );
 }
