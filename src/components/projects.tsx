@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
 import { Github, ExternalLink } from "lucide-react";
 import { useState, useRef, useId, useEffect } from "react";
@@ -81,7 +82,7 @@ const Slide = ({
         }}
       >
         <div
-          className="relative w-full h-full bg-[#1D1F2F] overflow-hidden transition-all duration-150 ease-out rounded-none"
+          className="relative w-full h-full bg-[#1D1F2F] overflow-hidden transition-all duration-150 ease-out rounded-xl"
           style={{
             transform:
               current === index
@@ -108,23 +109,30 @@ const Slide = ({
             <p className="text-sm text-gray-300 mb-4 max-w-[90%] mx-auto">
               {description}
             </p>
-            <div className="flex justify-center gap-4">
-              <a
-                href={githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 bg-gray-800 text-white rounded-lg flex items-center space-x-2 hover:bg-gray-700 transition text-sm"
+            <div className="flex justify-center gap-4 flex-wrap">
+              <Button
+                asChild
+                className="group/btn relative h-10 px-4 rounded-md bg-[#1f1f1f] text-white font-medium dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
               >
-                <Github size={16} /> <span>GitHub</span>
-              </a>
-              <a
-                href={liveDemoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 border border-gray-600 text-white rounded-lg flex items-center space-x-2 hover:bg-gray-800 transition text-sm"
+                <a href={githubUrl} target="_blank" rel="noopener noreferrer">
+                  GitHub
+                  <Github size={16} className="inline ml-2" />
+                  <span className="absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
+                  <span className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
+                </a>
+              </Button>
+
+              <Button
+                asChild
+                className="group/btn relative h-10 px-4 rounded-md bg-[#1f1f1f] text-white font-medium dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
               >
-                <ExternalLink size={16} /> <span>Live Demo</span>
-              </a>
+                <a href={liveDemoUrl} target="_blank" rel="noopener noreferrer">
+                  Live Demo
+                  <ExternalLink size={16} className="inline ml-2" />
+                  <span className="absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
+                  <span className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
+                </a>
+              </Button>
             </div>
           </article>
         </div>
@@ -220,9 +228,9 @@ export default function Projects() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
       viewport={{ amount: 0.3 }}
-      className="py-20 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto text-center relative overflow-x-hidden"
+      className="py-20 px-4 sm:px-6 md:px-10 max-w-6xl mx-auto text-center relative overflow-x-hidden"
     >
-      <h2 className="text-4xl font-bold text-gray-200 mb-10">{t.title}</h2>
+      <h2 className="text-4xl font-bold text-gray-200 mb-12">{t.title}</h2>
 
       <div
         className="relative w-[90vw] sm:w-[70vmin] h-[90vw] sm:h-[70vmin] mx-auto"
@@ -248,7 +256,7 @@ export default function Projects() {
           ))}
         </ul>
 
-        <div className="absolute flex justify-center w-full top-[calc(100%+1rem)]">
+        <div className="absolute flex justify-center w-full top-[calc(100%+1.5rem)]">
           <CarouselControl
             type="previous"
             title="Poprzedni"
