@@ -7,6 +7,7 @@ import { aboutMeLocales } from "@/locales/about-me";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import { ChevronDown } from "lucide-react";
 
 import {
   SiJavascript,
@@ -85,7 +86,10 @@ export default function About() {
   const t = aboutMeLocales[language];
 
   return (
-    <section id="about" className="py-20 px-6 max-w-5xl mx-auto text-center">
+    <section
+      id="about"
+      className="py-20 px-6 max-w-5xl mx-auto text-center relative"
+    >
       <motion.h2
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -108,7 +112,7 @@ export default function About() {
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 1 }}
         viewport={{ once: false, amount: 0.3 }}
-        className="mt-12"
+        className="mt-10"
       >
         <InfiniteMovingCards
           items={technologies}
@@ -122,7 +126,7 @@ export default function About() {
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 1.2 }}
         viewport={{ once: false, amount: 0.3 }}
-        className="mt-12 flex justify-center space-x-6"
+        className="mt-12 flex justify-center flex-wrap gap-4"
       >
         <HoverBorderGradient
           as="a"
@@ -145,6 +149,17 @@ export default function About() {
           <Linkedin size={22} />
           <span>{t.linkedin}</span>
         </HoverBorderGradient>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+        className="mt-10 sm:mt-16 text-gray-400 flex justify-center"
+      >
+        <a href="#projects" aria-label="Scroll to projects">
+          <ChevronDown className="w-6 h-6 animate-bounce" />
+        </a>
       </motion.div>
     </section>
   );
