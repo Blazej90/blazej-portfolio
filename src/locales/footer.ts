@@ -1,12 +1,12 @@
 export const footerLocales = {
   pl: {
-    rights: "© 2025 Błażej Bartoszewski. Wszelkie prawa zastrzeżone.",
-    contact: "Kontakt",
+    repository: "Odwiedź repozytorium projektu",
+    rights: "Wszelkie prawa zastrzeżone.",
     visitRepo: "Odwiedź repozytorium tego projektu",
   },
   en: {
-    rights: "© 2025 Błażej Bartoszewski. All rights reserved.",
-    contact: "Contact",
+    repository: "View project repository",
+    rights: "All rights reserved.",
     visitRepo: "Visit this project repository",
   },
 };
