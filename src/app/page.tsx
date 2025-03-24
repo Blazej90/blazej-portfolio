@@ -6,6 +6,7 @@ import { lazy, Suspense } from "react";
 import { useLanguage } from "@/context/language-context";
 import { pageLocales } from "@/locales/page";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import { ChevronDown } from "lucide-react";
 
 const About = lazy(() => import("@/components/about-me"));
 const Projects = lazy(() => import("@/components/projects"));
@@ -17,9 +18,9 @@ export default function Home() {
 
   return (
     <>
-      <main className="relative h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
+      <main className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden pt-[6rem] sm:pt-0 sm:pb-16">
         <Parallax speed={-10}>
-          <div className="absolute top-0 left-0 w-full h-full bg-cover bg-center opacity-20"></div>
+          <div className="absolute top-0 left-0 w-full h-full bg-cover bg-center opacity-20" />
         </Parallax>
 
         <motion.h1
@@ -74,6 +75,17 @@ export default function Home() {
           >
             {t.contactButton}
           </HoverBorderGradient>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          className="mt-10 sm:mt-auto sm:absolute sm:bottom-6 sm:left-1/2 sm:-translate-x-1/2 text-gray-400"
+        >
+          <a href="#about" aria-label="Scroll down">
+            <ChevronDown className="w-6 h-6 animate-bounce" />
+          </a>
         </motion.div>
       </main>
 
