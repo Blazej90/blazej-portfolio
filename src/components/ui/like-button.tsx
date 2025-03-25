@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { motion } from "framer-motion";
+import confetti from "canvas-confetti";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 
 export default function LikeButton() {
@@ -10,7 +11,7 @@ export default function LikeButton() {
   const [liked, setLiked] = useState(false);
 
   useEffect(() => {
-    const isLiked = localStorage.getItem("likes");
+    const isLiked = localStorage.getItem("liked");
     if (isLiked) setLiked(true);
 
     const fetchLikes = async () => {
@@ -32,7 +33,7 @@ export default function LikeButton() {
     if (liked) return;
 
     setLiked(true);
-    localStorage.setItem("likes", "true");
+    localStorage.setItem("liked", "true");
 
     try {
       const res = await fetch("/api/likes", {
@@ -41,16 +42,22 @@ export default function LikeButton() {
 
       if (res.ok) {
         setLikes((prev) => prev + 1);
+        triggerConfetti();
       }
     } catch (error) {
       console.error("Błąd przy wysyłaniu lajka:", error);
     }
   };
 
-  const handleReset = async () => {
-    localStorage.removeItem("likes");
-    setLiked(false);
-    setLikes(0);
+  const triggerConfetti = () => {
+    confetti({
+      particleCount: 60,
+      spread: 80,
+      origin: { y: 0.6 },
+      colors: ["#3b82f6", "#6366f1", "#a855f7"],
+      scalar: 0.8,
+      zIndex: 9999,
+    });
   };
 
   return (
@@ -69,11 +76,16 @@ export default function LikeButton() {
           <FaHeart className="w-5 h-5" />
         </motion.div>
         <span className="text-white">{likes}</span>
+        <span className="text-white">Likes</span>
       </HoverBorderGradient>
 
       {process.env.NODE_ENV === "development" && (
         <button
-          onClick={handleReset}
+          onClick={() => {
+            localStorage.removeItem("liked");
+            setLiked(false);
+            setLikes(0);
+          }}
           className="block text-xs text-gray-400 hover:text-red-400 underline underline-offset-4 transition mx-auto"
         >
           Reset Like (dev only)
