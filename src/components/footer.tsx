@@ -4,6 +4,7 @@ import { Github, Linkedin, FileText } from "lucide-react";
 import { useLanguage } from "@/context/language-context";
 import { footerLocales } from "@/locales/footer";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import LikeButton from "@/components/ui/like-button";
 
 export default function Footer() {
   const { language } = useLanguage();
@@ -71,6 +72,8 @@ export default function Footer() {
             <Github size={18} />
             {t.visitRepo}
           </HoverBorderGradient>
+
+          <LikeButton />
         </div>
       </div>
 
