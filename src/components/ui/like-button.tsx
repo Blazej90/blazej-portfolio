@@ -10,29 +10,45 @@ export default function LikeButton() {
   const [liked, setLiked] = useState(false);
 
   useEffect(() => {
-    const isLiked = localStorage.getItem("liked");
+    const isLiked = localStorage.getItem("likes");
     if (isLiked) setLiked(true);
 
-    fetch("/api/likes")
-      .then((res) => res.json())
-      .then((data) => setLikes(data.count))
-      .catch(() => setLikes(0));
+    const fetchLikes = async () => {
+      try {
+        const res = await fetch("/api/likes");
+        const data = await res.json();
+        if (res.ok) {
+          setLikes(data.count);
+        }
+      } catch (error) {
+        console.error("Błąd pobierania lajków:", error);
+      }
+    };
+
+    fetchLikes();
   }, []);
 
   const handleLike = async () => {
     if (liked) return;
 
     setLiked(true);
-    setLikes((prev) => prev + 1);
-    localStorage.setItem("liked", "true");
+    localStorage.setItem("likes", "true");
 
-    await fetch("/api/likes", {
-      method: "POST",
-    });
+    try {
+      const res = await fetch("/api/likes", {
+        method: "POST",
+      });
+
+      if (res.ok) {
+        setLikes((prev) => prev + 1);
+      }
+    } catch (error) {
+      console.error("Błąd przy wysyłaniu lajka:", error);
+    }
   };
 
-  const handleReset = () => {
-    localStorage.removeItem("liked");
+  const handleReset = async () => {
+    localStorage.removeItem("likes");
     setLiked(false);
     setLikes(0);
   };
