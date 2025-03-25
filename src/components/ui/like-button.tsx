@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 
 export default function LikeButton() {
