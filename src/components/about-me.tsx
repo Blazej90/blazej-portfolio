@@ -23,6 +23,8 @@ import {
   SiDocker,
   SiGit,
   SiGithub,
+  SiSupabase,
+  SiVite,
 } from "@icons-pack/react-simple-icons";
 
 const technologies = [
@@ -56,29 +58,35 @@ const technologies = [
     name: "Tailwind CSS",
     icon: <SiTailwindcss className="text-blue-300 w-6 h-6" />,
   },
+  { id: 7, name: "Vite", icon: <SiVite className="text-purple-400 w-6 h-6" /> },
   {
-    id: 7,
+    id: 8,
     name: "HTML",
     icon: <SiHtml5 className="text-orange-500 w-6 h-6" />,
   },
-  { id: 8, name: "CSS", icon: <SiCss3 className="text-blue-600 w-6 h-6" /> },
+  { id: 9, name: "CSS", icon: <SiCss3 className="text-blue-600 w-6 h-6" /> },
   {
-    id: 9,
+    id: 10,
     name: "Node.js",
     icon: <SiNodedotjs className="text-green-600 w-6 h-6" />,
   },
   {
-    id: 10,
+    id: 11,
     name: "MongoDB",
     icon: <SiMongodb className="text-green-400 w-6 h-6" />,
   },
   {
-    id: 11,
+    id: 12,
+    name: "Supabase",
+    icon: <SiSupabase className="text-emerald-400 w-6 h-6" />,
+  },
+  {
+    id: 13,
     name: "Docker",
     icon: <SiDocker className="text-blue-400 w-6 h-6" />,
   },
-  { id: 12, name: "Git", icon: <SiGit className="text-orange-400 w-6 h-6" /> },
-  { id: 13, name: "GitHub", icon: <SiGithub className="text-white w-6 h-6" /> },
+  { id: 14, name: "Git", icon: <SiGit className="text-orange-400 w-6 h-6" /> },
+  { id: 15, name: "GitHub", icon: <SiGithub className="text-white w-6 h-6" /> },
 ];
 
 export default function About() {
