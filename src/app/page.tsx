@@ -3,6 +3,7 @@
 import Footer from "@/components/footer";
 import { motion } from "framer-motion";
 import { Parallax } from "react-scroll-parallax";
+import { Typewriter } from "react-simple-typewriter";
 import ParticlesBackground from "@/components/ui/particles-background";
 import { lazy, Suspense } from "react";
 import { useLanguage } from "@/context/language-context";
@@ -29,34 +30,53 @@ export default function Home() {
           <ParticlesBackground />
         </div>
 
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="text-base sm:text-lg text-gray-400"
+        >
+          Cześć, jestem
+        </motion.p>
+
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ amount: 0.3 }}
-          className="relative text-3xl sm:text-4xl md:text-5xl font-bold text-gray-200"
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="text-3xl sm:text-4xl md:text-5xl font-bold text-white"
         >
-          {t.role}
+          Błażej Bartoszewski
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          viewport={{ amount: 0.3 }}
-          className="relative text-base sm:text-lg text-gray-400"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="text-lg sm:text-xl text-blue-400 font-medium mt-2"
         >
-          Błażej Bartoszewski
+          <Typewriter
+            words={[
+              "Frontend Developer",
+              "TypeScript & React Specialist",
+              "UI/UX Lover",
+            ]}
+            loop={0}
+            cursor
+            cursorStyle="|"
+            typeSpeed={60}
+            deleteSpeed={30}
+            delaySpeed={1500}
+          />
         </motion.p>
 
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
-          viewport={{ amount: 0.3 }}
-          className="relative mt-4 text-sm sm:text-lg text-gray-400 max-w-xs sm:max-w-md md:max-w-2xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.8 }}
+          className="mt-4 max-w-xs sm:max-w-md md:max-w-2xl text-sm sm:text-lg text-gray-400"
         >
-          {t.description}
+          Specjalizuję się w tworzeniu nowoczesnych, wydajnych i responsywnych
+          aplikacji webowych. Moje projekty łączą estetykę z funkcjonalnością.
         </motion.p>
 
         <motion.div
