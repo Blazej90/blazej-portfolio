@@ -3,6 +3,7 @@
 import Footer from "@/components/footer";
 import { motion } from "framer-motion";
 import { Parallax } from "react-scroll-parallax";
+import ParticlesBackground from "@/components/ui/particles-background";
 import { lazy, Suspense } from "react";
 import { useLanguage } from "@/context/language-context";
 import { pageLocales } from "@/locales/page";
@@ -23,6 +24,10 @@ export default function Home() {
         <Parallax speed={-10}>
           <div className="absolute top-0 left-0 w-full h-full bg-cover bg-center opacity-20" />
         </Parallax>
+
+        <div className="absolute inset-0 w-full h-full -z-10 pointer-events-none">
+          <ParticlesBackground />
+        </div>
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
