@@ -36,7 +36,7 @@ export default function Home() {
           transition={{ duration: 1 }}
           className="text-base sm:text-lg text-gray-400"
         >
-          Cześć, jestem
+          {t.hello}
         </motion.p>
 
         <motion.h1
@@ -55,11 +55,7 @@ export default function Home() {
           className="text-lg sm:text-xl text-blue-400 font-medium mt-2"
         >
           <Typewriter
-            words={[
-              "Frontend Developer",
-              "TypeScript & React Specialist",
-              "UI/UX Lover",
-            ]}
+            words={t.typewriter}
             loop={0}
             cursor
             cursorStyle="|"
@@ -75,8 +71,7 @@ export default function Home() {
           transition={{ duration: 1, delay: 0.8 }}
           className="mt-4 max-w-xs sm:max-w-md md:max-w-2xl text-sm sm:text-lg text-gray-400"
         >
-          Specjalizuję się w tworzeniu nowoczesnych, wydajnych i responsywnych
-          aplikacji webowych. Moje projekty łączą estetykę z funkcjonalnością.
+          {t.description}
         </motion.p>
 
         <motion.div
