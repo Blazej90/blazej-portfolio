@@ -76,7 +76,7 @@ export function HoverBorderGradient<T extends ElementType = "button">({
     >
       <div
         className={cn(
-          "w-auto text-white z-10 bg-black px-6 py-2 text-lg font-semibold rounded-[inherit]",
+          "w-auto text-white z-10 bg-neutral-800 px-6 py-2 text-lg font-semibold rounded-[inherit]",
           className
         )}
       >
