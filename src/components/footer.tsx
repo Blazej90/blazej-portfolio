@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, FileText } from "lucide-react";
 import { useLanguage } from "@/context/language-context";
 import { footerLocales } from "@/locales/footer";
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { FaMusic } from "react-icons/fa";
 import LikeButton from "@/components/ui/like-button";
 
@@ -13,9 +12,9 @@ export default function Footer() {
   const t = footerLocales[language];
 
   return (
-    <footer className="bg-[#0f0f0f] border-t border-gray-800 px-4 py-10 sm:py-12 text-gray-400">
+    <footer className="bg-[#0f0f0f] border-t border-gray-800 px-4 py-10 sm:py-12 text-gray-400 overflow-x-hidden">
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 text-sm">
-        <div className="flex flex-col items-center sm:items-start space-y-3 text-center sm:text-left">
+        <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-3">
           <a
             href="mailto:blazej.developer@gmail.com"
             className="block text-sm text-gray-400 hover:text-white transition"
@@ -73,35 +72,37 @@ export default function Footer() {
           ></iframe>
         </div>
 
-        <div className="flex flex-col items-center sm:items-end space-y-3 text-center sm:text-right">
-          <HoverBorderGradient
-            as="a"
+        <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-3 sm:ml-auto">
+          <a
             href="/cv/CV_Błażej_Bartoszewski.pdf"
             download="CV_Błażej_Bartoszewski.pdf"
-            className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm sm:text-base min-w-[220px]"
+            className="inline-flex items-center justify-center gap-2 text-gray-400 hover:text-white transition text-sm"
           >
             <FileText size={18} />
             {t.downloadCV}
-          </HoverBorderGradient>
+          </a>
 
-          <HoverBorderGradient
-            as="a"
+          <a
             href="https://github.com/Blazej90/blazej-portfolio"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm sm:text-base min-w-[220px]"
+            className="inline-flex items-center justify-center gap-2 text-gray-400 hover:text-white transition text-sm"
           >
             <Github size={18} />
             {t.visitRepo}
-          </HoverBorderGradient>
-
-          <LikeButton />
+          </a>
         </div>
       </div>
 
-      <div className="mt-10 text-center text-sm text-gray-500 space-y-1">
-        <p>© 2025 Błażej Bartoszewski.</p>
-        <p>{t.rights}</p>
+      <div className="relative max-w-6xl mx-auto mt-10 px-4 sm:px-0 flex flex-col sm:block items-center gap-6">
+        <div className="order-first sm:order-none sm:absolute sm:top-1/2 sm:-translate-y-1/2 sm:right-0 w-full sm:w-auto flex justify-center sm:justify-end">
+          <LikeButton />
+        </div>
+
+        <div className="text-center text-sm text-gray-500 space-y-1">
+          <p>© 2025 Błażej Bartoszewski.</p>
+          <p>{t.rights}</p>
+        </div>
       </div>
     </footer>
   );
