@@ -4,7 +4,7 @@ export const footerLocales = {
     rights: "Wszelkie prawa zastrzeżone.",
     visitRepo: "Repozytorium projektu",
     downloadCV: "Pobierz CV",
-    spotifyLabel: "Czego słucham przy kodzeniu",
+    spotifyLabel: "Czego słucham przy kodowaniu",
   },
   en: {
     repository: "View project repository",
