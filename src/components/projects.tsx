@@ -200,7 +200,7 @@ export default function Projects() {
     {
       src: "/images/projects/styroapin-calculator.jpg",
       githubUrl: "https://github.com/Blazej90/styroapin-calculator",
-      liveDemoUrl: "https:blazej90.github.io/styroapin-calculator/",
+      liveDemoUrl: "https://blazej90.github.io/styroapin-calculator/",
     },
   ];
 
