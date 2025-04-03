@@ -1,13 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Linkedin } from "lucide-react";
+import { Github, Linkedin, ChevronDown } from "lucide-react";
 import { useLanguage } from "@/context/language-context";
 import { aboutMeLocales } from "@/locales/about-me";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
-import { ChevronDown } from "lucide-react";
 
 import {
   SiJavascript,
@@ -96,7 +95,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="py-20 px-6 max-w-5xl mx-auto text-center relative"
+      className="scroll-mt-32 py-20 px-6 max-w-5xl mx-auto text-center relative"
     >
       <motion.h2
         initial={{ opacity: 0, y: 50 }}
@@ -120,7 +119,7 @@ export default function About() {
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 1 }}
         viewport={{ once: false, amount: 0.3 }}
-        className="mt-10"
+        className="mt-10 flex justify-center"
       >
         <InfiniteMovingCards
           items={technologies}
@@ -134,7 +133,7 @@ export default function About() {
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 1.2 }}
         viewport={{ once: false, amount: 0.3 }}
-        className="mt-12 flex justify-center flex-wrap gap-4"
+        className="mt-12 flex justify-center flex-wrap gap-4 max-w-2xl mx-auto"
       >
         <HoverBorderGradient
           as="a"

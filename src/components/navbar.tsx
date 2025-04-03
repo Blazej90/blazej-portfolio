@@ -14,18 +14,26 @@ import { navbarLocales } from "@/locales/navbar";
 import { useLanguage } from "@/context/language-context";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 
-const Navbar = () => {
+type NavbarProps = {
+  scrolled?: boolean;
+};
+
+const Navbar = ({ scrolled }: NavbarProps) => {
   const { language, toggleLanguage } = useLanguage();
   const t = navbarLocales[language];
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-black/40 backdrop-blur-lg text-white px-6 py-4 z-50">
-      <div className="max-w-6xl mx-auto flex justify-between items-center relative">
+    <nav
+      className={`fixed top-0 left-0 w-full backdrop-blur-lg text-white px-6 z-50 transition-all duration-300 ${
+        scrolled ? "bg-black/60 py-2" : "bg-black/40 py-4"
+      }`}
+    >
+      <div className="max-w-6xl mx-auto flex justify-between items-center relative transition-all duration-300">
         <div className="flex md:hidden">
           <Sheet>
             <SheetTrigger asChild>
               <button>
-                <Menu size={28} />
+                <Menu size={scrolled ? 24 : 28} />
               </button>
             </SheetTrigger>
             <SheetContent
@@ -81,7 +89,9 @@ const Navbar = () => {
             <img
               src="/images/logo/logo.png"
               alt="Błażej Bartoszewski Logo"
-              className="h-20 sm:h-24 md:h-28 w-auto object-contain transition-transform duration-300 hover:scale-105"
+              className={`w-auto object-contain transition-all duration-300 ${
+                scrolled ? "h-16 sm:h-20 md:h-24" : "h-20 sm:h-24 md:h-28"
+              }`}
             />
             <span className="sr-only">Błażej Bartoszewski</span>
           </Link>

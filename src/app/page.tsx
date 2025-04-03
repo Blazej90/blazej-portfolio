@@ -5,11 +5,11 @@ import { motion } from "framer-motion";
 import { Parallax } from "react-scroll-parallax";
 import { Typewriter } from "react-simple-typewriter";
 import ParticlesBackground from "@/components/ui/particles-background";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { useLanguage } from "@/context/language-context";
 import { pageLocales } from "@/locales/page";
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { ChevronDown } from "lucide-react";
+import Navbar from "@/components/navbar";
 
 const About = lazy(() => import("@/components/about-me"));
 const Projects = lazy(() => import("@/components/projects"));
@@ -19,9 +19,26 @@ export default function Home() {
   const { language } = useLanguage();
   const t = pageLocales[language];
 
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 60);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
-      <main className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden pt-[6rem] sm:pt-0 sm:pb-16">
+      <Navbar scrolled={scrolled} />
+
+      <main
+        className={`relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden pt-[6rem] sm:pt-0 sm:pb-16 transition-all duration-300 ${
+          scrolled ? "pt-[4rem]" : "pt-[6rem]"
+        }`}
+      >
         <Parallax speed={-10}>
           <div className="absolute top-0 left-0 w-full h-full bg-cover bg-center opacity-20" />
         </Parallax>
@@ -89,13 +106,12 @@ export default function Home() {
             <span className="absolute inset-0 bg-black/30 z-0 origin-right scale-x-100 group-hover:scale-x-0 transition-transform duration-700 ease-out" />
           </a>
 
-          <HoverBorderGradient
-            as="a"
+          <a
             href="#contact"
-            className="px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-lg text-white font-medium rounded-[inherit]"
+            className="px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-lg text-white font-medium rounded-full border border-white/30 hover:border-white/60 transition"
           >
             {t.contactButton}
-          </HoverBorderGradient>
+          </a>
         </motion.div>
 
         <motion.div
