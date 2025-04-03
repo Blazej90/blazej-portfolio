@@ -34,6 +34,11 @@ export const projectsLocales = {
         description:
           "Aplikacja służy do obliczania wartości błędu taksometru podczas jego legalizacji. Użytkownik wprowadza wartości, otrzymuje wynik testu i może zapisać wyniki w localStorage.",
       },
+      {
+        title: "Kalkulator styropianu",
+        description:
+          "Aplikacja webowa stworzona dla firmy budowlanej. Umożliwia klientom obliczenie zapotrzebowania na styropian. W pełni responsywna i łatwa do osadzenia na stronie Shoper.",
+      },
     ],
   },
   en: {
@@ -70,6 +75,11 @@ export const projectsLocales = {
         title: "Taxi Test",
         description:
           "An application used to calculate the error value of a taximeter during its verification. Users enter values, get test results, and can save data in localStorage.",
+      },
+      {
+        title: "Styrofoam Calculator",
+        description:
+          "A web app built for a construction supply company. Allows customers to calculate how much styrofoam they need. Fully responsive and embeddable in a Shoper-based site.",
       },
     ],
   },

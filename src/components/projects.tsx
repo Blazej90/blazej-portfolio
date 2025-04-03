@@ -197,6 +197,11 @@ export default function Projects() {
       githubUrl: "https://github.com/Blazej90/taxi-test",
       liveDemoUrl: "https://blazej90.github.io/taxi-test/",
     },
+    {
+      src: "/images/projects/styroapin-calculator.jpg",
+      githubUrl: "https://github.com/Blazej90/styroapin-calculator",
+      liveDemoUrl: "https:blazej90.github.io/styroapin-calculator/",
+    },
   ];
 
   const handlePreviousClick = () => {
