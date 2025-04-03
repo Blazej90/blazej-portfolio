@@ -62,20 +62,15 @@ const Navbar = () => {
                   {t.contact}
                 </Link>
 
-                <div className="w-full flex justify-center">
-                  <a
-                    href="/cv/CV_Błażej_Bartoszewski.pdf"
-                    download="CV_Błażej_Bartoszewski.pdf"
-                    className="w-auto"
-                  >
-                    <HoverBorderGradient
-                      as="div"
-                      className="px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-lg"
-                    >
-                      {t.downloadCV}
-                    </HoverBorderGradient>
-                  </a>
-                </div>
+                <HoverBorderGradient
+                  as="a"
+                  href="/cv/CV_Błażej_Bartoszewski.pdf"
+                  download="CV_Błażej_Bartoszewski.pdf"
+                  className="relative overflow-hidden px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-lg font-semibold text-white rounded-full bg-gradient-to-r from-blue-600 to-purple-600 shadow-md group"
+                >
+                  <span className="relative z-10">{t.downloadCV}</span>
+                  <span className="absolute inset-0 bg-black/30 z-0 origin-right scale-x-100 group-hover:scale-x-0 transition-transform duration-700 ease-out" />
+                </HoverBorderGradient>
               </div>
             </SheetContent>
           </Sheet>
@@ -129,18 +124,15 @@ const Navbar = () => {
             <span className="text-sm">EN</span>
           </div>
 
-          <a
+          <HoverBorderGradient
+            as="a"
             href="/cv/CV_Błażej_Bartoszewski.pdf"
             download="CV_Błażej_Bartoszewski.pdf"
-            className="hidden md:block w-auto"
+            className="hidden md:inline-block relative overflow-hidden px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-semibold text-white rounded-full bg-gradient-to-r from-blue-600 to-purple-600 shadow-md group"
           >
-            <HoverBorderGradient
-              as="div"
-              className="px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm"
-            >
-              {t.downloadCV}
-            </HoverBorderGradient>
-          </a>
+            <span className="relative z-10">{t.downloadCV}</span>
+            <span className="absolute inset-0 bg-black/30 z-0 origin-right scale-x-100 group-hover:scale-x-0 transition-transform duration-700 ease-out" />
+          </HoverBorderGradient>
         </div>
       </div>
     </nav>

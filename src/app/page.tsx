@@ -81,18 +81,18 @@ export default function Home() {
           viewport={{ amount: 0.3 }}
           className="relative mt-6 flex flex-col sm:flex-row justify-center items-center gap-3 w-full"
         >
-          <HoverBorderGradient
-            as="a"
+          <a
             href="#projects"
-            className="px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-lg"
+            className="relative px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-lg font-semibold text-white rounded-full bg-gradient-to-r from-blue-600 to-purple-600 shadow-md transition-all overflow-hidden group"
           >
-            {t.projectsButton}
-          </HoverBorderGradient>
+            <span className="relative z-10">{t.projectsButton}</span>
+            <span className="absolute inset-0 bg-black/30 z-0 origin-right scale-x-100 group-hover:scale-x-0 transition-transform duration-700 ease-out" />
+          </a>
 
           <HoverBorderGradient
             as="a"
             href="#contact"
-            className="px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-lg"
+            className="px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-lg text-white font-medium rounded-[inherit]"
           >
             {t.contactButton}
           </HoverBorderGradient>
