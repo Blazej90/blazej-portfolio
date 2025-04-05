@@ -25,15 +25,15 @@ const Navbar = ({ scrolled }: NavbarProps) => {
   return (
     <nav
       className={`fixed top-0 left-0 w-full backdrop-blur-lg text-white px-6 z-50 transition-all duration-300 ${
-        scrolled ? "bg-black/60 py-2" : "bg-black/40 py-4"
+        scrolled ? "bg-black/60 py-3" : "bg-black/40 py-3"
       }`}
     >
-      <div className="max-w-6xl mx-auto flex justify-between items-center relative transition-all duration-300">
+      <div className="max-w-5xl mx-auto flex justify-between items-center relative transition-all duration-300">
         <div className="flex md:hidden">
           <Sheet>
             <SheetTrigger asChild>
               <button>
-                <Menu size={scrolled ? 24 : 28} />
+                <Menu size={24} />
               </button>
             </SheetTrigger>
             <SheetContent
@@ -89,12 +89,19 @@ const Navbar = ({ scrolled }: NavbarProps) => {
             <img
               src="/images/logo/logo.png"
               alt="Błażej Bartoszewski Logo"
-              className={`w-auto object-contain transition-all duration-300 ${
-                scrolled ? "h-16 sm:h-20 md:h-24" : "h-20 sm:h-24 md:h-28"
-              }`}
+              className="w-auto h-16 object-contain transition-all duration-300"
             />
             <span className="sr-only">Błażej Bartoszewski</span>
           </Link>
+        </div>
+
+        <div className="md:hidden flex items-center space-x-2">
+          <span className="text-sm">PL</span>
+          <Switch
+            checked={language === "en"}
+            onCheckedChange={toggleLanguage}
+          />
+          <span className="text-sm">EN</span>
         </div>
 
         <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 space-x-8">
@@ -124,7 +131,7 @@ const Navbar = ({ scrolled }: NavbarProps) => {
           </Link>
         </div>
 
-        <div className="flex items-center space-x-4 ml-auto">
+        <div className="hidden md:flex items-center space-x-4 ml-auto">
           <div className="flex items-center space-x-2">
             <span className="text-sm">PL</span>
             <Switch
@@ -138,7 +145,7 @@ const Navbar = ({ scrolled }: NavbarProps) => {
             as="a"
             href="/cv/CV_Błażej_Bartoszewski.pdf"
             download="CV_Błażej_Bartoszewski.pdf"
-            className="hidden md:inline-block relative overflow-hidden px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-semibold text-white rounded-full bg-gradient-to-r from-blue-600 to-purple-600 shadow-md group"
+            className="relative overflow-hidden px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-semibold text-white rounded-full bg-gradient-to-r from-blue-600 to-purple-600 shadow-md group"
           >
             <span className="relative z-10">{t.downloadCV}</span>
             <span className="absolute inset-0 bg-black/30 z-0 origin-right scale-x-100 group-hover:scale-x-0 transition-transform duration-700 ease-out" />

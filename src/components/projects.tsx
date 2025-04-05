@@ -233,7 +233,7 @@ export default function Projects() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
       viewport={{ amount: 0.3 }}
-      className="py-20 px-4 sm:px-6 md:px-10 max-w-6xl mx-auto text-center relative overflow-x-hidden"
+      className="scroll-mt-32 py-20 px-4 sm:px-6 md:px-10 max-w-6xl mx-auto text-center relative overflow-x-hidden"
     >
       <h2 className="text-4xl font-bold text-gray-200 mb-12">{t.title}</h2>
 
