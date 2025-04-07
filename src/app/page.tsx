@@ -9,6 +9,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { useLanguage } from "@/context/language-context";
 import { pageLocales } from "@/locales/page";
 import { ChevronDown } from "lucide-react";
+import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import Navbar from "@/components/navbar";
 
 const About = lazy(() => import("@/components/about-me"));
@@ -106,12 +107,13 @@ export default function Home() {
             <span className="absolute inset-0 bg-black/30 z-0 origin-right scale-x-100 group-hover:scale-x-0 transition-transform duration-700 ease-out" />
           </a>
 
-          <a
+          <HoverBorderGradient
+            as="a"
             href="#contact"
-            className="px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-lg text-white font-medium rounded-full border border-white/30 hover:border-white/60 transition"
+            className="px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-lg"
           >
             {t.contactButton}
-          </a>
+          </HoverBorderGradient>
         </motion.div>
 
         <motion.div
