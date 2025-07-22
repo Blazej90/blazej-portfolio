@@ -5,6 +5,11 @@ export const projectsLocales = {
     liveDemo: "Live Demo",
     projects: [
       {
+        title: "Platforma do nauki angielskiego",
+        description:
+          "Platforma do umawiania lekcji angielskiego z wideo czatem i integracją z Google Calendar.",
+      },
+      {
         title: "Ucz się React.js z AI",
         description:
           "Aplikacja losuje pytania z React.js, pozwala na nagrywanie odpowiedzi głosowej i weryfikację przez AI. Po skończonej odpowiedzi AI ocenia poprawność i daje wskazówki.",
@@ -46,6 +51,11 @@ export const projectsLocales = {
     github: "GitHub",
     liveDemo: "Live Demo",
     projects: [
+      {
+        title: "English Learning Platform",
+        description:
+          "English lesson booking platform with video chat and calendar integration.",
+      },
       {
         title: "Learn React.js with AI",
         description:

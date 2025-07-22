@@ -168,6 +168,11 @@ export default function Projects() {
 
   const slides: SlideData[] = [
     {
+      src: "/images/projects/english-platform.png",
+      githubUrl: "https://github.com/Blazej90/english-platform",
+      liveDemoUrl: "https://english-platform-eight.vercel.app",
+    },
+    {
       src: "/images/projects/learn-react.jpg",
       githubUrl: "https://github.com/Blazej90/lern-react",
       liveDemoUrl: "https://lern-react.vercel.app",
