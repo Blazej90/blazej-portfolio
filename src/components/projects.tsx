@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
 import { Github, ExternalLink } from "lucide-react";
+import { Meteors } from "@/components/ui/meteors";
 import { useState, useRef, useId, useEffect } from "react";
 import { useLanguage } from "@/context/language-context";
 import { projectsLocales } from "@/locales/projects";
@@ -240,6 +241,9 @@ export default function Projects() {
       viewport={{ amount: 0.3 }}
       className="scroll-mt-32 py-20 px-4 sm:px-6 md:px-10 max-w-6xl mx-auto text-center relative overflow-x-hidden"
     >
+      <div className="absolute inset-0 w-full h-full -z-10 pointer-events-none">
+        <Meteors number={30} className="top-0 left-0 w-full h-full" />
+      </div>
       <h2 className="text-4xl font-bold text-gray-200 mb-12">{t.title}</h2>
 
       <div

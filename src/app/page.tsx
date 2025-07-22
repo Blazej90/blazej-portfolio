@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Parallax } from "react-scroll-parallax";
 import { Typewriter } from "react-simple-typewriter";
 import ParticlesBackground from "@/components/ui/particles-background";
+import { Meteors } from "@/components/ui/meteors";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { useLanguage } from "@/context/language-context";
 import { pageLocales } from "@/locales/page";
@@ -45,7 +46,7 @@ export default function Home() {
         </Parallax>
 
         <div className="absolute inset-0 w-full h-full -z-10 pointer-events-none">
-          <ParticlesBackground />
+          <Meteors number={30} className="top-0 left-0 w-full h-full" />
         </div>
 
         <motion.p

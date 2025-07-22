@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, X, Paperclip } from "lucide-react";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import { Meteors } from "@/components/ui/meteors";
 import { useLanguage } from "@/context/language-context";
 import { contactLocales } from "@/locales/contact";
 import { Input } from "@/components/ui/aceternity-input";
@@ -108,7 +109,13 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 px-4 max-w-3xl mx-auto text-center">
+    <section
+      id="contact"
+      className="relative py-20 px-4 max-w-3xl mx-auto text-center"
+    >
+      <div className="absolute inset-0 w-full h-full -z-10 pointer-events-none">
+        <Meteors number={30} className="w-full h-full" />
+      </div>
       <motion.h2
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}

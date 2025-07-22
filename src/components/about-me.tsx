@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Github, Linkedin, ChevronDown } from "lucide-react";
+import { Meteors } from "@/components/ui/meteors";
 import { useLanguage } from "@/context/language-context";
 import { aboutMeLocales } from "@/locales/about-me";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
@@ -97,6 +98,10 @@ export default function About() {
       id="about"
       className="scroll-mt-32 py-20 px-6 max-w-5xl mx-auto text-center relative"
     >
+      <div className="absolute inset-0 w-full h-full -z-10 pointer-events-none">
+        <Meteors number={30} className="top-0 left-0 w-full h-full" />
+      </div>
+
       <motion.h2
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
