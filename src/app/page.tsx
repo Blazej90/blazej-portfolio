@@ -4,7 +4,6 @@ import Footer from "@/components/footer";
 import { motion } from "framer-motion";
 import { Parallax } from "react-scroll-parallax";
 import { Typewriter } from "react-simple-typewriter";
-import ParticlesBackground from "@/components/ui/particles-background";
 import { Meteors } from "@/components/ui/meteors";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { useLanguage } from "@/context/language-context";
@@ -144,7 +143,7 @@ export default function Home() {
       </Suspense>
 
       <Suspense
-        fallback={<p className="text-gray-400 text-center">{t.loading}</p>}
+        fallback={<p className="text-red-400 text-center">{t.loading}</p>}
       >
         <Contact />
       </Suspense>
