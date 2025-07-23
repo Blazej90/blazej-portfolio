@@ -239,48 +239,53 @@ export default function Projects() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
       viewport={{ amount: 0.3 }}
-      className="scroll-mt-32 py-20 px-4 sm:px-6 md:px-10 max-w-6xl mx-auto text-center relative overflow-x-hidden"
+      className="scroll-mt-32 py-20 px-4 sm:px-6 md:px-10 text-center relative overflow-hidden"
     >
-      <div className="absolute inset-0 w-full h-full -z-10 pointer-events-none">
+      {/* Meteors pełnoekranowy */}
+      <div className="absolute inset-0 w-screen h-full -z-10 pointer-events-none">
         <Meteors number={30} className="top-0 left-0 w-full h-full" />
       </div>
-      <h2 className="text-4xl font-bold text-gray-200 mb-12">{t.title}</h2>
 
-      <div
-        className="relative w-[90vw] sm:w-[70vmin] h-[90vw] sm:h-[70vmin] mx-auto"
-        aria-labelledby={`carousel-heading-${id}`}
-        {...swipeHandlers}
-      >
-        <ul
-          className="absolute flex transition-transform duration-1000 ease-in-out overflow-hidden"
-          style={{
-            transform: `translateX(-${current * (100 / slides.length)}%)`,
-          }}
+      {/* Ograniczenie szerokości dopiero tu */}
+      <div className="max-w-6xl mx-auto relative z-10">
+        <h2 className="text-4xl font-bold text-gray-200 mb-12">{t.title}</h2>
+
+        <div
+          className="relative w-[90vw] sm:w-[70vmin] h-[90vw] sm:h-[70vmin] mx-auto"
+          aria-labelledby={`carousel-heading-${id}`}
+          {...swipeHandlers}
         >
-          {slides.map((slide, index) => (
-            <Slide
-              key={index}
-              slide={slide}
-              index={index}
-              current={current}
-              handleSlideClick={handleSlideClick}
-              title={t.projects[index].title}
-              description={t.projects[index].description}
-            />
-          ))}
-        </ul>
+          <ul
+            className="absolute flex transition-transform duration-1000 ease-in-out overflow-hidden"
+            style={{
+              transform: `translateX(-${current * (100 / slides.length)}%)`,
+            }}
+          >
+            {slides.map((slide, index) => (
+              <Slide
+                key={index}
+                slide={slide}
+                index={index}
+                current={current}
+                handleSlideClick={handleSlideClick}
+                title={t.projects[index].title}
+                description={t.projects[index].description}
+              />
+            ))}
+          </ul>
 
-        <div className="absolute flex justify-center w-full top-[calc(100%+1.5rem)]">
-          <CarouselControl
-            type="previous"
-            title="Poprzedni"
-            handleClick={handlePreviousClick}
-          />
-          <CarouselControl
-            type="next"
-            title="Następny"
-            handleClick={handleNextClick}
-          />
+          <div className="absolute flex justify-center w-full top-[calc(100%+1.5rem)]">
+            <CarouselControl
+              type="previous"
+              title="Poprzedni"
+              handleClick={handlePreviousClick}
+            />
+            <CarouselControl
+              type="next"
+              title="Następny"
+              handleClick={handleNextClick}
+            />
+          </div>
         </div>
       </div>
     </motion.section>
