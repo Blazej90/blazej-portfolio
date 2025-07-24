@@ -241,12 +241,10 @@ export default function Projects() {
       viewport={{ amount: 0.3 }}
       className="scroll-mt-32 py-20 px-4 sm:px-6 md:px-10 text-center relative overflow-hidden"
     >
-      {/* Meteors pełnoekranowy */}
       <div className="absolute inset-0 w-screen h-full -z-10 pointer-events-none">
         <Meteors number={30} className="top-0 left-0 w-full h-full" />
       </div>
 
-      {/* Ograniczenie szerokości dopiero tu */}
       <div className="max-w-6xl mx-auto relative z-10">
         <h2 className="text-4xl font-bold text-gray-200 mb-12">{t.title}</h2>
 

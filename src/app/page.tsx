@@ -143,7 +143,7 @@ export default function Home() {
       </Suspense>
 
       <Suspense
-        fallback={<p className="text-red-400 text-center">{t.loading}</p>}
+        fallback={<p className="text-gray-400 text-center">{t.loading}</p>}
       >
         <Contact />
       </Suspense>
