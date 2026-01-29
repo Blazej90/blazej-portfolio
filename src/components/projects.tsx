@@ -14,6 +14,7 @@ interface SlideData {
   src: string;
   githubUrl: string;
   liveDemoUrl: string;
+  clientUrl?: string;
 }
 
 interface SlideProps {
@@ -134,6 +135,28 @@ const Slide = ({
                   <span className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
                 </a>
               </Button>
+              {slide.clientUrl && (
+                <Button
+                  asChild
+                  className="group/btn relative h-10 px-4 rounded-md bg-[#1f1f1f] text-white font-medium"
+                >
+                  <a
+                    href={slide.clientUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="This project is used in production by a real client"
+                  >
+                    See it in production
+                    <ExternalLink
+                      size={16}
+                      className="inline ml-2 text-emerald-400"
+                    />
+                    {/* underline */}
+                    <span className="absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-emerald-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
+                    <span className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-emerald-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
+                  </a>
+                </Button>
+              )}
             </div>
           </article>
         </div>
@@ -207,6 +230,8 @@ export default function Projects() {
       src: "/images/projects/styroapin-calculator.jpg",
       githubUrl: "https://github.com/Blazej90/styroapin-calculator",
       liveDemoUrl: "https://blazej90.github.io/styroapin-calculator/",
+      clientUrl:
+        "https://remontomaniak.pl/pl/p/Genderka-FASADA-EXTRA-PLUS-styropian-fasadowy-EPS-lambda-0%2C31-10-cm-grafitowy-/2442",
     },
   ];
 
