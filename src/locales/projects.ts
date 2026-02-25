@@ -5,6 +5,11 @@ export const projectsLocales = {
     liveDemo: "Live Demo",
     projects: [
       {
+        title: "TaskFlow",
+        description:
+          "Aplikacja do zarządzania zadaniami z interfejsem drag & drop. Zbudowana w Angular 21 z Firebase Authentication i Firestore.",
+      },
+      {
         title: "Platforma do nauki angielskiego",
         description:
           "Platforma do umawiania lekcji angielskiego z wideo czatem i integracją z Google Calendar.",
@@ -51,6 +56,11 @@ export const projectsLocales = {
     github: "GitHub",
     liveDemo: "Live Demo",
     projects: [
+      {
+        title: "TaskFlow",
+        description:
+          "Task management application with drag & drop interface. Built with Angular 21, Firebase Authentication and Firestore.",
+      },
       {
         title: "English Learning Platform",
         description:
