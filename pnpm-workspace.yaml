@@ -1,4 +1,2 @@
-ignoredBuiltDependencies:
-  - '@tsparticles/engine'
-  - react-tsparticles
-  - tsparticles-engine
+allowBuilds:
+  sharp: true
