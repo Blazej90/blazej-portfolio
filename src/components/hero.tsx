@@ -5,8 +5,9 @@ import { motion } from "framer-motion";
 import { Parallax } from "react-scroll-parallax";
 import { Typewriter } from "react-simple-typewriter";
 import { ChevronDown } from "lucide-react";
-import { Meteors } from "@/components/ui/meteors";
+import { MeteorsBackground } from "@/components/ui/meteors-background";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import { SweepOverlay } from "@/components/ui/gradient-button";
 import { useLanguage } from "@/context/language-context";
 import { pageLocales } from "@/locales/page";
 
@@ -35,9 +36,7 @@ export default function Hero() {
         <div className="absolute top-0 left-0 w-full h-full bg-cover bg-center opacity-20" />
       </Parallax>
 
-      <div className="absolute inset-0 w-full h-full -z-10 pointer-events-none">
-        <Meteors number={30} className="top-0 left-0 w-full h-full" />
-      </div>
+      <MeteorsBackground />
 
       <motion.p
         initial={{ opacity: 0, y: 20 }}
@@ -95,7 +94,7 @@ export default function Hero() {
           className="relative px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-lg font-semibold text-white rounded-full bg-gradient-to-r from-blue-600 to-purple-600 shadow-md transition-all overflow-hidden group"
         >
           <span className="relative z-10">{t.projectsButton}</span>
-          <span className="absolute inset-0 bg-black/30 z-0 origin-right scale-x-100 group-hover:scale-x-0 transition-transform duration-700 ease-out" />
+          <SweepOverlay />
         </a>
 
         <HoverBorderGradient

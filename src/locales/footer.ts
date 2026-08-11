@@ -5,6 +5,7 @@ export const footerLocales = {
     visitRepo: "Repozytorium projektu",
     downloadCV: "Pobierz CV",
     spotifyLabel: "Czego słucham przy kodowaniu",
+    likes: "Polubienia",
   },
   en: {
     repository: "View project repository",
@@ -12,5 +13,6 @@ export const footerLocales = {
     visitRepo: "Project repository",
     downloadCV: "Download CV",
     spotifyLabel: "What I listen to while coding",
+    likes: "Likes",
   },
 };

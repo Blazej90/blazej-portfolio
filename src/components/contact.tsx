@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, X, Paperclip } from "lucide-react";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
-import { Meteors } from "@/components/ui/meteors";
+import { MeteorsBackground } from "@/components/ui/meteors-background";
 import { useLanguage } from "@/context/language-context";
 import { contactLocales } from "@/locales/contact";
 import { Input } from "@/components/ui/aceternity-input";
@@ -18,7 +18,7 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
 } from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
+import { GradientButton } from "@/components/ui/gradient-button";
 import { cn } from "@/lib/utils";
 
 const LabelInputContainer = ({
@@ -72,6 +72,7 @@ export default function Contact() {
     formData.append("name", form.name);
     formData.append("email", form.email);
     formData.append("message", form.message);
+    formData.append("lang", language);
     files.forEach((file) => formData.append("attachments", file));
 
     try {
@@ -113,9 +114,7 @@ export default function Contact() {
       id="contact"
       className="relative py-20 px-4 max-w-3xl mx-auto text-center"
     >
-      <div className="fixed inset-0 w-screen h-full -z-10 pointer-events-none">
-        <Meteors number={30} className="w-full h-full" />
-      </div>
+      <MeteorsBackground className="fixed w-screen" />
 
       <motion.h2
         initial={{ opacity: 0, y: 50 }}
@@ -225,16 +224,14 @@ export default function Contact() {
           </div>
         </HoverEffectWrapper>
 
-        <Button
+        <GradientButton
           type="submit"
           disabled={loading}
-          className="group/btn relative block h-10 w-full rounded-md bg-[#1f1f1f] text-white font-medium dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
+          className="block w-full"
         >
           {loading ? t.sending : t.submit}
           <Send size={16} className="inline ml-2" />
-          <span className="absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
-          <span className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
-        </Button>
+        </GradientButton>
 
         <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <AlertDialogContent asChild>
@@ -257,14 +254,12 @@ export default function Contact() {
                 </AlertDialogHeader>
 
                 <AlertDialogFooter className="pt-6">
-                  <Button
+                  <GradientButton
                     onClick={() => setIsDialogOpen(false)}
-                    className="group/btn relative block h-10 w-full rounded-md bg-[#1f1f1f] text-white font-medium dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
+                    className="block w-full"
                   >
                     {t.close}
-                    <span className="absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
-                    <span className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
-                  </Button>
+                  </GradientButton>
                 </AlertDialogFooter>
               </div>
             </HoverEffectWrapper>

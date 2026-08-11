@@ -15,6 +15,7 @@ import { Switch } from "@/components/ui/switch";
 import { navbarLocales } from "@/locales/navbar";
 import { useLanguage } from "@/context/language-context";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import { SweepOverlay } from "@/components/ui/gradient-button";
 
 const Navbar = () => {
   const { language, toggleLanguage } = useLanguage();
@@ -59,7 +60,7 @@ const Navbar = () => {
                   href="/"
                   className="hover:text-gray-400 transition text-lg text-center"
                 >
-                  Home
+                  {t.home}
                 </Link>
                 <Link
                   href="#projects"
@@ -87,7 +88,7 @@ const Navbar = () => {
                   className="relative overflow-hidden px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-lg font-semibold text-white rounded-full bg-gradient-to-r from-blue-600 to-purple-600 shadow-md group"
                 >
                   <span className="relative z-10">{t.downloadCV}</span>
-                  <span className="absolute inset-0 bg-black/30 z-0 origin-right scale-x-100 group-hover:scale-x-0 transition-transform duration-700 ease-out" />
+                  <SweepOverlay />
                 </HoverBorderGradient>
               </div>
             </SheetContent>
@@ -122,7 +123,7 @@ const Navbar = () => {
             href="/"
             className="hover:text-gray-400 transition text-lg font-medium"
           >
-            Home
+            {t.home}
           </Link>
           <Link
             href="#projects"
@@ -161,7 +162,7 @@ const Navbar = () => {
             className="relative overflow-hidden px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-semibold text-white rounded-full bg-gradient-to-r from-blue-600 to-purple-600 shadow-md group"
           >
             <span className="relative z-10">{t.downloadCV}</span>
-            <span className="absolute inset-0 bg-black/30 z-0 origin-right scale-x-100 group-hover:scale-x-0 transition-transform duration-700 ease-out" />
+            <SweepOverlay />
           </HoverBorderGradient>
         </div>
       </div>

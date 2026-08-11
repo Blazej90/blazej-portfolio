@@ -1,9 +1,23 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
+const messages = {
+  pl: {
+    required: "Wszystkie pola są wymagane",
+    failed: "Nie udało się wysłać wiadomości",
+  },
+  en: {
+    required: "All fields are required",
+    failed: "Failed to send the message",
+  },
+};
+
 export async function POST(req: Request) {
+  let lang: keyof typeof messages = "pl";
+
   try {
     const formData = await req.formData();
+    lang = formData.get("lang") === "en" ? "en" : "pl";
 
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
@@ -12,7 +26,7 @@ export async function POST(req: Request) {
 
     if (!name || !email || !message) {
       return NextResponse.json(
-        { error: "Wszystkie pola są wymagane" },
+        { error: messages[lang].required },
         { status: 400 }
       );
     }
@@ -43,9 +57,9 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: true, message: "Wiadomość wysłana!" });
   } catch (error) {
-    console.error("Błąd:", error);
+    console.error("Contact form error:", error);
     return NextResponse.json(
-      { error: "Nie udało się wysłać wiadomości" },
+      { error: messages[lang].failed },
       { status: 500 }
     );
   }

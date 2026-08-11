@@ -5,8 +5,12 @@ import { FaHeart } from "react-icons/fa";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import { useLanguage } from "@/context/language-context";
+import { footerLocales } from "@/locales/footer";
 
 export default function LikeButton() {
+  const { language } = useLanguage();
+  const t = footerLocales[language];
   const [likes, setLikes] = useState(0);
   const [liked, setLiked] = useState(false);
 
@@ -77,7 +81,7 @@ export default function LikeButton() {
           <FaHeart className="w-5 h-5" />
         </motion.div>
         <span className="text-white">{likes}</span>
-        <span className="text-white">Likes</span>
+        <span className="text-white">{t.likes}</span>
       </HoverBorderGradient>
 
       {process.env.NODE_ENV === "development" && (

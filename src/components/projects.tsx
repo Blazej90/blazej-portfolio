@@ -1,25 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
 import { Github, ExternalLink } from "lucide-react";
-import { Meteors } from "@/components/ui/meteors";
+import { MeteorsBackground } from "@/components/ui/meteors-background";
+import { GradientButton } from "@/components/ui/gradient-button";
 import { useState, useRef, useId } from "react";
 import { useLanguage } from "@/context/language-context";
 import { projectsLocales } from "@/locales/projects";
+import { projects, type Project } from "@/data/projects";
 import { motion } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
 
-interface SlideData {
-  src: string;
-  githubUrl: string;
-  liveDemoUrl: string;
-  clientUrl?: string;
-}
-
 interface SlideProps {
-  slide: SlideData;
+  slide: Project;
   index: number;
   current: number;
   title: string;
@@ -36,6 +30,8 @@ const Slide = ({
   handleSlideClick,
 }: SlideProps) => {
   const slideRef = useRef<HTMLLIElement>(null);
+  const { language } = useLanguage();
+  const t = projectsLocales[language];
 
   const isActive = current === index;
   const { src, githubUrl, liveDemoUrl, clientUrl } = slide;
@@ -112,50 +108,35 @@ const Slide = ({
             </p>
 
             <div className="flex justify-center gap-4 flex-wrap">
-              <Button
-                asChild
-                className="group/btn relative h-10 px-4 rounded-md bg-[#1f1f1f] text-white font-medium dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
-              >
+              <GradientButton asChild>
                 <a href={githubUrl} target="_blank" rel="noopener noreferrer">
-                  GitHub
+                  {t.github}
                   <Github size={16} className="inline ml-2" />
-                  <span className="absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
-                  <span className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
                 </a>
-              </Button>
+              </GradientButton>
 
-              <Button
-                asChild
-                className="group/btn relative h-10 px-4 rounded-md bg-[#1f1f1f] text-white font-medium dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
-              >
+              <GradientButton asChild>
                 <a href={liveDemoUrl} target="_blank" rel="noopener noreferrer">
-                  Live Demo
+                  {t.liveDemo}
                   <ExternalLink size={16} className="inline ml-2" />
-                  <span className="absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
-                  <span className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
                 </a>
-              </Button>
+              </GradientButton>
 
               {clientUrl && (
-                <Button
-                  asChild
-                  className="group/btn relative h-10 px-4 rounded-md bg-[#1f1f1f] text-white font-medium"
-                >
+                <GradientButton asChild gradient="emerald">
                   <a
                     href={clientUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    title="This project is used in production by a real client"
+                    title={t.productionTitle}
                   >
-                    See it in production
+                    {t.seeInProduction}
                     <ExternalLink
                       size={16}
                       className="inline ml-2 text-emerald-400"
                     />
-                    <span className="absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-emerald-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
-                    <span className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-emerald-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
                   </a>
-                </Button>
+                </GradientButton>
               )}
             </div>
           </article>
@@ -190,62 +171,12 @@ export default function Projects() {
   const { language } = useLanguage();
   const t = projectsLocales[language];
 
-  const slides: SlideData[] = [
-    {
-      src: "/images/projects/task-flow.jpg",
-      githubUrl: "https://github.com/Blazej90/taskflow",
-      liveDemoUrl: "https://taskflow-two-ebon.vercel.app",
-    },
-    {
-      src: "/images/projects/english-platform.png",
-      githubUrl: "https://github.com/Blazej90/english-platform",
-      liveDemoUrl: "https://english-platform-eight.vercel.app",
-    },
-    {
-      src: "/images/projects/learn-react.jpg",
-      githubUrl: "https://github.com/Blazej90/lern-react",
-      liveDemoUrl: "https://lern-react.vercel.app",
-    },
-    {
-      src: "/images/projects/form.jpg",
-      githubUrl: "https://github.com/Blazej90/form",
-      liveDemoUrl: "https://form-eta-three.vercel.app/",
-    },
-    {
-      src: "/images/projects/movie.jpg",
-      githubUrl: "https://github.com/Blazej90/goit-react-hw-05-movies",
-      liveDemoUrl: "https://blazej90.github.io/goit-react-hw-05-movies/",
-    },
-    {
-      src: "/images/projects/hangman.jpg",
-      githubUrl: "https://github.com/Blazej90/hangman-game/tree/master",
-      liveDemoUrl: "https://game-for-boredom.netlify.app",
-    },
-    {
-      src: "/images/projects/picture.jpg",
-      githubUrl: "https://github.com/Blazej90/goit-react-hw-03-image-finder",
-      liveDemoUrl: "https://blazej90.github.io/goit-react-hw-03-image-finder/",
-    },
-    {
-      src: "/images/projects/taxi.jpg",
-      githubUrl: "https://github.com/Blazej90/taxi-test",
-      liveDemoUrl: "https://blazej90.github.io/taxi-test/",
-    },
-    {
-      src: "/images/projects/styroapin-calculator.jpg",
-      githubUrl: "https://github.com/Blazej90/styroapin-calculator",
-      liveDemoUrl: "https://blazej90.github.io/styroapin-calculator/",
-      clientUrl:
-        "https://remontomaniak.pl/pl/p/Genderka-FASADA-EXTRA-PLUS-styropian-fasadowy-EPS-lambda-0%2C31-10-cm-grafitowy-/2442",
-    },
-  ];
-
   const handlePreviousClick = () => {
-    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+    setCurrent((prev) => (prev - 1 + projects.length) % projects.length);
   };
 
   const handleNextClick = () => {
-    setCurrent((prev) => (prev + 1) % slides.length);
+    setCurrent((prev) => (prev + 1) % projects.length);
   };
 
   const handleSlideClick = (index: number) => {
@@ -269,9 +200,7 @@ export default function Projects() {
       viewport={{ amount: 0.3 }}
       className="scroll-mt-32 py-20 px-4 sm:px-6 md:px-10 text-center relative overflow-hidden"
     >
-      <div className="absolute inset-0 w-screen h-full -z-10 pointer-events-none">
-        <Meteors number={30} className="top-0 left-0 w-full h-full" />
-      </div>
+      <MeteorsBackground className="w-screen" />
 
       <div className="max-w-6xl mx-auto relative z-10">
         <h2 className="text-4xl font-bold text-gray-200 mb-12">{t.title}</h2>
@@ -284,18 +213,18 @@ export default function Projects() {
           <ul
             className="absolute flex transition-transform duration-1000 ease-in-out overflow-hidden"
             style={{
-              transform: `translateX(-${current * (100 / slides.length)}%)`,
+              transform: `translateX(-${current * (100 / projects.length)}%)`,
             }}
           >
-            {slides.map((slide, index) => (
+            {projects.map((project, index) => (
               <Slide
-                key={index}
-                slide={slide}
+                key={project.src}
+                slide={project}
                 index={index}
                 current={current}
                 handleSlideClick={handleSlideClick}
-                title={t.projects[index].title}
-                description={t.projects[index].description}
+                title={project.title[language]}
+                description={project.description[language]}
               />
             ))}
           </ul>
@@ -303,12 +232,12 @@ export default function Projects() {
           <div className="absolute flex justify-center w-full top-[calc(100%+1.5rem)]">
             <CarouselControl
               type="previous"
-              title="Poprzedni"
+              title={t.previous}
               handleClick={handlePreviousClick}
             />
             <CarouselControl
               type="next"
-              title="Następny"
+              title={t.next}
               handleClick={handleNextClick}
             />
           </div>

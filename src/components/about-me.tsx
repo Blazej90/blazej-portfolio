@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Github, Linkedin, ChevronDown } from "lucide-react";
-import { Meteors } from "@/components/ui/meteors";
+import { MeteorsBackground } from "@/components/ui/meteors-background";
 import { useLanguage } from "@/context/language-context";
 import { aboutMeLocales } from "@/locales/about-me";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
@@ -137,9 +137,7 @@ export default function About() {
       id="about"
       className="scroll-mt-32 py-20 px-6 text-center relative overflow-hidden"
     >
-      <div className="absolute inset-0 w-screen h-full -z-10 pointer-events-none">
-        <Meteors number={30} className="top-0 left-0 w-full h-full" />
-      </div>
+      <MeteorsBackground className="w-screen" />
 
       <div className="max-w-5xl mx-auto relative z-10">
         <motion.h2
