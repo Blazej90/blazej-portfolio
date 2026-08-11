@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Błażej Bartoszewski — Portfolio
+
+Personal portfolio website showcasing my projects, tech stack and a contact form.
+Live content is bilingual (PL/EN) with the language preference persisted in a cookie.
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router, Server Components, Turbopack)
+- **UI:** React 19, Tailwind CSS 4, shadcn/ui + Aceternity UI components
+- **Animations:** Framer Motion, react-scroll-parallax, canvas-confetti
+- **Backend:** Next.js Route Handlers — contact form (Nodemailer/Gmail) and a likes counter (Supabase)
+- **Tooling:** TypeScript, ESLint 9 (flat config), pnpm
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 20+
+- pnpm
+
+### Environment variables
+
+Create a `.env.local` file in the project root:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Contact form (/api/contact) — Gmail account used to send emails
+EMAIL_USER=your-gmail@gmail.com
+EMAIL_PASS=your-gmail-app-password
+EMAIL_RECEIVER=where-messages-should-arrive@example.com
+
+# Likes counter (/api/likes) — Supabase project with a "likes" table
+# (columns: id text, count int)
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 ```
 
-Open [http://localhost:3003](http://localhost:3003) with your browser to see the result.
+> `EMAIL_PASS` is a Gmail *App Password*, not the account password
+> (requires 2FA enabled on the Google account).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Run
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm install
+pnpm dev        # dev server on http://localhost:3000
+```
 
-## Learn More
+Other scripts:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+pnpm build      # production build
+pnpm start      # serve the production build
+pnpm lint       # ESLint
+pnpm test       # data & locale integrity tests (node:test)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/            # App Router: layout (server, SEO metadata), page, API routes
+├── components/     # page sections (hero, about, projects, contact, footer, navbar)
+│   └── ui/         # reusable UI primitives (shadcn/Aceternity based)
+├── context/        # language context (PL/EN, cookie persistence)
+├── data/           # single source of truth for projects (urls + pl/en copy)
+├── lib/            # supabase client, utils
+└── locales/        # UI translations per section
+```
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The app deploys cleanly to Vercel (recommended) — remember to configure the
+environment variables listed above in the project settings.

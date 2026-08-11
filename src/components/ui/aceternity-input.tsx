@@ -45,7 +45,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               shadow-input
               flex h-10 w-full
               rounded-md border-none
-              bg-[#27272a]
+              bg-surface
               px-3 py-2 text-sm
               placeholder:text-neutral-400
               text-[oklch(0.371_0_0)]

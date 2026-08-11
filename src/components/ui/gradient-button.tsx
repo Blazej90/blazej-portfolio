@@ -47,7 +47,7 @@ export const GradientButton = ({
     <Button
       asChild={asChild}
       className={cn(
-        "group/btn relative h-10 px-4 rounded-md bg-[#1f1f1f] text-white font-medium dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]",
+        "group/btn relative h-10 px-4 rounded-md bg-surface-dark text-white font-medium dark:shadow-[0px_1px_0px_0px_var(--color-surface)_inset,0px_-1px_0px_0px_var(--color-surface)_inset]",
         className
       )}
       {...props}

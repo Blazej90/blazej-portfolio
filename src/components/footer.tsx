@@ -12,7 +12,7 @@ export default function Footer() {
   const t = footerLocales[language];
 
   return (
-    <footer className="bg-[#0f0f0f] border-t border-gray-800 px-4 py-10 sm:py-12 text-gray-400 overflow-x-hidden">
+    <footer className="bg-surface-darker border-t border-gray-800 px-4 py-10 sm:py-12 text-gray-400 overflow-x-hidden">
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 text-sm">
         <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-3">
           <a

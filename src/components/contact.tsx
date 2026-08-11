@@ -153,7 +153,7 @@ export default function Contact() {
             placeholder={t.namePlaceholder}
             value={form.name}
             onChange={handleChange}
-            className="bg-[#27272a] text-white placeholder:text-neutral-400"
+            className="bg-surface text-white placeholder:text-neutral-400"
           />
         </LabelInputContainer>
 
@@ -166,7 +166,7 @@ export default function Contact() {
             placeholder={t.emailPlaceholder}
             value={form.email}
             onChange={handleChange}
-            className="bg-[#27272a] text-white placeholder:text-neutral-400"
+            className="bg-surface text-white placeholder:text-neutral-400"
           />
         </LabelInputContainer>
 
@@ -180,13 +180,13 @@ export default function Contact() {
               value={form.message}
               onChange={handleChange}
               rows={6}
-              className="w-full rounded-md border-none bg-[#27272a] px-3 py-2 text-sm text-white placeholder:text-neutral-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition duration-300"
+              className="w-full rounded-md border-none bg-surface px-3 py-2 text-sm text-white placeholder:text-neutral-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition duration-300"
             />
           </HoverEffectWrapper>
         </LabelInputContainer>
 
         <HoverEffectWrapper>
-          <div className="relative z-10 flex flex-col items-start space-y-2 border border-gray-600 p-3 rounded-lg bg-[#27272a] w-full focus-within:ring-2 focus-within:ring-blue-500 transition duration-300">
+          <div className="relative z-10 flex flex-col items-start space-y-2 border border-gray-600 p-3 rounded-lg bg-surface w-full focus-within:ring-2 focus-within:ring-blue-500 transition duration-300">
             <label
               htmlFor="fileInput"
               className="flex items-center space-x-2 cursor-pointer text-sm text-gray-300"
@@ -207,7 +207,7 @@ export default function Contact() {
                 {files.map((file) => (
                   <li
                     key={file.name}
-                    className="flex justify-between items-center px-2 py-1 bg-[#27272a] rounded"
+                    className="flex justify-between items-center px-2 py-1 bg-surface rounded"
                   >
                     <span className="text-sm text-white">{file.name}</span>
                     <button
@@ -235,8 +235,8 @@ export default function Contact() {
 
         <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <AlertDialogContent asChild>
-            <HoverEffectWrapper className="bg-[#27272a] border border-gray-600 text-white shadow-xl w-full max-w-md">
-              <div className="p-6 rounded-lg bg-[#27272a]">
+            <HoverEffectWrapper className="bg-surface border border-gray-600 text-white shadow-xl w-full max-w-md">
+              <div className="p-6 rounded-lg bg-surface">
                 <AlertDialogHeader>
                   <AlertDialogTitle className="text-lg flex items-center gap-2">
                     {dialogContent.success ? (
