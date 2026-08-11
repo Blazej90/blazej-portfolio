@@ -1,6 +1,6 @@
 "use client";
 
-import { useMotionTemplate, useMotionValue, motion } from "motion/react";
+import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
 import React from "react";
 
 export function HoverEffectWrapper({

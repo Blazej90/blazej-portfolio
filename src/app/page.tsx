@@ -10,7 +10,6 @@ import { useLanguage } from "@/context/language-context";
 import { pageLocales } from "@/locales/page";
 import { ChevronDown } from "lucide-react";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
-import Navbar from "@/components/navbar";
 
 const About = lazy(() => import("@/components/about-me"));
 const Projects = lazy(() => import("@/components/projects"));
@@ -33,8 +32,6 @@ export default function Home() {
 
   return (
     <>
-      <Navbar scrolled={scrolled} />
-
       <main
         className={`relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden pt-[6rem] sm:pt-0 sm:pb-16 transition-all duration-300 ${
           scrolled ? "pt-[4rem]" : "pt-[6rem]"

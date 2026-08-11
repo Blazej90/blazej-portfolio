@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu } from "lucide-react";
 import {
   Sheet,
@@ -14,13 +16,21 @@ import { navbarLocales } from "@/locales/navbar";
 import { useLanguage } from "@/context/language-context";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 
-type NavbarProps = {
-  scrolled?: boolean;
-};
-
-const Navbar = ({ scrolled }: NavbarProps) => {
+const Navbar = () => {
   const { language, toggleLanguage } = useLanguage();
   const t = navbarLocales[language];
+
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 60);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <nav
@@ -86,9 +96,12 @@ const Navbar = ({ scrolled }: NavbarProps) => {
 
         <div className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
           <Link href="/" className="flex items-center space-x-2">
-            <img
+            <Image
               src="/images/logo/logo.png"
               alt="Błażej Bartoszewski Logo"
+              width={1024}
+              height={1024}
+              priority
               className="w-auto h-16 object-contain transition-all duration-300"
             />
             <span className="sr-only">Błażej Bartoszewski</span>

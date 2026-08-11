@@ -1,7 +1,16 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import React from "react";
+
+// Deterministic pseudo-random generator (mulberry32) — pure, stable across
+// renders and between server/client, so meteors don't jump on re-render.
+const seededRandom = (seed: number) => {
+  let t = (seed + 0x6d2b79f5) | 0;
+  t = Math.imul(t ^ (t >>> 15), t | 1);
+  t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+};
 
 export const Meteors = ({
   number = 30,
@@ -10,16 +19,6 @@ export const Meteors = ({
   number?: number;
   className?: string;
 }) => {
-  const [hasMounted, setHasMounted] = useState(false);
-  const [width, setWidth] = useState(0);
-
-  useEffect(() => {
-    setHasMounted(true);
-    setWidth(window.innerWidth);
-  }, []);
-
-  if (!hasMounted) return null;
-
   return (
     <motion.div
       className={cn("absolute inset-0 w-full h-full", className)}
@@ -28,9 +27,9 @@ export const Meteors = ({
       transition={{ duration: 0.5 }}
     >
       {Array.from({ length: number }).map((_, idx) => {
-        const position = Math.random() * width;
-        const duration = Math.floor(Math.random() * 5 + 5);
-        const delay = Math.random() * 5;
+        const position = seededRandom(idx * 3) * 100;
+        const duration = Math.floor(seededRandom(idx * 3 + 1) * 5 + 5);
+        const delay = seededRandom(idx * 3 + 2) * 5;
 
         return (
           <span
@@ -41,7 +40,7 @@ export const Meteors = ({
             )}
             style={{
               top: "-40px",
-              left: `${position}px`,
+              left: `${position}%`,
               animationDelay: `${delay}s`,
               animationDuration: `${duration}s`,
             }}

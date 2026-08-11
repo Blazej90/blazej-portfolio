@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
 import { Github, ExternalLink } from "lucide-react";
@@ -83,15 +84,19 @@ const Slide = ({
               : "none",
           }}
         >
-          <img
-            className="absolute inset-0 w-[120%] h-[120%] object-cover transition-opacity duration-600 ease-in-out"
-            style={{ opacity: isActive ? 1 : 0.5 }}
-            alt={title}
-            src={src}
-            loading={isActive ? "eager" : "lazy"}
-            decoding="async"
-            draggable={false}
-          />
+          <div className="absolute inset-0 w-[120%] h-[120%]">
+            <Image
+              className="object-cover transition-opacity duration-600 ease-in-out"
+              style={{ opacity: isActive ? 1 : 0.5 }}
+              alt={title}
+              src={src}
+              fill
+              sizes="(max-width: 640px) 90vw, 70vmin"
+              loading={isActive ? "eager" : "lazy"}
+              decoding="async"
+              draggable={false}
+            />
+          </div>
 
           {isActive && (
             <div className="absolute inset-0 bg-black/30 transition-all duration-1000" />

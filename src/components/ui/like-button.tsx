@@ -11,9 +11,6 @@ export default function LikeButton() {
   const [liked, setLiked] = useState(false);
 
   useEffect(() => {
-    const isLiked = localStorage.getItem("liked");
-    if (isLiked) setLiked(true);
-
     const fetchLikes = async () => {
       try {
         const res = await fetch("/api/likes");
@@ -23,6 +20,10 @@ export default function LikeButton() {
         }
       } catch (error) {
         console.error("Błąd pobierania lajków:", error);
+      }
+
+      if (localStorage.getItem("liked")) {
+        setLiked(true);
       }
     };
 
