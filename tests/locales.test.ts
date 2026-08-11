@@ -25,7 +25,10 @@ for (const [name, locales] of Object.entries(localeGroups)) {
 
   test(`locales/${name}: no empty translations`, () => {
     for (const lang of ["pl", "en"] as const) {
-      for (const [key, value] of Object.entries(locales[lang])) {
+      for (const [key, value] of Object.entries(locales[lang]) as [
+        string,
+        unknown,
+      ][]) {
         if (typeof value === "string") {
           assert.ok(value.trim().length > 0, `${name}.${key} (${lang})`);
         } else if (Array.isArray(value)) {

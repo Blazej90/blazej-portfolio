@@ -1,121 +1,105 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { Parallax } from "react-scroll-parallax";
-import { Typewriter } from "react-simple-typewriter";
+import { motion, type Variants } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { MeteorsBackground } from "@/components/ui/meteors-background";
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
-import { SweepOverlay } from "@/components/ui/gradient-button";
+import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/context/language-context";
 import { pageLocales } from "@/locales/page";
+
+const container: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+};
 
 export default function Hero() {
   const { language } = useLanguage();
   const t = pageLocales[language];
 
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 60);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <main
-      className={`relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden pt-[6rem] sm:pt-0 sm:pb-16 transition-all duration-300 ${
-        scrolled ? "pt-[4rem]" : "pt-[6rem]"
-      }`}
-    >
-      <Parallax speed={-10}>
-        <div className="absolute top-0 left-0 w-full h-full bg-cover bg-center opacity-20" />
-      </Parallax>
-
-      <MeteorsBackground />
-
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="text-base sm:text-lg text-gray-400"
-      >
-        {t.hello}
-      </motion.p>
-
-      <motion.h1
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.2 }}
-        className="text-3xl sm:text-4xl md:text-5xl font-bold text-white"
-      >
-        Błażej Bartoszewski
-      </motion.h1>
-
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.5 }}
-        className="text-lg sm:text-xl text-blue-400 font-medium mt-2"
-      >
-        <Typewriter
-          words={t.typewriter}
-          loop={0}
-          cursor
-          cursorStyle="|"
-          typeSpeed={60}
-          deleteSpeed={30}
-          delaySpeed={1500}
-        />
-      </motion.p>
-
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.8 }}
-        className="mt-4 max-w-xs sm:max-w-md md:max-w-2xl text-sm sm:text-lg text-gray-400"
-      >
-        {t.description}
-      </motion.p>
+    <main className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
+      {/* subtle dot grid with radial mask */}
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-[radial-gradient(var(--border)_1.5px,transparent_1.5px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_40%,black_30%,transparent_75%)]"
+      />
+      {/* soft indigo blur orb */}
+      <div
+        aria-hidden
+        className="absolute -z-10 top-1/4 left-1/2 -translate-x-1/2 size-72 sm:size-96 rounded-full bg-brand opacity-[0.08] blur-3xl"
+      />
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, delay: 1 }}
-        viewport={{ amount: 0.3 }}
-        className="relative mt-6 flex flex-col sm:flex-row justify-center items-center gap-3 w-full"
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="flex flex-col items-center"
       >
-        <a
-          href="#projects"
-          className="relative px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-lg font-semibold text-white rounded-full bg-gradient-to-r from-blue-600 to-purple-600 shadow-md transition-all overflow-hidden group"
+        <motion.p
+          variants={item}
+          className="text-xs sm:text-sm font-medium uppercase tracking-[0.25em] text-muted-foreground"
         >
-          <span className="relative z-10">{t.projectsButton}</span>
-          <SweepOverlay />
-        </a>
+          {t.role}
+        </motion.p>
 
-        <HoverBorderGradient
-          as="a"
-          href="#contact"
-          className="px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-lg"
+        <motion.h1
+          variants={item}
+          className="mt-4 text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight"
         >
-          {t.contactButton}
-        </HoverBorderGradient>
+          Błażej Bartoszewski
+        </motion.h1>
+
+        <motion.p
+          variants={item}
+          className="mt-4 text-2xl sm:text-4xl md:text-5xl font-semibold tracking-tight"
+        >
+          {t.taglineStart} <span className="text-brand">{t.taglineAccent}</span>{" "}
+          {t.taglineEnd}
+        </motion.p>
+
+        <motion.p
+          variants={item}
+          className="mt-6 max-w-md sm:max-w-xl text-base sm:text-lg text-muted-foreground"
+        >
+          {t.description}
+        </motion.p>
+
+        <motion.div
+          variants={item}
+          className="mt-10 flex flex-col sm:flex-row items-center gap-3"
+        >
+          <Button
+            asChild
+            size="lg"
+            className="bg-brand text-white hover:bg-brand-hover"
+          >
+            <a href="#projects">{t.projectsButton}</a>
+          </Button>
+          <Button asChild variant="outline" size="lg">
+            <a href="#contact">{t.contactButton}</a>
+          </Button>
+        </motion.div>
       </motion.div>
 
-      <motion.div
+      <motion.a
+        href="#about"
+        aria-label="Scroll down"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="mt-10 sm:mt-auto sm:absolute sm:bottom-6 sm:left-1/2 sm:-translate-x-1/2 text-gray-400"
+        animate={{ opacity: [0.3, 0.8, 0.3] }}
+        transition={{
+          delay: 1.6,
+          duration: 2.5,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground hover:text-foreground transition-colors"
       >
-        <a href="#about" aria-label="Scroll down">
-          <ChevronDown className="w-6 h-6 animate-bounce" />
-        </a>
-      </motion.div>
+        <ChevronDown className="size-6" />
+      </motion.a>
     </main>
   );
 }

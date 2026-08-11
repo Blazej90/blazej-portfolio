@@ -2,11 +2,9 @@ export const pageLocales = {
   pl: {
     hello: "Cześć, jestem",
     role: "Frontend Developer",
-    typewriter: [
-      "Frontend Developer",
-      "Specjalista TypeScript & React",
-      "Miłośnik UI/UX",
-    ],
+    taglineStart: "Buduję",
+    taglineAccent: "szybkie",
+    taglineEnd: "i piękne aplikacje webowe.",
     description:
       "Specjalizuję się w tworzeniu nowoczesnych, wydajnych i responsywnych aplikacji webowych. Moje projekty łączą estetykę z funkcjonalnością.",
     projectsButton: "Zobacz moje projekty",
@@ -17,11 +15,9 @@ export const pageLocales = {
   en: {
     hello: "Hi, I'm",
     role: "Frontend Developer",
-    typewriter: [
-      "Frontend Developer",
-      "TypeScript & React Specialist",
-      "UI/UX Lover",
-    ],
+    taglineStart: "I build",
+    taglineAccent: "fast",
+    taglineEnd: "and beautiful web applications.",
     description:
       "I specialize in building modern, performant and responsive web applications. My projects combine aesthetics with functionality.",
     projectsButton: "See my projects",
