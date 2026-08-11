@@ -1,9 +1,20 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
+import { Inter, Space_Grotesk } from "next/font/google";
 import Navbar from "@/components/navbar";
 import Providers from "@/components/providers";
 import type { Language } from "@/context/language-context";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-inter",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-space-grotesk",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -45,8 +56,12 @@ export default async function RootLayout({
     cookieStore.get("lang")?.value === "en" ? "en" : "pl";
 
   return (
-    <html lang={language}>
-      <body className="bg-black text-white">
+    <html
+      lang={language}
+      suppressHydrationWarning
+      className={`${inter.variable} ${spaceGrotesk.variable}`}
+    >
+      <body className="bg-background text-foreground font-sans">
         <Providers initialLanguage={language}>
           <Navbar />
           {children}

@@ -53,6 +53,9 @@ importers:
       next:
         specifier: 16.1.6
         version: 16.1.6(@babel/core@7.29.7(supports-color@7.2.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      next-themes:
+        specifier: ^0.4.6
+        version: 0.4.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       nodemailer:
         specifier: ^6.10.0
         version: 6.10.0
@@ -2048,6 +2051,12 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
+  next-themes@0.4.6:
+    resolution: {integrity: sha512-pZvgD5L0IEvX5/9GWyHMf3m8BKiVQwsCMHfoFosXtXBMnaS0ZnIJ9ST4b4NqLVKDEm8QBxoNNGNaBv2JNF6XNA==}
+    peerDependencies:
+      react: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
+      react-dom: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
+
   next@16.1.6:
     resolution: {integrity: sha512-hkyRkcu5x/41KoqnROkfTm2pZVbKxvbZRuNvKXLRXxs3VfyO0WhY50TQS40EuKO9SW3rBj/sF3WbVwDACeMZyw==}
     engines: {node: '>=20.9.0'}
@@ -3493,7 +3502,7 @@ snapshots:
       '@typescript-eslint/visitor-keys': 8.66.0
       debug: 4.4.3(supports-color@7.2.0)
       minimatch: 10.2.6
-      semver: 7.7.3
+      semver: 7.8.5
       tinyglobby: 0.2.17
       ts-api-utils: 2.5.0(typescript@5.8.2)
       typescript: 5.8.2
@@ -4593,6 +4602,11 @@ snapshots:
   nanoid@3.3.9: {}
 
   natural-compare@1.4.0: {}
+
+  next-themes@0.4.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+    dependencies:
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
 
   next@16.1.6(@babel/core@7.29.7(supports-color@7.2.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:

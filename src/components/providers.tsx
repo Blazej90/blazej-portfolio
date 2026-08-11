@@ -1,6 +1,6 @@
 "use client";
 
-import { ParallaxProvider } from "react-scroll-parallax";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { LanguageProvider, type Language } from "@/context/language-context";
 
 export default function Providers({
@@ -11,10 +11,15 @@ export default function Providers({
   initialLanguage: Language;
 }) {
   return (
-    <ParallaxProvider>
+    <NextThemesProvider
+      attribute="class"
+      defaultTheme="light"
+      enableSystem={false}
+      disableTransitionOnChange
+    >
       <LanguageProvider initialLanguage={initialLanguage}>
         {children}
       </LanguageProvider>
-    </ParallaxProvider>
+    </NextThemesProvider>
   );
 }

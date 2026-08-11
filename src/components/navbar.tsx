@@ -16,6 +16,7 @@ import { navbarLocales } from "@/locales/navbar";
 import { useLanguage } from "@/context/language-context";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { SweepOverlay } from "@/components/ui/gradient-button";
+import ThemeToggle from "@/components/theme-toggle";
 
 const Navbar = () => {
   const { language, toggleLanguage } = useLanguage();
@@ -90,6 +91,8 @@ const Navbar = () => {
                   <span className="relative z-10">{t.downloadCV}</span>
                   <SweepOverlay />
                 </HoverBorderGradient>
+
+                <ThemeToggle />
               </div>
             </SheetContent>
           </Sheet>
@@ -146,6 +149,8 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex items-center space-x-4 ml-auto">
+          <ThemeToggle />
+
           <div className="flex items-center space-x-2">
             <span className="text-sm">PL</span>
             <Switch
