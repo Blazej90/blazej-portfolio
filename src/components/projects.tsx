@@ -1,248 +1,118 @@
 "use client";
 
 import Image from "next/image";
-import { IconArrowNarrowRight } from "@tabler/icons-react";
+import { motion, type Variants } from "framer-motion";
 import { Github, ExternalLink } from "lucide-react";
-import { MeteorsBackground } from "@/components/ui/meteors-background";
-import { GradientButton } from "@/components/ui/gradient-button";
-import { useState, useRef, useId } from "react";
 import { useLanguage } from "@/context/language-context";
 import { projectsLocales } from "@/locales/projects";
 import { projects, type Project } from "@/data/projects";
-import { motion } from "framer-motion";
-import { useSwipeable } from "react-swipeable";
 
-interface SlideProps {
-  slide: Project;
-  index: number;
-  current: number;
-  title: string;
-  description: string;
-  handleSlideClick: (index: number) => void;
-}
-
-const Slide = ({
-  slide,
-  index,
-  current,
-  title,
-  description,
-  handleSlideClick,
-}: SlideProps) => {
-  const slideRef = useRef<HTMLLIElement>(null);
-  const { language } = useLanguage();
-  const t = projectsLocales[language];
-
-  const isActive = current === index;
-  const { src, githubUrl, liveDemoUrl, clientUrl } = slide;
-  const handleMouseMove = (event: React.MouseEvent) => {
-    if (!isActive) return;
-    const el = slideRef.current;
-    if (!el) return;
-
-    const r = el.getBoundingClientRect();
-    const x = event.clientX - (r.left + r.width / 2);
-    const y = event.clientY - (r.top + r.height / 2);
-
-    el.style.setProperty("--x", `${x}px`);
-    el.style.setProperty("--y", `${y}px`);
-  };
-
-  const handleMouseLeave = () => {
-    if (!isActive) return;
-    const el = slideRef.current;
-    if (!el) return;
-
-    el.style.setProperty("--x", `0px`);
-    el.style.setProperty("--y", `0px`);
-  };
-
-  return (
-    <div className="[perspective:1200px] [transform-style:preserve-3d]">
-      <li
-        ref={slideRef}
-        className="flex flex-1 flex-col items-center justify-end relative text-center text-white transition-all duration-300 ease-in-out w-[90vw] sm:w-[70vmin] h-[90vw] sm:h-[70vmin] mx-auto z-10"
-        onClick={() => handleSlideClick(index)}
-        onMouseMove={isActive ? handleMouseMove : undefined}
-        onMouseLeave={isActive ? handleMouseLeave : undefined}
-        style={{
-          transform: !isActive
-            ? "scale(0.98) rotateX(8deg)"
-            : "scale(1) rotateX(0deg)",
-          transformOrigin: "bottom",
-        }}
-      >
-        <div
-          className="relative w-full h-full bg-slide overflow-hidden transition-all duration-150 ease-out rounded-xl"
-          style={{
-            transform: isActive
-              ? "translate3d(calc(var(--x)/30), calc(var(--y)/30), 0)"
-              : "none",
-          }}
-        >
-          <div className="absolute inset-0 w-[120%] h-[120%]">
-            <Image
-              className="object-cover transition-opacity duration-600 ease-in-out"
-              style={{ opacity: isActive ? 1 : 0.5 }}
-              alt={title}
-              src={src}
-              fill
-              sizes="(max-width: 640px) 90vw, 70vmin"
-              loading={isActive ? "eager" : "lazy"}
-              decoding="async"
-              draggable={false}
-            />
-          </div>
-
-          {isActive && (
-            <div className="absolute inset-0 bg-black/30 transition-all duration-1000" />
-          )}
-
-          <article className="absolute bottom-0 left-0 w-full bg-black/70 p-6 z-10">
-            <h2 className="text-lg md:text-2xl lg:text-3xl font-semibold mb-2">
-              {title}
-            </h2>
-
-            <p className="text-sm text-gray-300 mb-4 max-w-[90%] mx-auto">
-              {description}
-            </p>
-
-            <div className="flex justify-center gap-4 flex-wrap">
-              <GradientButton asChild>
-                <a href={githubUrl} target="_blank" rel="noopener noreferrer">
-                  {t.github}
-                  <Github size={16} className="inline ml-2" />
-                </a>
-              </GradientButton>
-
-              <GradientButton asChild>
-                <a href={liveDemoUrl} target="_blank" rel="noopener noreferrer">
-                  {t.liveDemo}
-                  <ExternalLink size={16} className="inline ml-2" />
-                </a>
-              </GradientButton>
-
-              {clientUrl && (
-                <GradientButton asChild gradient="emerald">
-                  <a
-                    href={clientUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title={t.productionTitle}
-                  >
-                    {t.seeInProduction}
-                    <ExternalLink
-                      size={16}
-                      className="inline ml-2 text-emerald-400"
-                    />
-                  </a>
-                </GradientButton>
-              )}
-            </div>
-          </article>
-        </div>
-      </li>
-    </div>
-  );
+const container: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1 } },
 };
 
-const CarouselControl = ({
-  type,
-  title,
-  handleClick,
-}: {
-  type: string;
-  title: string;
-  handleClick: () => void;
-}) => (
-  <button
-    className={`w-10 h-10 flex items-center mx-2 justify-center bg-neutral-200 dark:bg-neutral-800 border-3 border-transparent rounded-full focus:border-focus focus:outline-none hover:-translate-y-0.5 active:translate-y-0.5 transition duration-200 ${
-      type === "previous" ? "rotate-180" : ""
-    }`}
-    title={title}
-    onClick={handleClick}
-  >
-    <IconArrowNarrowRight className="text-neutral-600 dark:text-neutral-200" />
-  </button>
-);
+const card: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
 
-export default function Projects() {
-  const [current, setCurrent] = useState(0);
+function ProjectCard({ project }: { project: Project }) {
   const { language } = useLanguage();
   const t = projectsLocales[language];
 
-  const handlePreviousClick = () => {
-    setCurrent((prev) => (prev - 1 + projects.length) % projects.length);
-  };
-
-  const handleNextClick = () => {
-    setCurrent((prev) => (prev + 1) % projects.length);
-  };
-
-  const handleSlideClick = (index: number) => {
-    if (current !== index) setCurrent(index);
-  };
-
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: handleNextClick,
-    onSwipedRight: handlePreviousClick,
-    trackMouse: true,
-  });
-
-  const id = useId();
-
   return (
-    <motion.section
-      id="projects"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1 }}
-      viewport={{ amount: 0.3 }}
-      className="scroll-mt-32 py-20 px-4 sm:px-6 md:px-10 text-center relative overflow-hidden"
+    <motion.article
+      variants={card}
+      className="group flex flex-col overflow-hidden rounded-xl border bg-card text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
     >
-      <MeteorsBackground className="w-screen" />
+      <div className="relative aspect-video overflow-hidden">
+        <Image
+          src={project.src}
+          alt={project.title[language]}
+          fill
+          sizes="(max-width: 640px) 100vw, 50vw"
+          className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+        />
+      </div>
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        <h2 className="text-4xl font-bold text-gray-200 mb-12">{t.title}</h2>
+      <div className="flex flex-1 flex-col p-6">
+        <h3 className="text-xl font-semibold tracking-tight">
+          {project.title[language]}
+        </h3>
+        <p className="mt-2 flex-1 text-sm text-muted-foreground">
+          {project.description[language]}
+        </p>
 
-        <div
-          className="relative w-[90vw] sm:w-[70vmin] h-[90vw] sm:h-[70vmin] mx-auto"
-          aria-labelledby={`carousel-heading-${id}`}
-          {...swipeHandlers}
-        >
-          <ul
-            className="absolute flex transition-transform duration-1000 ease-in-out overflow-hidden"
-            style={{
-              transform: `translateX(-${current * (100 / projects.length)}%)`,
-            }}
+        <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium">
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-brand"
           >
-            {projects.map((project, index) => (
-              <Slide
-                key={project.src}
-                slide={project}
-                index={index}
-                current={current}
-                handleSlideClick={handleSlideClick}
-                title={project.title[language]}
-                description={project.description[language]}
-              />
-            ))}
-          </ul>
-
-          <div className="absolute flex justify-center w-full top-[calc(100%+1.5rem)]">
-            <CarouselControl
-              type="previous"
-              title={t.previous}
-              handleClick={handlePreviousClick}
-            />
-            <CarouselControl
-              type="next"
-              title={t.next}
-              handleClick={handleNextClick}
-            />
-          </div>
+            <Github className="size-4" />
+            {t.github}
+          </a>
+          <a
+            href={project.liveDemoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-brand"
+          >
+            <ExternalLink className="size-4" />
+            {t.liveDemo}
+          </a>
+          {project.clientUrl && (
+            <a
+              href={project.clientUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={t.productionTitle}
+              className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-brand"
+            >
+              <ExternalLink className="size-4" />
+              {t.seeInProduction}
+            </a>
+          )}
         </div>
       </div>
-    </motion.section>
+    </motion.article>
+  );
+}
+
+export default function Projects() {
+  const { language } = useLanguage();
+  const t = projectsLocales[language];
+
+  return (
+    <section
+      id="projects"
+      className="scroll-mt-32 py-20 px-4 sm:px-6 md:px-10 text-center relative overflow-hidden"
+    >
+      <div className="max-w-5xl mx-auto relative z-10">
+        <motion.h2
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.3 }}
+          className="text-4xl font-bold tracking-tight"
+        >
+          {t.title}
+        </motion.h2>
+
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.1 }}
+          className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8"
+        >
+          {projects.map((project) => (
+            <ProjectCard key={project.src} project={project} />
+          ))}
+        </motion.div>
+      </div>
+    </section>
   );
 }
