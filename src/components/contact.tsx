@@ -2,9 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, X, Paperclip } from "lucide-react";
-import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
-import { MeteorsBackground } from "@/components/ui/meteors-background";
+import { Send, X, Paperclip, CircleCheck, CircleX } from "lucide-react";
 import { useLanguage } from "@/context/language-context";
 import { contactLocales } from "@/locales/contact";
 import { Input } from "@/components/ui/aceternity-input";
@@ -18,7 +16,7 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
 } from "@/components/ui/alert-dialog";
-import { GradientButton } from "@/components/ui/gradient-button";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const LabelInputContainer = ({
@@ -114,14 +112,12 @@ export default function Contact() {
       id="contact"
       className="relative py-20 px-4 max-w-3xl mx-auto text-center"
     >
-      <MeteorsBackground className="fixed w-screen" />
-
       <motion.h2
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        viewport={{ amount: 0.3 }}
-        className="text-4xl font-bold text-gray-200"
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.3 }}
+        className="text-4xl font-bold tracking-tight"
       >
         {t.title}
       </motion.h2>
@@ -131,7 +127,7 @@ export default function Contact() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.2 }}
         viewport={{ amount: 0.3 }}
-        className="text-base text-gray-400 mt-2"
+        className="text-base text-muted-foreground mt-2"
       >
         {t.description}
       </motion.p>
@@ -153,7 +149,6 @@ export default function Contact() {
             placeholder={t.namePlaceholder}
             value={form.name}
             onChange={handleChange}
-            className="bg-surface text-white placeholder:text-neutral-400"
           />
         </LabelInputContainer>
 
@@ -166,7 +161,6 @@ export default function Contact() {
             placeholder={t.emailPlaceholder}
             value={form.email}
             onChange={handleChange}
-            className="bg-surface text-white placeholder:text-neutral-400"
           />
         </LabelInputContainer>
 
@@ -180,16 +174,16 @@ export default function Contact() {
               value={form.message}
               onChange={handleChange}
               rows={6}
-              className="w-full rounded-md border-none bg-surface px-3 py-2 text-sm text-white placeholder:text-neutral-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition duration-300"
+              className="w-full rounded-md border-none bg-card px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring transition duration-300"
             />
           </HoverEffectWrapper>
         </LabelInputContainer>
 
         <HoverEffectWrapper>
-          <div className="relative z-10 flex flex-col items-start space-y-2 border border-gray-600 p-3 rounded-lg bg-surface w-full focus-within:ring-2 focus-within:ring-blue-500 transition duration-300">
+          <div className="relative z-10 flex flex-col items-start space-y-2 border border-border p-3 rounded-lg bg-card w-full focus-within:ring-2 focus-within:ring-ring transition duration-300">
             <label
               htmlFor="fileInput"
-              className="flex items-center space-x-2 cursor-pointer text-sm text-gray-300"
+              className="flex items-center space-x-2 cursor-pointer text-sm text-muted-foreground"
             >
               <Paperclip size={16} />
               <span>{t.attachment}</span>
@@ -207,13 +201,13 @@ export default function Contact() {
                 {files.map((file) => (
                   <li
                     key={file.name}
-                    className="flex justify-between items-center px-2 py-1 bg-surface rounded"
+                    className="flex justify-between items-center px-2 py-1 bg-muted rounded"
                   >
-                    <span className="text-sm text-white">{file.name}</span>
+                    <span className="text-sm text-foreground">{file.name}</span>
                     <button
                       type="button"
                       onClick={() => removeFile(file.name)}
-                      className="text-gray-400 hover:text-red-500 transition"
+                      className="text-muted-foreground hover:text-destructive transition"
                     >
                       <X size={16} />
                     </button>
@@ -224,42 +218,42 @@ export default function Contact() {
           </div>
         </HoverEffectWrapper>
 
-        <GradientButton
+        <Button
           type="submit"
           disabled={loading}
-          className="block w-full"
+          className="w-full bg-brand text-white hover:bg-brand-hover"
         >
           {loading ? t.sending : t.submit}
           <Send size={16} className="inline ml-2" />
-        </GradientButton>
+        </Button>
 
         <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <AlertDialogContent asChild>
-            <HoverEffectWrapper className="bg-surface border border-gray-600 text-white shadow-xl w-full max-w-md">
-              <div className="p-6 rounded-lg bg-surface">
+            <HoverEffectWrapper className="bg-card border border-border text-foreground shadow-xl w-full max-w-md">
+              <div className="p-6 rounded-lg bg-card">
                 <AlertDialogHeader>
                   <AlertDialogTitle className="text-lg flex items-center gap-2">
                     {dialogContent.success ? (
-                      <FaCheckCircle className="text-green-400" />
+                      <CircleCheck className="text-emerald-500" />
                     ) : (
-                      <FaTimesCircle className="text-red-500" />
+                      <CircleX className="text-destructive" />
                     )}
                     {dialogContent.title}
                   </AlertDialogTitle>
                   {dialogContent.description && (
-                    <AlertDialogDescription className="text-sm text-gray-300 mt-2">
+                    <AlertDialogDescription className="text-sm text-muted-foreground mt-2">
                       {dialogContent.description}
                     </AlertDialogDescription>
                   )}
                 </AlertDialogHeader>
 
                 <AlertDialogFooter className="pt-6">
-                  <GradientButton
+                  <Button
                     onClick={() => setIsDialogOpen(false)}
-                    className="block w-full"
+                    className="w-full bg-brand text-white hover:bg-brand-hover"
                   >
                     {t.close}
-                  </GradientButton>
+                  </Button>
                 </AlertDialogFooter>
               </div>
             </HoverEffectWrapper>

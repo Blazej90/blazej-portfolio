@@ -4,7 +4,6 @@ export const footerLocales = {
     rights: "Wszelkie prawa zastrzeżone.",
     visitRepo: "Repozytorium projektu",
     downloadCV: "Pobierz CV",
-    spotifyLabel: "Czego słucham przy kodowaniu",
     likes: "Polubienia",
   },
   en: {
@@ -12,7 +11,6 @@ export const footerLocales = {
     rights: "All rights reserved.",
     visitRepo: "Project repository",
     downloadCV: "Download CV",
-    spotifyLabel: "What I listen to while coding",
     likes: "Likes",
   },
 };

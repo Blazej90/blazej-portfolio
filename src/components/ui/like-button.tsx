@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FaHeart } from "react-icons/fa";
+import { Heart } from "lucide-react";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/context/language-context";
 import { footerLocales } from "@/locales/footer";
 
@@ -59,7 +59,7 @@ export default function LikeButton() {
       particleCount: 60,
       spread: 80,
       origin: { y: 0.6 },
-      colors: ["#3b82f6", "#6366f1", "#a855f7"],
+      colors: ["#4F46E5", "#6366F1", "#818CF8", "#A5B4FC"],
       scalar: 0.8,
       zIndex: 9999,
     });
@@ -67,22 +67,22 @@ export default function LikeButton() {
 
   return (
     <div className="space-y-2">
-      <HoverBorderGradient
-        as="button"
+      <Button
+        variant="outline"
         onClick={handleLike}
-        className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm sm:text-base min-w-[220px] text-white transition"
+        className="inline-flex items-center justify-center gap-2 min-w-[220px]"
       >
-        <motion.div
+        <motion.span
           initial={false}
           animate={liked ? { scale: [1, 1.4, 1] } : {}}
           transition={{ duration: 0.4, ease: "easeInOut" }}
-          className="text-red-500"
+          className={liked ? "text-brand" : "text-muted-foreground"}
         >
-          <FaHeart className="w-5 h-5" />
-        </motion.div>
-        <span className="text-white">{likes}</span>
-        <span className="text-white">{t.likes}</span>
-      </HoverBorderGradient>
+          <Heart className="w-5 h-5" fill={liked ? "currentColor" : "none"} />
+        </motion.span>
+        <span>{likes}</span>
+        <span>{t.likes}</span>
+      </Button>
 
       {process.env.NODE_ENV === "development" && (
         <button
@@ -91,7 +91,7 @@ export default function LikeButton() {
             setLiked(false);
             setLikes(0);
           }}
-          className="block text-xs text-gray-400 hover:text-red-400 underline underline-offset-4 transition mx-auto"
+          className="block text-xs text-muted-foreground hover:text-destructive underline underline-offset-4 transition mx-auto"
         >
           Reset Like (dev only)
         </button>

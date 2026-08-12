@@ -27,7 +27,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               ${
                 visible ? radius + "px" : "0px"
               } circle at ${mouseX}px ${mouseY}px,
-              #3b82f6,
+              rgba(99, 102, 241, 0.15),
               transparent 80%
             )
           `,
@@ -45,13 +45,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               shadow-input
               flex h-10 w-full
               rounded-md border-none
-              bg-surface
+              bg-card
               px-3 py-2 text-sm
-              placeholder:text-neutral-400
-              text-[oklch(0.371_0_0)]
+              placeholder:text-muted-foreground
+              text-foreground
               transition duration-300
               group-hover/input:shadow-none
-              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
               file:border-0 file:bg-transparent file:text-sm file:font-medium
               disabled:cursor-not-allowed disabled:opacity-50
             `,

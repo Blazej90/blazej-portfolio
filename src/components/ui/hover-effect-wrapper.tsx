@@ -34,7 +34,7 @@ export function HoverEffectWrapper({
             ${
               visible ? radius + "px" : "0px"
             } circle at ${mouseX}px ${mouseY}px,
-            #3b82f6,
+            rgba(99, 102, 241, 0.15),
             transparent 80%
           )
         `,
