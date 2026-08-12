@@ -1,13 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { Github, Linkedin, ChevronDown } from "lucide-react";
-import { MeteorsBackground } from "@/components/ui/meteors-background";
+import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/context/language-context";
 import { aboutMeLocales } from "@/locales/about-me";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
-import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 
 import {
   SiJavascript,
@@ -27,106 +25,44 @@ import {
   SiGithub,
   SiSupabase,
   SiVite,
+  type IconType,
 } from "@icons-pack/react-simple-icons";
 
-const technologies = [
+const technologies: { name: string; icon: IconType }[] = [
   // Core languages
-  {
-    id: 1,
-    name: "JavaScript",
-    icon: <SiJavascript className="text-yellow-400 w-6 h-6" />,
-  },
-  {
-    id: 2,
-    name: "TypeScript",
-    icon: <SiTypescript className="text-blue-500 w-6 h-6" />,
-  },
-
+  { name: "JavaScript", icon: SiJavascript },
+  { name: "TypeScript", icon: SiTypescript },
   // Frontend frameworks
-  {
-    id: 3,
-    name: "React.js",
-    icon: <SiReact className="text-cyan-400 w-6 h-6" />,
-  },
-  {
-    id: 4,
-    name: "Angular",
-    icon: <SiAngular className="text-red-500 w-6 h-6" />,
-  },
-  {
-    id: 5,
-    name: "Redux",
-    icon: <SiRedux className="text-purple-500 w-6 h-6" />,
-  },
-  {
-    id: 6,
-    name: "Next.js",
-    icon: <SiNextdotjs className="text-white w-6 h-6" />,
-  },
-
+  { name: "React", icon: SiReact },
+  { name: "Angular", icon: SiAngular },
+  { name: "Redux", icon: SiRedux },
+  { name: "Next.js", icon: SiNextdotjs },
   // Styling & tooling
-  {
-    id: 7,
-    name: "Tailwind CSS",
-    icon: <SiTailwindcss className="text-blue-300 w-6 h-6" />,
-  },
-  {
-    id: 8,
-    name: "Vite",
-    icon: <SiVite className="text-purple-400 w-6 h-6" />,
-  },
-  {
-    id: 9,
-    name: "HTML",
-    icon: <SiHtml5 className="text-orange-500 w-6 h-6" />,
-  },
-  {
-    id: 10,
-    name: "CSS",
-    icon: <SiCss3 className="text-blue-600 w-6 h-6" />,
-  },
-
+  { name: "Tailwind CSS", icon: SiTailwindcss },
+  { name: "Vite", icon: SiVite },
+  { name: "HTML", icon: SiHtml5 },
+  { name: "CSS", icon: SiCss3 },
   // Backend
-  {
-    id: 11,
-    name: "Node.js",
-    icon: <SiNodedotjs className="text-green-600 w-6 h-6" />,
-  },
-
+  { name: "Node.js", icon: SiNodedotjs },
   // Databases / BaaS
-  {
-    id: 12,
-    name: "MongoDB",
-    icon: <SiMongodb className="text-green-400 w-6 h-6" />,
-  },
-  {
-    id: 13,
-    name: "Firebase",
-    icon: <SiFirebase className="text-yellow-500 w-6 h-6" />,
-  },
-  {
-    id: 14,
-    name: "Supabase",
-    icon: <SiSupabase className="text-emerald-400 w-6 h-6" />,
-  },
-
+  { name: "MongoDB", icon: SiMongodb },
+  { name: "Firebase", icon: SiFirebase },
+  { name: "Supabase", icon: SiSupabase },
   // DevOps & version control
-  {
-    id: 15,
-    name: "Docker",
-    icon: <SiDocker className="text-blue-400 w-6 h-6" />,
-  },
-  {
-    id: 16,
-    name: "Git",
-    icon: <SiGit className="text-orange-400 w-6 h-6" />,
-  },
-  {
-    id: 17,
-    name: "GitHub",
-    icon: <SiGithub className="text-white w-6 h-6" />,
-  },
+  { name: "Docker", icon: SiDocker },
+  { name: "Git", icon: SiGit },
+  { name: "GitHub", icon: SiGithub },
 ];
+
+const container: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.04 } },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
 
 export default function About() {
   const { language } = useLanguage();
@@ -137,15 +73,13 @@ export default function About() {
       id="about"
       className="scroll-mt-32 py-20 px-6 text-center relative overflow-hidden"
     >
-      <MeteorsBackground className="w-screen" />
-
       <div className="max-w-5xl mx-auto relative z-10">
         <motion.h2
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: false, amount: 0.3 }}
-          className="text-4xl font-bold text-gray-200"
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.3 }}
+          className="text-4xl font-bold tracking-tight"
         >
           {t.title}
         </motion.h2>
@@ -153,65 +87,82 @@ export default function About() {
         <TextGenerateEffect
           key={language}
           words={t.description || ""}
-          className="mt-4 max-w-3xl mx-auto text-lg text-gray-400"
+          className="mt-4 max-w-3xl mx-auto text-lg text-muted-foreground"
           duration={0.8}
         />
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-          viewport={{ once: false, amount: 0.3 }}
-          className="mt-10 flex justify-center"
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.3 }}
+          className="mt-14 text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground"
         >
-          <InfiniteMovingCards
-            items={technologies}
-            direction="left"
-            speed="slow"
-          />
-        </motion.div>
+          {t.technologiesTitle}
+        </motion.p>
+
+        <motion.ul
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          className="mt-8 grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-8 max-w-3xl mx-auto"
+        >
+          {technologies.map((tech) => (
+            <motion.li
+              key={tech.name}
+              variants={item}
+              className="group flex flex-col items-center gap-2 text-muted-foreground transition-colors duration-200 hover:text-brand"
+            >
+              <tech.icon className="size-6" color="currentColor" />
+              <span className="text-xs font-medium group-hover:text-foreground transition-colors duration-200">
+                {tech.name}
+              </span>
+            </motion.li>
+          ))}
+        </motion.ul>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 1.2 }}
-          viewport={{ once: false, amount: 0.3 }}
-          className="mt-12 flex justify-center flex-wrap gap-4 max-w-2xl mx-auto"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.3 }}
+          className="mt-14 flex flex-col sm:flex-row justify-center items-center gap-3"
         >
-          <HoverBorderGradient
-            as="a"
-            href="https://github.com/Blazej90"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center space-x-2 text-white text-lg px-6 py-2"
-          >
-            <Github size={22} />
-            <span>{t.github}</span>
-          </HoverBorderGradient>
-
-          <HoverBorderGradient
-            as="a"
-            href="https://www.linkedin.com/in/błażej-bartoszewski-36b7162b7"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center space-x-2 text-white text-lg px-6 py-2"
-          >
-            <Linkedin size={22} />
-            <span>{t.linkedin}</span>
-          </HoverBorderGradient>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="mt-10 sm:mt-16 text-gray-400 flex justify-center"
-        >
-          <a href="#projects" aria-label="Scroll to projects">
-            <ChevronDown className="w-6 h-6 animate-bounce" />
-          </a>
+          <Button asChild variant="outline" size="lg">
+            <a
+              href="https://github.com/Blazej90"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Github className="size-5" />
+              <span>{t.github}</span>
+            </a>
+          </Button>
+          <Button asChild variant="outline" size="lg">
+            <a
+              href="https://www.linkedin.com/in/błażej-bartoszewski-36b7162b7"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Linkedin className="size-5" />
+              <span>{t.linkedin}</span>
+            </a>
+          </Button>
         </motion.div>
       </div>
+
+      <motion.a
+        href="#projects"
+        aria-label="Scroll to projects"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: [0.3, 0.8, 0.3] }}
+        viewport={{ once: false }}
+        transition={{ delay: 0.5, duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+        className="mt-16 inline-block text-muted-foreground hover:text-foreground transition-colors"
+      >
+        <ChevronDown className="size-6" />
+      </motion.a>
     </section>
   );
 }

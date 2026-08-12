@@ -35,7 +35,7 @@ export const TextGenerateEffect = ({
     <motion.div
       ref={scope}
       className={cn(
-        "inline-block leading-relaxed text-lg text-gray-400",
+        "inline-block leading-relaxed text-lg text-muted-foreground",
         className
       )}
       initial={{ opacity: 0, filter: "blur(6px)" }}
