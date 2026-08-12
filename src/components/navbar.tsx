@@ -11,11 +11,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { navbarLocales } from "@/locales/navbar";
 import { useLanguage } from "@/context/language-context";
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
-import { SweepOverlay } from "@/components/ui/gradient-button";
 import ThemeToggle from "@/components/theme-toggle";
 
 const Navbar = () => {
@@ -34,63 +33,67 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const links = [
+    { href: "/", label: t.home },
+    { href: "#projects", label: t.projects },
+    { href: "#about", label: t.about },
+    { href: "#contact", label: t.contact },
+  ];
+
+  const linkClasses =
+    "group relative text-sm font-medium text-muted-foreground transition-colors duration-300 hover:text-foreground";
+
+  const underline = (
+    <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-brand transition-transform duration-300 ease-out group-hover:scale-x-100" />
+  );
+
   return (
     <nav
-      className={`fixed top-0 left-0 w-full backdrop-blur-lg text-white px-6 z-50 transition-all duration-300 ${
-        scrolled ? "bg-black/60 py-3" : "bg-black/40 py-3"
+      className={`fixed top-0 left-0 w-full px-6 z-50 transition-all duration-300 border-b ${
+        scrolled
+          ? "bg-background/80 backdrop-blur-xl border-border py-2"
+          : "bg-transparent border-transparent py-4"
       }`}
     >
       <div className="max-w-5xl mx-auto flex justify-between items-center relative transition-all duration-300">
         <div className="flex md:hidden">
           <Sheet>
             <SheetTrigger asChild>
-              <button>
+              <button aria-label={t.menu} className="text-foreground">
                 <Menu size={24} />
               </button>
             </SheetTrigger>
             <SheetContent
               side="left"
-              className="bg-black text-white border-0 px-6 w-[250px] flex flex-col items-center"
+              className="bg-background text-foreground border-border px-6 w-[260px] flex flex-col items-center"
             >
               <SheetHeader className="w-full flex flex-col items-center">
                 <SheetTitle className="text-xl font-bold">{t.menu}</SheetTitle>
               </SheetHeader>
 
               <div className="flex flex-col mt-6 space-y-6 items-center w-full">
-                <Link
-                  href="/"
-                  className="hover:text-gray-400 transition text-lg text-center"
-                >
-                  {t.home}
-                </Link>
-                <Link
-                  href="#projects"
-                  className="hover:text-gray-400 transition text-lg text-center"
-                >
-                  {t.projects}
-                </Link>
-                <Link
-                  href="#about"
-                  className="hover:text-gray-400 transition text-lg text-center"
-                >
-                  {t.about}
-                </Link>
-                <Link
-                  href="#contact"
-                  className="hover:text-gray-400 transition text-lg text-center"
-                >
-                  {t.contact}
-                </Link>
+                {links.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`${linkClasses} text-base`}
+                  >
+                    {link.label}
+                    {underline}
+                  </Link>
+                ))}
 
-                <HoverBorderGradient
-                  as="a"
-                  href="/cv/CV_Błażej_Bartoszewski.pdf"
-                  download="CV_Błażej_Bartoszewski.pdf"
-                  className="relative overflow-hidden px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-lg font-semibold text-white rounded-full bg-gradient-to-r from-blue-600 to-purple-600 shadow-md group"
+                <Button
+                  asChild
+                  className="bg-brand text-white hover:bg-brand-hover"
                 >
-                  <span className="relative z-10">{t.downloadCV}</span>
-                  <SweepOverlay />
-                </HoverBorderGradient>
+                  <a
+                    href="/cv/CV_Błażej_Bartoszewski.pdf"
+                    download="CV_Błażej_Bartoszewski.pdf"
+                  >
+                    {t.downloadCV}
+                  </a>
+                </Button>
 
                 <ThemeToggle />
               </div>
@@ -103,72 +106,61 @@ const Navbar = () => {
             <Image
               src="/images/logo/logo.png"
               alt="Błażej Bartoszewski Logo"
-              width={1024}
-              height={1024}
+              width={128}
+              height={128}
               priority
-              className="w-auto h-16 object-contain transition-all duration-300"
+              className="w-auto h-9 object-contain transition-all duration-300"
             />
             <span className="sr-only">Błażej Bartoszewski</span>
           </Link>
         </div>
 
         <div className="md:hidden flex items-center space-x-2">
-          <span className="text-sm">PL</span>
+          <span className="text-xs font-medium text-muted-foreground">PL</span>
           <Switch
             checked={language === "en"}
             onCheckedChange={toggleLanguage}
           />
-          <span className="text-sm">EN</span>
+          <span className="text-xs font-medium text-muted-foreground">EN</span>
         </div>
 
         <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 space-x-8">
-          <Link
-            href="/"
-            className="hover:text-gray-400 transition text-lg font-medium"
-          >
-            {t.home}
-          </Link>
-          <Link
-            href="#projects"
-            className="hover:text-gray-400 transition text-lg font-medium"
-          >
-            {t.projects}
-          </Link>
-          <Link
-            href="#about"
-            className="hover:text-gray-400 transition text-lg font-medium"
-          >
-            {t.about}
-          </Link>
-          <Link
-            href="#contact"
-            className="hover:text-gray-400 transition text-lg font-medium"
-          >
-            {t.contact}
-          </Link>
+          {links.map((link) => (
+            <Link key={link.href} href={link.href} className={linkClasses}>
+              {link.label}
+              {underline}
+            </Link>
+          ))}
         </div>
 
         <div className="hidden md:flex items-center space-x-4 ml-auto">
           <ThemeToggle />
 
           <div className="flex items-center space-x-2">
-            <span className="text-sm">PL</span>
+            <span className="text-xs font-medium text-muted-foreground">
+              PL
+            </span>
             <Switch
               checked={language === "en"}
               onCheckedChange={toggleLanguage}
             />
-            <span className="text-sm">EN</span>
+            <span className="text-xs font-medium text-muted-foreground">
+              EN
+            </span>
           </div>
 
-          <HoverBorderGradient
-            as="a"
-            href="/cv/CV_Błażej_Bartoszewski.pdf"
-            download="CV_Błażej_Bartoszewski.pdf"
-            className="relative overflow-hidden px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-semibold text-white rounded-full bg-gradient-to-r from-blue-600 to-purple-600 shadow-md group"
+          <Button
+            asChild
+            size="sm"
+            className="bg-brand text-white hover:bg-brand-hover"
           >
-            <span className="relative z-10">{t.downloadCV}</span>
-            <SweepOverlay />
-          </HoverBorderGradient>
+            <a
+              href="/cv/CV_Błażej_Bartoszewski.pdf"
+              download="CV_Błażej_Bartoszewski.pdf"
+            >
+              {t.downloadCV}
+            </a>
+          </Button>
         </div>
       </div>
     </nav>
