@@ -87,7 +87,7 @@ export default function Hero() {
 
       <motion.a
         href="#about"
-        aria-label="Scroll down"
+        aria-label={t.scrollDown}
         initial={{ opacity: 0 }}
         animate={{ opacity: [0.3, 0.8, 0.3] }}
         transition={{

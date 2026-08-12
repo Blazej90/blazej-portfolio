@@ -6,6 +6,7 @@ export const aboutMeLocales = {
     technologiesTitle: "Technologie",
     github: "GitHub",
     linkedin: "LinkedIn",
+    scrollToProjects: "Przewiń do projektów",
   },
   en: {
     title: "About Me",
@@ -14,5 +15,6 @@ export const aboutMeLocales = {
     technologiesTitle: "Technologies",
     github: "GitHub",
     linkedin: "LinkedIn",
+    scrollToProjects: "Scroll to projects",
   },
 };

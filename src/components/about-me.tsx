@@ -154,7 +154,7 @@ export default function About() {
 
       <motion.a
         href="#projects"
-        aria-label="Scroll to projects"
+        aria-label={t.scrollToProjects}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: [0.3, 0.8, 0.3] }}
         viewport={{ once: false }}
