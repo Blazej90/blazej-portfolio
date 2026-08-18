@@ -9,6 +9,19 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    src: "/images/projects/learning-german.png",
+    githubUrl: "https://github.com/Blazej90/learning-german",
+    liveDemoUrl: "https://learning-german-pi.vercel.app",
+    title: {
+      pl: "Kartoffel — niemiecki na fiszkach",
+      en: "Kartoffel — German Flashcards",
+    },
+    description: {
+      pl: "PWA do nauki niemieckiego: talia fiszek z powtórkami w algorytmie SM-2 i tracker 4-tygodniowego planu. Postępy zapisywane w Firestore, po instalacji na telefonie działa offline.",
+      en: "A PWA for learning German: a flashcard deck with SM-2 spaced repetition and a 4-week plan tracker. Progress stored in Firestore, works offline once installed on your phone.",
+    },
+  },
+  {
     src: "/images/projects/task-flow.jpg",
     githubUrl: "https://github.com/Blazej90/taskflow",
     liveDemoUrl: "https://taskflow-two-ebon.vercel.app",
