@@ -6,7 +6,6 @@ import { Send, X, Paperclip, CircleCheck, CircleX } from "lucide-react";
 import { useLanguage } from "@/context/language-context";
 import { contactLocales } from "@/locales/contact";
 import { Input } from "@/components/ui/aceternity-input";
-import { Label } from "@/components/ui/aceternity-label";
 import { HoverEffectWrapper } from "@/components/ui/hover-effect-wrapper";
 import {
   AlertDialog,
@@ -17,19 +16,6 @@ import {
   AlertDialogFooter,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-
-const LabelInputContainer = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => (
-  <div className={cn("flex w-full flex-col space-y-[2px]", className)}>
-    {children}
-  </div>
-);
 
 export default function Contact() {
   const { language } = useLanguage();
@@ -140,44 +126,38 @@ export default function Contact() {
         viewport={{ amount: 0.3 }}
         className="mx-auto mt-10 w-full max-w-lg space-y-4 sm:space-y-5"
       >
-        <LabelInputContainer>
-          <Label htmlFor="name">{t.namePlaceholder}</Label>
-          <Input
-            id="name"
-            name="name"
-            type="text"
-            placeholder={t.nameExample}
-            value={form.name}
-            onChange={handleChange}
-          />
-        </LabelInputContainer>
+        <Input
+          id="name"
+          name="name"
+          type="text"
+          placeholder={t.namePlaceholder}
+          aria-label={t.namePlaceholder}
+          value={form.name}
+          onChange={handleChange}
+        />
 
-        <LabelInputContainer>
-          <Label htmlFor="email">{t.emailPlaceholder}</Label>
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            placeholder={t.emailExample}
-            value={form.email}
-            onChange={handleChange}
-          />
-        </LabelInputContainer>
+        <Input
+          id="email"
+          name="email"
+          type="email"
+          placeholder={t.emailPlaceholder}
+          aria-label={t.emailPlaceholder}
+          value={form.email}
+          onChange={handleChange}
+        />
 
-        <LabelInputContainer>
-          <Label htmlFor="message">{t.messagePlaceholder}</Label>
-          <HoverEffectWrapper>
-            <textarea
-              id="message"
-              name="message"
-              placeholder={t.messageExample}
-              value={form.message}
-              onChange={handleChange}
-              rows={6}
-              className="w-full rounded-md border-none bg-card px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring transition duration-300"
-            />
-          </HoverEffectWrapper>
-        </LabelInputContainer>
+        <HoverEffectWrapper>
+          <textarea
+            id="message"
+            name="message"
+            placeholder={t.messagePlaceholder}
+            aria-label={t.messagePlaceholder}
+            value={form.message}
+            onChange={handleChange}
+            rows={6}
+            className="w-full rounded-md border-none bg-card px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring transition duration-300"
+          />
+        </HoverEffectWrapper>
 
         <HoverEffectWrapper>
           <div className="relative z-10 flex flex-col items-start space-y-2 border border-border p-3 rounded-lg bg-card w-full focus-within:ring-2 focus-within:ring-ring transition duration-300">
