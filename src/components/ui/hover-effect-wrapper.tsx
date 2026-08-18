@@ -10,7 +10,7 @@ export function HoverEffectWrapper({
   children: React.ReactNode;
   className?: string;
 }) {
-  const radius = 100;
+  const radius = 120;
   const [visible, setVisible] = React.useState(false);
 
   const mouseX = useMotionValue(0);
@@ -31,10 +31,8 @@ export function HoverEffectWrapper({
       style={{
         background: useMotionTemplate`
           radial-gradient(
-            ${
-              visible ? radius + "px" : "0px"
-            } circle at ${mouseX}px ${mouseY}px,
-            rgba(99, 102, 241, 0.15),
+            ${visible ? radius + "px" : "0px"} circle at ${mouseX}px ${mouseY}px,
+            var(--input-glow),
             transparent 80%
           )
         `,
@@ -42,7 +40,7 @@ export function HoverEffectWrapper({
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setVisible(true)}
       onMouseLeave={() => setVisible(false)}
-      className={`group/input rounded-lg p-[2px] transition duration-300 ${className}`}
+      className={`group/input rounded-lg p-[2px] transition duration-300 ${className ?? ""}`}
     >
       {children}
     </motion.div>

@@ -138,7 +138,7 @@ export default function Contact() {
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.3 }}
         viewport={{ amount: 0.3 }}
-        className="shadow-input mx-auto mt-10 w-full max-w-lg rounded-none p-0 space-y-4 sm:space-y-5"
+        className="mx-auto mt-10 w-full max-w-lg space-y-4 sm:space-y-5"
       >
         <LabelInputContainer>
           <Label htmlFor="name">{t.namePlaceholder}</Label>
@@ -146,7 +146,7 @@ export default function Contact() {
             id="name"
             name="name"
             type="text"
-            placeholder={t.namePlaceholder}
+            placeholder={t.nameExample}
             value={form.name}
             onChange={handleChange}
           />
@@ -158,7 +158,7 @@ export default function Contact() {
             id="email"
             name="email"
             type="email"
-            placeholder={t.emailPlaceholder}
+            placeholder={t.emailExample}
             value={form.email}
             onChange={handleChange}
           />
@@ -170,7 +170,7 @@ export default function Contact() {
             <textarea
               id="message"
               name="message"
-              placeholder={t.messagePlaceholder}
+              placeholder={t.messageExample}
               value={form.message}
               onChange={handleChange}
               rows={6}
@@ -221,7 +221,7 @@ export default function Contact() {
         <Button
           type="submit"
           disabled={loading}
-          className="w-full bg-brand text-white hover:bg-brand-hover"
+          className="bg-brand text-white hover:bg-brand-hover"
         >
           {loading ? t.sending : t.submit}
           <Send size={16} className="inline ml-2" />

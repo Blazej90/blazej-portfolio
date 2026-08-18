@@ -5,7 +5,7 @@ export const pageLocales = {
     taglineAccent: "szybkie",
     taglineEnd: "i piękne aplikacje webowe.",
     description:
-      "Specjalizuję się w tworzeniu nowoczesnych, wydajnych i responsywnych aplikacji webowych. Moje projekty łączą estetykę z funkcjonalnością.",
+      "Zamieniam pomysły w intuicyjne aplikacje, z których użytkownicy chcą korzystać na co dzień.",
     projectsButton: "Zobacz moje projekty",
     contactButton: "Skontaktuj się ze mną",
     scrollDown: "Przewiń w dół",
@@ -16,7 +16,7 @@ export const pageLocales = {
     taglineAccent: "fast",
     taglineEnd: "and beautiful web applications.",
     description:
-      "I specialize in building modern, performant and responsive web applications. My projects combine aesthetics with functionality.",
+      "I turn ideas into intuitive applications that people want to use every day.",
     projectsButton: "See my projects",
     contactButton: "Contact me",
     scrollDown: "Scroll down",

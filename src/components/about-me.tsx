@@ -1,8 +1,6 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
-import { Github, Linkedin, ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/context/language-context";
 import { aboutMeLocales } from "@/locales/about-me";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
@@ -121,48 +119,7 @@ export default function About() {
             </motion.li>
           ))}
         </motion.ul>
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          viewport={{ once: true, amount: 0.3 }}
-          className="mt-14 flex flex-col sm:flex-row justify-center items-center gap-3"
-        >
-          <Button asChild variant="outline" size="lg">
-            <a
-              href="https://github.com/Blazej90"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Github className="size-5" />
-              <span>{t.github}</span>
-            </a>
-          </Button>
-          <Button asChild variant="outline" size="lg">
-            <a
-              href="https://www.linkedin.com/in/błażej-bartoszewski-36b7162b7"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Linkedin className="size-5" />
-              <span>{t.linkedin}</span>
-            </a>
-          </Button>
-        </motion.div>
       </div>
-
-      <motion.a
-        href="#projects"
-        aria-label={t.scrollToProjects}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: [0.3, 0.8, 0.3] }}
-        viewport={{ once: false }}
-        transition={{ delay: 0.5, duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-        className="mt-16 inline-block text-muted-foreground hover:text-foreground transition-colors"
-      >
-        <ChevronDown className="size-6" />
-      </motion.a>
     </section>
   );
 }

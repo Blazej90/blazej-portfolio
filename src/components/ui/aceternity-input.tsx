@@ -7,7 +7,7 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
-    const radius = 100;
+    const radius = 120;
     const [visible, setVisible] = React.useState(false);
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
@@ -24,10 +24,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         style={{
           background: useMotionTemplate`
             radial-gradient(
-              ${
-                visible ? radius + "px" : "0px"
-              } circle at ${mouseX}px ${mouseY}px,
-              rgba(99, 102, 241, 0.15),
+              ${visible ? radius + "px" : "0px"} circle at ${mouseX}px ${mouseY}px,
+              var(--input-glow),
               transparent 80%
             )
           `,
@@ -42,7 +40,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           className={cn(
             `
-              shadow-input
               flex h-10 w-full
               rounded-md border-none
               bg-card
@@ -50,7 +47,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               placeholder:text-muted-foreground
               text-foreground
               transition duration-300
-              group-hover/input:shadow-none
               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
               file:border-0 file:bg-transparent file:text-sm file:font-medium
               disabled:cursor-not-allowed disabled:opacity-50

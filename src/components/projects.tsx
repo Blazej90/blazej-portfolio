@@ -37,14 +37,14 @@ function ProjectCard({ project }: { project: Project }) {
       </div>
 
       <div className="flex flex-1 flex-col p-6">
-        <h3 className="text-xl font-semibold tracking-tight">
+        <h3 className="text-xl font-semibold tracking-tight text-center">
           {project.title[language]}
         </h3>
-        <p className="mt-2 flex-1 text-sm text-muted-foreground">
+        <p className="mt-2 flex-1 text-sm text-muted-foreground text-center">
           {project.description[language]}
         </p>
 
-        <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium">
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm font-medium">
           <a
             href={project.githubUrl}
             target="_blank"

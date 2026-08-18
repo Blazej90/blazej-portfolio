@@ -1,0 +1,11 @@
+<svg width="560" height="220" viewBox="0 0 560 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bb-gradient" x1="150" y1="110" x2="360" y2="110" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#14B8A6"/>
+      <stop offset="1" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+  <text x="280" y="168" text-anchor="middle" font-family="ui-monospace, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="170" font-weight="700" letter-spacing="-4">
+    <tspan fill="#94A3B8">&#60;</tspan><tspan fill="url(#bb-gradient)">BB</tspan><tspan fill="#94A3B8">/&#62;</tspan>
+  </text>
+</svg>

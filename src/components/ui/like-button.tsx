@@ -66,11 +66,12 @@ export default function LikeButton() {
   };
 
   return (
-    <div className="space-y-2">
-      <Button
-        variant="outline"
+    <Button
+        variant="ghost"
+        size="sm"
         onClick={handleLike}
-        className="inline-flex items-center justify-center gap-2 min-w-[220px]"
+        aria-label={t.likes}
+        className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground"
       >
         <motion.span
           initial={false}
@@ -78,24 +79,9 @@ export default function LikeButton() {
           transition={{ duration: 0.4, ease: "easeInOut" }}
           className={liked ? "text-brand" : "text-muted-foreground"}
         >
-          <Heart className="w-5 h-5" fill={liked ? "currentColor" : "none"} />
+          <Heart className="w-4 h-4" fill={liked ? "currentColor" : "none"} />
         </motion.span>
         <span>{likes}</span>
-        <span>{t.likes}</span>
-      </Button>
-
-      {process.env.NODE_ENV === "development" && (
-        <button
-          onClick={() => {
-            localStorage.removeItem("liked");
-            setLiked(false);
-            setLikes(0);
-          }}
-          className="block text-xs text-muted-foreground hover:text-destructive underline underline-offset-4 transition mx-auto"
-        >
-          Reset Like (dev only)
-        </button>
-      )}
-    </div>
+    </Button>
   );
 }

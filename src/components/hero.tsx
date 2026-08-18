@@ -27,10 +27,19 @@ export default function Hero() {
         aria-hidden
         className="absolute inset-0 -z-10 bg-[radial-gradient(var(--border)_1.5px,transparent_1.5px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_40%,black_30%,transparent_75%)]"
       />
-      {/* soft indigo blur orb */}
-      <div
+      {/* drifting indigo blur orb */}
+      <motion.div
         aria-hidden
-        className="absolute -z-10 top-1/4 left-1/2 -translate-x-1/2 size-72 sm:size-96 rounded-full bg-brand opacity-[0.08] blur-3xl"
+        className="absolute -z-10 top-1/4 left-1/2 size-80 sm:size-[28rem] rounded-full bg-brand opacity-[0.15] blur-3xl"
+        animate={{ x: ["-50%", "-38%", "-62%", "-50%"], y: [0, 36, -24, 0] }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+      />
+      {/* drifting violet blur orb */}
+      <motion.div
+        aria-hidden
+        className="absolute -z-10 bottom-[18%] left-[12%] size-72 sm:size-96 rounded-full bg-[var(--brand-secondary)] opacity-[0.13] blur-3xl"
+        animate={{ x: [0, 44, -28, 0], y: [0, -32, 24, 0] }}
+        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 2 }}
       />
 
       <motion.div

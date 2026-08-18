@@ -56,7 +56,7 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-5xl mx-auto flex justify-between items-center relative transition-all duration-300">
-        <div className="flex md:hidden">
+        <div className="flex lg:hidden">
           <Sheet>
             <SheetTrigger asChild>
               <button aria-label={t.menu} className="text-foreground">
@@ -94,17 +94,15 @@ const Navbar = () => {
                     {t.downloadCV}
                   </a>
                 </Button>
-
-                <ThemeToggle />
               </div>
             </SheetContent>
           </Sheet>
         </div>
 
-        <div className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
+        <div className="absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0">
           <Link href="/" className="flex items-center space-x-2">
             <Image
-              src="/images/logo/logo.png"
+              src="/images/logo/logo.svg"
               alt="Błażej Bartoszewski Logo"
               width={128}
               height={128}
@@ -115,7 +113,8 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div className="md:hidden flex items-center space-x-2">
+        <div className="lg:hidden flex items-center space-x-3">
+          <ThemeToggle />
           <span className="text-xs font-medium text-muted-foreground">PL</span>
           <Switch
             checked={language === "en"}
@@ -124,7 +123,7 @@ const Navbar = () => {
           <span className="text-xs font-medium text-muted-foreground">EN</span>
         </div>
 
-        <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 space-x-8">
+        <div className="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 space-x-8">
           {links.map((link) => (
             <Link key={link.href} href={link.href} className={linkClasses}>
               {link.label}
@@ -133,7 +132,7 @@ const Navbar = () => {
           ))}
         </div>
 
-        <div className="hidden md:flex items-center space-x-4 ml-auto">
+        <div className="hidden lg:flex items-center space-x-4 ml-auto">
           <ThemeToggle />
 
           <div className="flex items-center space-x-2">
