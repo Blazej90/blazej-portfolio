@@ -17,12 +17,14 @@ import {
   SiCss3,
   SiNodedotjs,
   SiMongodb,
+  SiPostgresql,
   SiFirebase,
   SiDocker,
   SiGit,
   SiGithub,
   SiSupabase,
   SiVite,
+  SiClaude,
   type IconType,
 } from "@icons-pack/react-simple-icons";
 
@@ -44,8 +46,11 @@ const technologies: { name: string; icon: IconType }[] = [
   { name: "Node.js", icon: SiNodedotjs },
   // Databases / BaaS
   { name: "MongoDB", icon: SiMongodb },
+  { name: "PostgreSQL", icon: SiPostgresql },
   { name: "Firebase", icon: SiFirebase },
   { name: "Supabase", icon: SiSupabase },
+  // AI
+  { name: "Claude", icon: SiClaude },
   // DevOps & version control
   { name: "Docker", icon: SiDocker },
   { name: "Git", icon: SiGit },
