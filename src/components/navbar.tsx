@@ -88,8 +88,8 @@ const Navbar = () => {
                   className="bg-brand text-white hover:bg-brand-hover"
                 >
                   <a
-                    href="/cv/CV_Błażej_Bartoszewski.pdf"
-                    download="CV_Błażej_Bartoszewski.pdf"
+                    href="/cv/Blazej_Bartoszewski_CV.pdf"
+                    download="Blazej_Bartoszewski_CV.pdf"
                   >
                     {t.downloadCV}
                   </a>
@@ -154,8 +154,8 @@ const Navbar = () => {
             className="bg-brand text-white hover:bg-brand-hover"
           >
             <a
-              href="/cv/CV_Błażej_Bartoszewski.pdf"
-              download="CV_Błażej_Bartoszewski.pdf"
+              href="/cv/Blazej_Bartoszewski_CV.pdf"
+              download="Blazej_Bartoszewski_CV.pdf"
             >
               {t.downloadCV}
             </a>
