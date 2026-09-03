@@ -9,6 +9,16 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    src: "/images/projects/devpuls.png",
+    githubUrl: "https://github.com/Blazej90/devpuls",
+    liveDemoUrl: "https://devpuls-ecru.vercel.app/",
+    title: { pl: "DevPuls", en: "DevPuls" },
+    description: {
+      pl: "PWA-czytnik nowinek technicznych: agent AI (Claude Haiku) co 2 dni sprawdza 11 źródeł, ocenia trafność wpisów pod profil TS/React/JS, streszcza po polsku i wysyła jedno zbiorcze powiadomienie Web Push. Dane w Neon Postgres, harmonogram w GitHub Actions.",
+      en: "A PWA tech-news inbox: an AI agent (Claude Haiku) scans 11 sources every 2 days, scores each item for a TS/React/JS profile, summarizes in Polish, and sends one aggregated Web Push notification per run. Data in Neon Postgres, scheduled via GitHub Actions.",
+    },
+  },
+  {
     src: "/images/projects/learning-german.png",
     githubUrl: "https://github.com/Blazej90/learning-german",
     liveDemoUrl: "https://learning-german-pi.vercel.app",
@@ -82,16 +92,6 @@ export const projects: Project[] = [
     description: {
       pl: "Klasyczna gra Wisielec w wersji webowej! Użytkownik wybiera poziom trudności i zgaduje litery. Możliwość gry po angielsku z dedykowanymi hasłami.",
       en: "Classic Hangman game in a web version! Users select difficulty levels and guess letters. Option to play in English with dedicated words.",
-    },
-  },
-  {
-    src: "/images/projects/picture.jpg",
-    githubUrl: "https://github.com/Blazej90/goit-react-hw-03-image-finder",
-    liveDemoUrl: "https://blazej90.github.io/goit-react-hw-03-image-finder/",
-    title: { pl: "Wyszukiwarka obrazów", en: "Image Search" },
-    description: {
-      pl: "Aplikacja do wyszukiwania i przeglądania obrazów według słów kluczowych. Wykorzystuje Pixabay API jako backend.",
-      en: "An application for searching and browsing images by keywords. Uses the Pixabay API as a backend.",
     },
   },
   {
