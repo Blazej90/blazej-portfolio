@@ -1,9 +1,9 @@
 export const pageLocales = {
   pl: {
     role: "Frontend Developer",
-    taglineStart: "Buduję",
-    taglineAccent: "szybkie",
-    taglineEnd: "i piękne aplikacje webowe.",
+    taglineStart: "Tworzę",
+    taglineAccent: "nowoczesne",
+    taglineEnd: "i funkcjonalne aplikacje webowe.",
     description:
       "Zamieniam pomysły w intuicyjne aplikacje, z których użytkownicy chcą korzystać na co dzień.",
     projectsButton: "Zobacz moje projekty",
@@ -13,8 +13,8 @@ export const pageLocales = {
   en: {
     role: "Frontend Developer",
     taglineStart: "I build",
-    taglineAccent: "fast",
-    taglineEnd: "and beautiful web applications.",
+    taglineAccent: "modern",
+    taglineEnd: "and functional web applications.",
     description:
       "I turn ideas into intuitive applications that people want to use every day.",
     projectsButton: "See my projects",
