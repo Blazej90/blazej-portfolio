@@ -9,6 +9,16 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    src: "/images/projects/learn-react.jpg",
+    githubUrl: "https://github.com/Blazej90/lern-react",
+    liveDemoUrl: "https://lern-react.vercel.app",
+    title: { pl: "Ucz się React.js z AI", en: "Learn React.js with AI" },
+    description: {
+      pl: "Aplikacja losuje pytania z React.js, pozwala na nagrywanie odpowiedzi głosowej i weryfikację przez AI. Po skończonej odpowiedzi AI ocenia poprawność i daje wskazówki.",
+      en: "The app generates random React.js questions, allows voice recording of answers, and verifies them using AI. AI evaluates accuracy and provides feedback.",
+    },
+  },
+  {
     src: "/images/projects/devpuls.png",
     githubUrl: "https://github.com/Blazej90/devpuls",
     liveDemoUrl: "https://devpuls-ecru.vercel.app/",
@@ -16,6 +26,19 @@ export const projects: Project[] = [
     description: {
       pl: "PWA-czytnik nowinek technicznych: agent AI (Claude Haiku) co 2 dni sprawdza 11 źródeł, ocenia trafność wpisów pod profil TS/React/JS, streszcza po polsku i wysyła jedno zbiorcze powiadomienie Web Push. Dane w Neon Postgres, harmonogram w GitHub Actions.",
       en: "A PWA tech-news inbox: an AI agent (Claude Haiku) scans 11 sources every 2 days, scores each item for a TS/React/JS profile, summarizes in Polish, and sends one aggregated Web Push notification per run. Data in Neon Postgres, scheduled via GitHub Actions.",
+    },
+  },
+  {
+    src: "/images/projects/english-platform.png",
+    githubUrl: "https://github.com/Blazej90/english-platform",
+    liveDemoUrl: "https://english-platform-eight.vercel.app",
+    title: {
+      pl: "Platforma do nauki angielskiego",
+      en: "English Learning Platform",
+    },
+    description: {
+      pl: "Platforma do umawiania lekcji angielskiego z wideo czatem i integracją z Google Calendar.",
+      en: "English lesson booking platform with video chat and calendar integration.",
     },
   },
   {
@@ -42,26 +65,16 @@ export const projects: Project[] = [
     },
   },
   {
-    src: "/images/projects/english-platform.png",
-    githubUrl: "https://github.com/Blazej90/english-platform",
-    liveDemoUrl: "https://english-platform-eight.vercel.app",
+    src: "/images/projects/graintally.png",
+    githubUrl: "https://github.com/Blazej90/graintally",
+    liveDemoUrl: "https://klosek.vercel.app/",
     title: {
-      pl: "Platforma do nauki angielskiego",
-      en: "English Learning Platform",
+      pl: "GrainTally — kalkulator skupu zbóż",
+      en: "GrainTally — Grain Purchase Calculator",
     },
     description: {
-      pl: "Platforma do umawiania lekcji angielskiego z wideo czatem i integracją z Google Calendar.",
-      en: "English lesson booking platform with video chat and calendar integration.",
-    },
-  },
-  {
-    src: "/images/projects/learn-react.jpg",
-    githubUrl: "https://github.com/Blazej90/lern-react",
-    liveDemoUrl: "https://lern-react.vercel.app",
-    title: { pl: "Ucz się React.js z AI", en: "Learn React.js with AI" },
-    description: {
-      pl: "Aplikacja losuje pytania z React.js, pozwala na nagrywanie odpowiedzi głosowej i weryfikację przez AI. Po skończonej odpowiedzi AI ocenia poprawność i daje wskazówki.",
-      en: "The app generates random React.js questions, allows voice recording of answers, and verifies them using AI. AI evaluates accuracy and provides feedback.",
+      pl: "Oblicza cenę netto zboża na podstawie wyników badań laboratoryjnych: silnik wyceny jako czysta funkcja z cennikami jako dane. Reguły odrzucenia dostawy, zapisane transporty, wyszukiwanie rozmyte i eksport do PDF. Testy Vitest + Playwright, CI w GitHub Actions. (React 19, TypeScript, Vite, shadcn/ui).",
+      en: "Computes the net grain price from lab results using a data-driven pricing engine (pure function, price lists as data). Delivery rejection rules, saved transports, fuzzy search and PDF export. Vitest + Playwright, CI on GitHub Actions. (React 19, TypeScript, Vite, shadcn/ui).",
     },
   },
   {
