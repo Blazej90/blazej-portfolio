@@ -70,7 +70,7 @@ export default function LikeButton() {
         variant="ghost"
         size="sm"
         onClick={handleLike}
-        aria-label={t.likes}
+        aria-label={`${t.likes}: ${likes}`}
         className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground"
       >
         <motion.span

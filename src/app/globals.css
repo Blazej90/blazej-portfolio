@@ -35,6 +35,47 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* Hero ambient animations — CSS only, so they run on the compositor. */
+  --animate-orb-a: orb-a 18s ease-in-out infinite;
+  --animate-orb-b: orb-b 22s ease-in-out 2s infinite;
+  --animate-scroll-hint: scroll-hint 2.5s ease-in-out 1.6s infinite both;
+
+  @keyframes orb-a {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    33% {
+      transform: translate(12%, 36px);
+    }
+    66% {
+      transform: translate(-12%, -24px);
+    }
+  }
+
+  @keyframes orb-b {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    33% {
+      transform: translate(44px, -32px);
+    }
+    66% {
+      transform: translate(-28px, 24px);
+    }
+  }
+
+  @keyframes scroll-hint {
+    0%,
+    100% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
 }
 
 :root {

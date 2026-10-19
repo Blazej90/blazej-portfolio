@@ -8,18 +8,18 @@ import { pageLocales } from "@/locales/page";
 
 const container: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.06 } },
 };
 
 const item: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
-// Headline stays visible from the first paint (LCP) — only slides into place.
+// Text stays visible from the first paint (LCP, Speed Index) — only slides into place.
 const headline: Variants = {
-  hidden: { y: 16 },
-  show: { y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+  hidden: { y: 12 },
+  show: { y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
 export default function Hero() {
@@ -33,19 +33,14 @@ export default function Hero() {
         aria-hidden
         className="absolute inset-0 -z-10 bg-[radial-gradient(var(--border)_1.5px,transparent_1.5px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_40%,black_30%,transparent_75%)]"
       />
-      {/* drifting lime blur orb */}
-      <motion.div
+      {/* drifting blur orbs — pure CSS keyframes (compositor), no main-thread JS */}
+      <div
         aria-hidden
-        className="absolute -z-10 top-1/4 left-1/2 size-80 sm:size-[28rem] rounded-full bg-brand opacity-[0.15] blur-3xl"
-        animate={{ x: ["-50%", "-38%", "-62%", "-50%"], y: [0, 36, -24, 0] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -z-10 top-1/4 left-1/2 -translate-x-1/2 size-80 sm:size-[28rem] rounded-full bg-brand opacity-[0.15] blur-3xl motion-safe:animate-orb-a"
       />
-      {/* drifting cyan blur orb */}
-      <motion.div
+      <div
         aria-hidden
-        className="absolute -z-10 bottom-[18%] left-[12%] size-72 sm:size-96 rounded-full bg-brand-secondary opacity-[0.13] blur-3xl"
-        animate={{ x: [0, 44, -28, 0], y: [0, -32, 24, 0] }}
-        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        className="absolute -z-10 bottom-[18%] left-[12%] size-72 sm:size-96 rounded-full bg-brand-secondary opacity-[0.13] blur-3xl motion-safe:animate-orb-b"
       />
 
       <motion.div
@@ -77,7 +72,7 @@ export default function Hero() {
         </motion.p>
 
         <motion.p
-          variants={item}
+          variants={headline}
           className="mt-6 max-w-md sm:max-w-xl text-base sm:text-lg text-muted-foreground"
         >
           {t.description}
@@ -100,21 +95,13 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      <motion.a
+      <a
         href="#about"
         aria-label={t.scrollDown}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: [0.3, 0.8, 0.3] }}
-        transition={{
-          delay: 1.6,
-          duration: 2.5,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground hover:text-foreground transition-colors"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground hover:text-foreground transition-colors motion-safe:animate-scroll-hint"
       >
         <ChevronDown className="size-6" />
-      </motion.a>
+      </a>
     </main>
   );
 }

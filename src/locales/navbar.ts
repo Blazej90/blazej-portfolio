@@ -6,6 +6,7 @@ export const navbarLocales = {
     contact: "Kontakt",
     downloadCV: "Pobierz CV",
     themeToggle: "Przełącz motyw jasny/ciemny",
+    languageToggle: "Wersja angielska",
   },
   en: {
     menu: "Menu",
@@ -14,5 +15,6 @@ export const navbarLocales = {
     contact: "Contact",
     downloadCV: "Download CV",
     themeToggle: "Toggle light/dark theme",
+    languageToggle: "English version",
   },
 };

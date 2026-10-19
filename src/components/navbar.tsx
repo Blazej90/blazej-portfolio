@@ -111,6 +111,7 @@ const Navbar = () => {
           <ThemeToggle />
           <span className="text-xs font-medium text-muted-foreground">PL</span>
           <Switch
+            aria-label={t.languageToggle}
             checked={language === "en"}
             onCheckedChange={toggleLanguage}
           />
@@ -134,6 +135,7 @@ const Navbar = () => {
               PL
             </span>
             <Switch
+              aria-label={t.languageToggle}
               checked={language === "en"}
               onCheckedChange={toggleLanguage}
             />
