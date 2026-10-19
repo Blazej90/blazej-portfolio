@@ -2,7 +2,7 @@ name: Supabase Keep-Alive
 
 on:
   schedule:
-    - cron: "0 8 */3 * *"
+    - cron: "0 8 * * *"
   workflow_dispatch:
 
 jobs:
@@ -12,11 +12,12 @@ jobs:
       - name: Ping Supabase (odczyt z tabeli likes)
         run: |
           response=$(curl -s -o /dev/null -w "%{http_code}" \
+            --retry 5 --retry-delay 30 --retry-all-errors --max-time 30 \
             "${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}/rest/v1/likes?select=count&limit=1" \
             -H "apikey: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}" \
-            -H "Authorization: Bearer ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}")
+            -H "Authorization: Bearer ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}") || true
           echo "HTTP status: $response"
-          if [ "$response" -ne 200 ]; then
+          if [ "$response" != "200" ]; then
             echo "Ping nie powiódł się!"
             exit 1
           fi
