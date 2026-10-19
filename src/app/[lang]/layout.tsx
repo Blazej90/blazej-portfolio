@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
+import { notFound } from "next/navigation";
 import { Inter, Space_Grotesk } from "next/font/google";
 import Navbar from "@/components/navbar";
 import Providers from "@/components/providers";
-import type { Language } from "@/context/language-context";
-import "./globals.css";
+import { LANGUAGES, isLanguage, languagePath } from "@/lib/i18n";
+import { metadataLocales } from "@/locales/metadata";
+import "../globals.css";
 
 const inter = Inter({
   subsets: ["latin", "latin-ext"],
@@ -16,53 +17,74 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "Błażej Bartoszewski — Frontend Developer",
-    template: "%s | Błażej Bartoszewski",
-  },
-  description:
-    "Specjalizuję się w tworzeniu nowoczesnych, wydajnych i responsywnych aplikacji webowych. Moje projekty łączą estetykę z funkcjonalnością.",
-  keywords: [
-    "Frontend Developer",
-    "React",
-    "TypeScript",
-    "Next.js",
-    "Portfolio",
-    "Błażej Bartoszewski",
-  ],
-  authors: [{ name: "Błażej Bartoszewski" }],
-  creator: "Błażej Bartoszewski",
-  openGraph: {
-    title: "Błażej Bartoszewski — Frontend Developer",
-    description:
-      "Specjalizuję się w tworzeniu nowoczesnych, wydajnych i responsywnych aplikacji webowych. Moje projekty łączą estetykę z funkcjonalnością.",
-    locale: "pl_PL",
-    type: "website",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+// Only /pl and /en exist — both prerendered at build time.
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return LANGUAGES.map((lang) => ({ lang }));
+}
+
+export async function generateMetadata({
+  params,
+}: LayoutProps<"/[lang]">): Promise<Metadata> {
+  const { lang } = await params;
+  const language = isLanguage(lang) ? lang : "pl";
+  const t = metadataLocales[language];
+
+  return {
+    metadataBase: new URL("https://blazej-portfolio-sand.vercel.app"),
+    title: {
+      default: t.title,
+      template: "%s | Błażej Bartoszewski",
+    },
+    description: t.description,
+    keywords: [
+      "Frontend Developer",
+      "React",
+      "TypeScript",
+      "Next.js",
+      "Portfolio",
+      "Błażej Bartoszewski",
+    ],
+    authors: [{ name: "Błażej Bartoszewski" }],
+    creator: "Błażej Bartoszewski",
+    alternates: {
+      canonical: languagePath(language),
+      languages: {
+        pl: languagePath("pl"),
+        en: languagePath("en"),
+        "x-default": languagePath("pl"),
+      },
+    },
+    openGraph: {
+      title: t.title,
+      description: t.description,
+      url: languagePath(language),
+      locale: t.ogLocale,
+      type: "website",
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
 
 export default async function RootLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
-  const cookieStore = await cookies();
-  const language: Language =
-    cookieStore.get("lang")?.value === "en" ? "en" : "pl";
+  params,
+}: LayoutProps<"/[lang]">) {
+  const { lang } = await params;
+  if (!isLanguage(lang)) notFound();
 
   return (
     <html
-      lang={language}
+      lang={lang}
       suppressHydrationWarning
       className={`${inter.variable} ${spaceGrotesk.variable}`}
     >
       <body className="bg-background text-foreground font-sans">
-        <Providers initialLanguage={language}>
+        <Providers language={lang}>
           <Navbar />
           {children}
         </Providers>

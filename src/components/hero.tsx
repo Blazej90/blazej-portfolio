@@ -16,6 +16,12 @@ const item: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
 };
 
+// Headline stays visible from the first paint (LCP) — only slides into place.
+const headline: Variants = {
+  hidden: { y: 16 },
+  show: { y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+};
+
 export default function Hero() {
   const { language } = useLanguage();
   const t = pageLocales[language];
@@ -27,17 +33,17 @@ export default function Hero() {
         aria-hidden
         className="absolute inset-0 -z-10 bg-[radial-gradient(var(--border)_1.5px,transparent_1.5px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_40%,black_30%,transparent_75%)]"
       />
-      {/* drifting indigo blur orb */}
+      {/* drifting lime blur orb */}
       <motion.div
         aria-hidden
         className="absolute -z-10 top-1/4 left-1/2 size-80 sm:size-[28rem] rounded-full bg-brand opacity-[0.15] blur-3xl"
         animate={{ x: ["-50%", "-38%", "-62%", "-50%"], y: [0, 36, -24, 0] }}
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
       />
-      {/* drifting violet blur orb */}
+      {/* drifting cyan blur orb */}
       <motion.div
         aria-hidden
-        className="absolute -z-10 bottom-[18%] left-[12%] size-72 sm:size-96 rounded-full bg-[var(--brand-secondary)] opacity-[0.13] blur-3xl"
+        className="absolute -z-10 bottom-[18%] left-[12%] size-72 sm:size-96 rounded-full bg-brand-secondary opacity-[0.13] blur-3xl"
         animate={{ x: [0, 44, -28, 0], y: [0, -32, 24, 0] }}
         transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 2 }}
       />
@@ -56,17 +62,17 @@ export default function Hero() {
         </motion.p>
 
         <motion.h1
-          variants={item}
+          variants={headline}
           className="mt-4 text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight"
         >
           Błażej Bartoszewski
         </motion.h1>
 
         <motion.p
-          variants={item}
+          variants={headline}
           className="mt-4 text-2xl sm:text-4xl md:text-5xl font-semibold tracking-tight"
         >
-          {t.taglineStart} <span className="text-brand">{t.taglineAccent}</span>{" "}
+          {t.taglineStart} <span className="highlight">{t.taglineAccent}</span>{" "}
           {t.taglineEnd}
         </motion.p>
 
@@ -84,7 +90,7 @@ export default function Hero() {
           <Button
             asChild
             size="lg"
-            className="bg-brand text-white hover:bg-brand-hover"
+            className="bg-brand text-brand-foreground hover:bg-brand-hover"
           >
             <a href="#projects">{t.projectsButton}</a>
           </Button>

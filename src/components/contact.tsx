@@ -96,10 +96,10 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative py-20 px-4 max-w-3xl mx-auto text-center"
+      className="scroll-mt-32 relative py-20 px-4 max-w-3xl mx-auto text-center"
     >
       <motion.h2
-        initial={{ opacity: 0, y: 50 }}
+        initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
         viewport={{ once: true, amount: 0.3 }}
@@ -111,8 +111,8 @@ export default function Contact() {
       <motion.p
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.2 }}
-        viewport={{ amount: 0.3 }}
+        transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.3 }}
         className="text-base text-muted-foreground mt-2"
       >
         {t.description}
@@ -120,16 +120,18 @@ export default function Contact() {
 
       <motion.form
         onSubmit={handleSubmit}
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-        viewport={{ amount: 0.3 }}
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.3 }}
         className="mx-auto mt-10 w-full max-w-lg space-y-4 sm:space-y-5"
       >
         <Input
           id="name"
           name="name"
           type="text"
+          required
+          autoComplete="name"
           placeholder={t.namePlaceholder}
           aria-label={t.namePlaceholder}
           value={form.name}
@@ -140,6 +142,8 @@ export default function Contact() {
           id="email"
           name="email"
           type="email"
+          required
+          autoComplete="email"
           placeholder={t.emailPlaceholder}
           aria-label={t.emailPlaceholder}
           value={form.email}
@@ -150,6 +154,7 @@ export default function Contact() {
           <textarea
             id="message"
             name="message"
+            required
             placeholder={t.messagePlaceholder}
             aria-label={t.messagePlaceholder}
             value={form.message}
@@ -201,7 +206,7 @@ export default function Contact() {
         <Button
           type="submit"
           disabled={loading}
-          className="bg-brand text-white hover:bg-brand-hover"
+          className="bg-brand text-brand-foreground hover:bg-brand-hover"
         >
           {loading ? t.sending : t.submit}
           <Send size={16} className="inline ml-2" />
@@ -230,7 +235,7 @@ export default function Contact() {
                 <AlertDialogFooter className="pt-6">
                   <Button
                     onClick={() => setIsDialogOpen(false)}
-                    className="w-full bg-brand text-white hover:bg-brand-hover"
+                    className="w-full bg-brand text-brand-foreground hover:bg-brand-hover"
                   >
                     {t.close}
                   </Button>

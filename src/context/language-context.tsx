@@ -1,10 +1,10 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { createContext, useContext, ReactNode } from "react";
+import { useRouter } from "next/navigation";
+import { LANGUAGE_COOKIE, languagePath, type Language } from "@/lib/i18n";
 
-export type Language = "pl" | "en";
-
-const LANGUAGE_COOKIE = "lang";
+export type { Language };
 
 interface LanguageContextType {
   language: Language;
@@ -17,22 +17,19 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 
 export const LanguageProvider = ({
   children,
-  initialLanguage = "pl",
+  language,
 }: {
   children: ReactNode;
-  initialLanguage?: Language;
+  language: Language;
 }) => {
-  const [language, setLanguage] = useState<Language>(initialLanguage);
-
-  // Keep <html lang> in sync after client-side toggles.
-  useEffect(() => {
-    document.documentElement.lang = language;
-  }, [language]);
+  const router = useRouter();
 
   const toggleLanguage = () => {
     const next: Language = language === "pl" ? "en" : "pl";
+    // The cookie must be set before navigating, otherwise the proxy would
+    // redirect "/" back to "/en" for users who previously picked English.
     document.cookie = `${LANGUAGE_COOKIE}=${next}; path=/; max-age=31536000; samesite=lax`;
-    setLanguage(next);
+    router.push(languagePath(next), { scroll: false });
   };
 
   return (

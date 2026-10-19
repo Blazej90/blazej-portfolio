@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Menu } from "lucide-react";
 import {
   Sheet,
@@ -16,6 +15,8 @@ import { Switch } from "@/components/ui/switch";
 import { navbarLocales } from "@/locales/navbar";
 import { useLanguage } from "@/context/language-context";
 import ThemeToggle from "@/components/theme-toggle";
+import Logo from "@/components/logo";
+import { languagePath } from "@/lib/i18n";
 
 const Navbar = () => {
   const { language, toggleLanguage } = useLanguage();
@@ -33,10 +34,10 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Same order as the sections on the page.
   const links = [
-    { href: "/", label: t.home },
-    { href: "#projects", label: t.projects },
     { href: "#about", label: t.about },
+    { href: "#projects", label: t.projects },
     { href: "#contact", label: t.contact },
   ];
 
@@ -44,7 +45,7 @@ const Navbar = () => {
     "group relative text-sm font-medium text-muted-foreground transition-colors duration-300 hover:text-foreground";
 
   const underline = (
-    <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-brand transition-transform duration-300 ease-out group-hover:scale-x-100" />
+    <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-brand-ink transition-transform duration-300 ease-out group-hover:scale-x-100" />
   );
 
   return (
@@ -85,7 +86,7 @@ const Navbar = () => {
 
                 <Button
                   asChild
-                  className="bg-brand text-white hover:bg-brand-hover"
+                  className="bg-brand text-brand-foreground hover:bg-brand-hover"
                 >
                   <a
                     href="/cv/CV_Błażej_Bartoszewski.pdf"
@@ -100,15 +101,8 @@ const Navbar = () => {
         </div>
 
         <div className="absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0">
-          <Link href="/" className="flex items-center space-x-2">
-            <Image
-              src="/images/logo/logo.svg"
-              alt="Błażej Bartoszewski Logo"
-              width={128}
-              height={128}
-              priority
-              className="w-auto h-9 object-contain transition-all duration-300"
-            />
+          <Link href={languagePath(language)} className="flex items-center space-x-2">
+            <Logo className="w-auto h-7" />
             <span className="sr-only">Błażej Bartoszewski</span>
           </Link>
         </div>
@@ -151,7 +145,7 @@ const Navbar = () => {
           <Button
             asChild
             size="sm"
-            className="bg-brand text-white hover:bg-brand-hover"
+            className="bg-brand text-brand-foreground hover:bg-brand-hover"
           >
             <a
               href="/cv/CV_Błażej_Bartoszewski.pdf"

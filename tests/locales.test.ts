@@ -6,6 +6,7 @@ import { contactLocales } from "../src/locales/contact.ts";
 import { projectsLocales } from "../src/locales/projects.ts";
 import { pageLocales } from "../src/locales/page.ts";
 import { aboutMeLocales } from "../src/locales/about-me.ts";
+import { metadataLocales } from "../src/locales/metadata.ts";
 
 const localeGroups = {
   navbar: navbarLocales,
@@ -14,6 +15,7 @@ const localeGroups = {
   projects: projectsLocales,
   page: pageLocales,
   aboutMe: aboutMeLocales,
+  metadata: metadataLocales,
 };
 
 for (const [name, locales] of Object.entries(localeGroups)) {
