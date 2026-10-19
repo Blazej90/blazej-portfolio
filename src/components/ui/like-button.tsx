@@ -59,7 +59,7 @@ export default function LikeButton() {
       particleCount: 60,
       spread: 80,
       origin: { y: 0.6 },
-      colors: ["#4F46E5", "#6366F1", "#818CF8", "#A5B4FC"],
+      colors: ["#4D7C0F", "#84CC16", "#A3E635", "#22D3EE"],
       scalar: 0.8,
       zIndex: 9999,
     });
@@ -77,7 +77,7 @@ export default function LikeButton() {
           initial={false}
           animate={liked ? { scale: [1, 1.4, 1] } : {}}
           transition={{ duration: 0.4, ease: "easeInOut" }}
-          className={liked ? "text-brand" : "text-muted-foreground"}
+          className={liked ? "text-brand-ink" : "text-muted-foreground"}
         >
           <Heart className="w-4 h-4" fill={liked ? "currentColor" : "none"} />
         </motion.span>

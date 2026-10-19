@@ -49,7 +49,7 @@ function ProjectCard({ project }: { project: Project }) {
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-brand"
+            className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-brand-ink"
           >
             <Github className="size-4" />
             {t.github}
@@ -58,7 +58,7 @@ function ProjectCard({ project }: { project: Project }) {
             href={project.liveDemoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-brand"
+            className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-brand-ink"
           >
             <ExternalLink className="size-4" />
             {t.liveDemo}
@@ -69,7 +69,7 @@ function ProjectCard({ project }: { project: Project }) {
               target="_blank"
               rel="noopener noreferrer"
               title={t.productionTitle}
-              className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-brand"
+              className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-brand-ink"
             >
               <ExternalLink className="size-4" />
               {t.seeInProduction}

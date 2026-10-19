@@ -115,7 +115,7 @@ export default function About() {
             <motion.li
               key={tech.name}
               variants={item}
-              className="group flex flex-col items-center gap-2 text-muted-foreground transition-colors duration-200 hover:text-brand"
+              className="group flex flex-col items-center gap-2 text-muted-foreground transition-colors duration-200 hover:text-brand-ink"
             >
               <tech.icon className="size-6" color="currentColor" />
               <span className="text-xs font-medium group-hover:text-foreground transition-colors duration-200">
