@@ -3,6 +3,8 @@ export interface Project {
   githubUrl: string;
   liveDemoUrl: string;
   clientUrl?: string;
+  // Shown as a large card; the rest go into the collapsible "More projects" list.
+  featured?: boolean;
   title: { pl: string; en: string };
   description: { pl: string; en: string };
 }
@@ -10,6 +12,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     src: "/images/projects/learn-react.jpg",
+    featured: true,
     githubUrl: "https://github.com/Blazej90/lern-react",
     liveDemoUrl: "https://lern-react.vercel.app",
     title: { pl: "Ucz się React.js z AI", en: "Learn React.js with AI" },
@@ -20,6 +23,7 @@ export const projects: Project[] = [
   },
   {
     src: "/images/projects/devpuls.png",
+    featured: true,
     githubUrl: "https://github.com/Blazej90/devpuls",
     liveDemoUrl: "https://devpuls-ecru.vercel.app/",
     title: { pl: "DevPuls", en: "DevPuls" },
@@ -30,6 +34,7 @@ export const projects: Project[] = [
   },
   {
     src: "/images/projects/english-platform.png",
+    featured: true,
     githubUrl: "https://github.com/Blazej90/english-platform",
     liveDemoUrl: "https://english-platform-eight.vercel.app",
     title: {

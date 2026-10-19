@@ -6,8 +6,8 @@ export const projectsLocales = {
     seeInProduction: "Zobacz na produkcji",
     productionTitle:
       "Ten projekt jest używany produkcyjnie przez prawdziwego klienta",
-    previous: "Poprzedni",
-    next: "Następny",
+    moreProjects: "Więcej projektów",
+    fewerProjects: "Zwiń projekty",
   },
   en: {
     title: "My Projects",
@@ -15,7 +15,7 @@ export const projectsLocales = {
     liveDemo: "Live Demo",
     seeInProduction: "See it in production",
     productionTitle: "This project is used in production by a real client",
-    previous: "Previous",
-    next: "Next",
+    moreProjects: "More projects",
+    fewerProjects: "Show fewer projects",
   },
 };

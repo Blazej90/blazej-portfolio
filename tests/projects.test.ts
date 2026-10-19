@@ -51,3 +51,7 @@ test("projects: pl/en title and description are filled", () => {
     }
   }
 });
+
+test("projects: exactly three featured projects", () => {
+  assert.equal(projects.filter((p) => p.featured).length, 3);
+});
